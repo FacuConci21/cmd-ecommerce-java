@@ -19,7 +19,7 @@ public class CmdEcommerce {
         } while (optionSelection > optionsQuantity || optionSelection < 0);
     }
 
-    private boolean options_menu(String [] optionsList, String message) {
+    private boolean optionsMenu(String [] optionsList, String message) {
 
         for (int i = 0; i < optionsList.length; i++) {
             System.out.println( (i+1) + " - " + optionsList[i]);
@@ -33,7 +33,57 @@ public class CmdEcommerce {
     }
 
     private int createOption() {
-        System.out.println("Alta de un producto");
+        String[] optionsList = {
+                "Bebida alcoholica",
+                "Lacteo",
+                "Fiambre"
+        };
+        String optionMessage = "Que tipo de producto desea registrar?: ";
+        Scanner scanner = new Scanner(System.in);
+        Product newProductInstance;
+        String productName, productDescription;
+        float productPrice;
+        int productStock;
+
+        optionsMenu(optionsList, optionMessage);
+
+        // Asking for data
+        System.out.print("Nombre: "); productName = scanner.nextLine();
+        System.out.print("Description: "); productDescription = scanner.nextLine();
+        System.out.print("Precio: "); productPrice = scanner.nextFloat();
+        System.out.print("Cant. en Stock: "); productStock = scanner.nextInt();
+
+        switch (optionSelection) {
+            case 1:
+            {
+                float beverageLiter;
+                int beveragePercentage;
+
+                System.out.print("Litros: "); beverageLiter = scanner.nextFloat();
+                System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
+
+                newProductInstance = new AlcoholicBeverage(
+                        1, productName, productDescription, productPrice, productStock,
+                        beverageLiter, beveragePercentage
+                );
+
+                productsList.add(newProductInstance);
+                break;
+            }
+            case 2:
+            {
+                System.out.println("gfasrgwrgwrgwrgaw");
+                break;
+            }
+            case 3:
+            {
+                System.out.println("yuyhsthaethset");
+                break;
+            }
+
+        }
+
+        System.out.println("Producto: \'" + productName + "\'; \'" + productDescription + "\'.\nfue dado de alta." );
         return 0;
     }
 
@@ -69,7 +119,7 @@ public class CmdEcommerce {
         String menuMessage = "Elija una opcion: ";
 
         /*      PROGRAM LOOP        */
-        while (options_menu(optionsList, menuMessage)) {
+        while (optionsMenu(optionsList, menuMessage)) {
             switch (optionSelection) {
                 case 1:
                 {
