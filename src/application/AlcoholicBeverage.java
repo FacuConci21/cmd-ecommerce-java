@@ -2,12 +2,16 @@ package application;
 
 public class AlcoholicBeverage extends Product{
     private float liter;
-    private String name;
+    private String percentage;
 
 
-    public AlcoholicBeverage(float liter, String name){
+    public AlcoholicBeverage(int id,String name,String description,float price,
+                             int stock,float liter, String percentage){
+        super(id,name,description,price,stock);
+
+
         this.liter = liter;
-        this.name = name;
+        this.percentage = percentage;
     }
     public AlcoholicBeverage(){
 
@@ -22,10 +26,10 @@ public class AlcoholicBeverage extends Product{
     }
 
     public String getName() {
-        return name;
+        return percentage;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String percentage) {
+        this.percentage = percentage;
     }
 }
