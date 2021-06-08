@@ -33,6 +33,23 @@ public class CmdEcommerce {
         return false;
     }
 
+    private int createOption() {
+        System.out.println("Alta de un producto");
+        return 0;
+    }
+    private int updateOption() {
+        System.out.println("Modificar un producto");
+        return 0;
+    }
+    private int deleteOption() {
+        System.out.println("Baja de un producto");
+        return 0;
+    }
+    private int listingOption() {
+        System.out.println("Lista de productos");
+        return 0;
+    }
+
     // Constructors
     public CmdEcommerce() {
         productsList = new Vector<Object>();
@@ -41,11 +58,28 @@ public class CmdEcommerce {
     // Public methods
     public int main_loop_program() {
 
+        /*      PROGRAM LOOP        */
         while (options_menu()) {
-            System.out.println("---------------------------------------------");
+            switch (optionSelection) {
+                case 1:
+                {
+                    this.createOption();
+                }
+                case 2:
+                {
+                    this.updateOption();
+                }
+                case 3:
+                {
+                    this.deleteOption();
+                }
+                case 4:
+                {
+                    this.listingOption();
+                }
+            }
         }
 
-        System.out.println(productsList.isEmpty());
         return 0;
     }
 
