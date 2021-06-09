@@ -95,13 +95,23 @@ public final class CmdEcommerce {
             }
             case 3:
             {
-                System.out.println("yuyhsthaethset");
+                String stiffDateExpiry;
+                int stiffFatPercentage;
+
+                System.out.print("Fecha de caducidad: "); stiffDateExpiry = scanner.next();
+                System.out.print("Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
+
+                newProductInstance = new Stiff(
+                        productId, productName, productDescription, productPrice, productStock, stiffDateExpiry, stiffFatPercentage
+                );
+
+                this.productsList.add(newProductInstance);
                 break;
             }
 
         }
 
-        System.out.println("\tProducto: \'" + productName + "\'; \'" + productDescription + "\',\n\tfue dado de alta." );
+        System.out.println("\tProducto: \'" + productName + "\'; \'" + productDescription + "\',\n\tfue dado de alta exitosamente." );
         return 0;
     }
 
