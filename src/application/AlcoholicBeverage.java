@@ -5,11 +5,14 @@ public class AlcoholicBeverage extends Product{
     private float liter;
     private int percentage;
 
-    public AlcoholicBeverage(int id,String name,String description,float price,
-                             int stock,float liter, int percentage){
-        super(id,name,description,price,stock);
+    public AlcoholicBeverage(int id, int category, String name,String description,float price,
+                             int stock){
+        super(id,category,name,description,price,stock);
+    }
 
-
+    public AlcoholicBeverage(int id,int category,String name,String description,float price,
+                             int stock, float liter, int percentage) {
+        super(id,category,name,description,price,stock);
         this.liter = liter;
         this.percentage = percentage;
     }

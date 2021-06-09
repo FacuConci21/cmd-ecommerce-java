@@ -8,8 +8,8 @@ public class Stiff extends Product {
 
     }
 
-    public Stiff(int id, String name, String description, float price, int stock, String date_expiry, int fat_percentage) {
-        super(id, name, description, price, stock);
+    public Stiff(int id, int category, String name, String description, float price, int stock, String date_expiry, int fat_percentage) {
+        super(id, category,name, description, price, stock);
         this.date_expiry = date_expiry;
         this.fat_percentage = fat_percentage;
     }
