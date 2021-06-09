@@ -3,7 +3,7 @@ package application;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class CmdEcommerce {
+public final class CmdEcommerce {
 
     // Private attributes
     private Vector<Product> productsList;
@@ -15,8 +15,8 @@ public class CmdEcommerce {
 
         do {
             System.out.print(message);
-            optionSelection = scanner.nextInt();
-        } while (optionSelection > optionsQuantity || optionSelection < 0);
+            this.optionSelection = scanner.nextInt();
+        } while (this.optionSelection > optionsQuantity || this.optionSelection < 0);
     }
 
     private boolean optionsMenu(String [] optionsList, String message) {
@@ -25,7 +25,7 @@ public class CmdEcommerce {
             System.out.println( (i+1) + " - " + optionsList[i]);
         }
 
-        validateInput(optionsList.length, message);
+        this.validateInput(optionsList.length, message);
 
         if (optionSelection != 0) return true;
 
@@ -33,6 +33,7 @@ public class CmdEcommerce {
     }
 
     private int createOption() {
+        /*      DECLARATIONS        */
         String[] optionsList = {
                 "Bebida alcoholica",
                 "Lacteo",
@@ -45,7 +46,7 @@ public class CmdEcommerce {
         float productPrice;
         int productStock;
 
-        optionsMenu(optionsList, optionMessage);
+        this.optionsMenu(optionsList, optionMessage);
 
         // Asking for data
         System.out.print("Nombre: "); productName = scanner.nextLine();
@@ -53,7 +54,7 @@ public class CmdEcommerce {
         System.out.print("Precio: "); productPrice = scanner.nextFloat();
         System.out.print("Cant. en Stock: "); productStock = scanner.nextInt();
 
-        switch (optionSelection) {
+        switch (this.optionSelection) {
             case 1:
             {
                 float beverageLiter;
@@ -63,16 +64,31 @@ public class CmdEcommerce {
                 System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
-                        1, productName, productDescription, productPrice, productStock,
-                        beverageLiter, beveragePercentage
+                        1, productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
                 );
 
-                productsList.add(newProductInstance);
+                this.productsList.add(newProductInstance);
                 break;
             }
             case 2:
             {
-                System.out.println("gfasrgwrgwrgwrgaw");
+                int dairyFatPercentage;
+                String dairyDateExpiry, dairySingleVitamin;
+                Vector<String> dairyVitamins = new Vector<String>();
+
+                System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
+                System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.nextLine();
+                System.out.print("Ingrese las vitaminas: ");
+                for (int i = 0; i < 3; i++) {
+                    System.out.print(" "); dairySingleVitamin = scanner.next();
+                    dairyVitamins.add(dairySingleVitamin);
+                }
+
+                newProductInstance = new Dairy(
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, 1, productName, productDescription, productPrice, productStock
+                );
+
+                this.productsList.add(newProductInstance);
                 break;
             }
             case 3:
@@ -83,7 +99,7 @@ public class CmdEcommerce {
 
         }
 
-        System.out.println("Producto: \'" + productName + "\'; \'" + productDescription + "\'.\nfue dado de alta." );
+        System.out.println("\tProducto: \'" + productName + "\'; \'" + productDescription + "\',\n\tfue dado de alta." );
         return 0;
     }
 
@@ -119,8 +135,8 @@ public class CmdEcommerce {
         String menuMessage = "Elija una opcion: ";
 
         /*      PROGRAM LOOP        */
-        while (optionsMenu(optionsList, menuMessage)) {
-            switch (optionSelection) {
+        while (this.optionsMenu(optionsList, menuMessage)) {
+            switch (this.optionSelection) {
                 case 1:
                 {
                     this.createOption();
