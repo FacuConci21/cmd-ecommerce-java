@@ -128,7 +128,7 @@ public final class CmdEcommerce {
 
             for(int i = 0; i < this.productsList.size(); i++){
                     optionsList[i] = this.productsList.elementAt(i).getName();
-            };
+            }
 
             this.optionsMenu(optionsList, optionMessage);
 
@@ -203,7 +203,11 @@ public final class CmdEcommerce {
     }
 
     private int listingOption() {
-        System.out.println("Lista de productos");
+
+        for (int i = 0; i < this.productsList.size(); i++) {
+            System.out.println(this.productsList.elementAt(i).toString());
+        }
+
         return 0;
     }
 
