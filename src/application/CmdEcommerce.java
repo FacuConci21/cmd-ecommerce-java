@@ -6,7 +6,7 @@ import java.util.Vector;
 public final class CmdEcommerce {
 
     // Private attributes
-    private Vector<Product> productsList;
+    private final Vector<Product> productsList;
     int optionSelection;
 
     // Private methods
@@ -27,9 +27,7 @@ public final class CmdEcommerce {
 
         this.validateInput(optionsList.length, message);
 
-        if (optionSelection != 0) return true;
-
-        return false;
+        return (optionSelection != 0);
     }
 
     private int createOption() {
@@ -44,13 +42,14 @@ public final class CmdEcommerce {
         Product newProductInstance;
         String productName, productDescription;
         float productPrice;
-        int productStock;
+        int productStock, productId;
 
         this.optionsMenu(optionsList, optionMessage);
 
+        productId = (productsList.isEmpty()) ? 1 : productsList.size();
         // Asking for data
-        System.out.print("Nombre: "); productName = scanner.nextLine();
-        System.out.print("Description: "); productDescription = scanner.nextLine();
+        System.out.print("Nombre: "); productName = scanner.next();
+        System.out.print("Description: "); productDescription = scanner.next();
         System.out.print("Precio: "); productPrice = scanner.nextFloat();
         System.out.print("Cant. en Stock: "); productStock = scanner.nextInt();
 
@@ -64,7 +63,11 @@ public final class CmdEcommerce {
                 System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
+<<<<<<< HEAD
                         1, optionSelection,productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
+=======
+                        productId, productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
+>>>>>>> 22930b185536ec6892cacd8bedcc82a3fa8771ba
                 );
 
                 this.productsList.add(newProductInstance);
@@ -74,18 +77,23 @@ public final class CmdEcommerce {
             {
                 int dairyFatPercentage;
                 String dairyDateExpiry, dairySingleVitamin;
-                Vector<String> dairyVitamins = new Vector<String>();
+                Vector<String> dairyVitamins = new Vector<>();
 
-                System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
-                System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.nextLine();
                 System.out.print("Ingrese las vitaminas: ");
                 for (int i = 0; i < 3; i++) {
-                    System.out.print(" "); dairySingleVitamin = scanner.next();
+                    dairySingleVitamin = scanner.next();System.out.print(" ");
                     dairyVitamins.add(dairySingleVitamin);
                 }
+                System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
+                System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.next();
 
+                /**/
                 newProductInstance = new Dairy(
+<<<<<<< HEAD
                         dairyFatPercentage,dairyDateExpiry, dairyVitamins, 1, optionSelection,productName, productDescription, productPrice, productStock
+=======
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, productName, productDescription, productPrice, productStock
+>>>>>>> 22930b185536ec6892cacd8bedcc82a3fa8771ba
                 );
 
                 this.productsList.add(newProductInstance);
@@ -93,13 +101,23 @@ public final class CmdEcommerce {
             }
             case 3:
             {
-                System.out.println("yuyhsthaethset");
+                String stiffDateExpiry;
+                int stiffFatPercentage;
+
+                System.out.print("Fecha de caducidad: "); stiffDateExpiry = scanner.next();
+                System.out.print("Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
+
+                newProductInstance = new Stiff(
+                        productId, productName, productDescription, productPrice, productStock, stiffDateExpiry, stiffFatPercentage
+                );
+
+                this.productsList.add(newProductInstance);
                 break;
             }
 
         }
 
-        System.out.println("\tProducto: \'" + productName + "\'; \'" + productDescription + "\',\n\tfue dado de alta." );
+        System.out.println("\tProducto: '" + productName + "'; '" + productDescription + "',\n\tfue dado de alta exitosamente." );
         return 0;
     }
 
@@ -199,7 +217,7 @@ public final class CmdEcommerce {
 
     // Constructors
     public CmdEcommerce() {
-        productsList = new Vector<Product>();
+        this.productsList = new Vector<>();
     }
 
     // Public methods
@@ -214,34 +232,35 @@ public final class CmdEcommerce {
 
         };
         String menuMessage = "Elija una opcion: ";
+        int programResult = 0;
 
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
             switch (this.optionSelection) {
                 case 1:
                 {
-                    this.createOption();
+                    programResult = this.createOption();
                     break;
                 }
                 case 2:
                 {
-                    this.updateOption();
+                    programResult = this.updateOption();
                     break;
                 }
                 case 3:
                 {
-                    this.deleteOption();
+                    programResult = this.deleteOption();
                     break;
                 }
                 case 4:
                 {
-                    this.listingOption();
+                    programResult = this.listingOption();
                     break;
                 }
             }
         }
 
-        return 0;
+        return programResult;
     }
 
 }
