@@ -43,4 +43,15 @@ public class Product {
     public int getStock() {
         return stock;
     }
+
+
+    @Override
+    public String toString() {
+        return "Id: " + id +
+                ", Nombre: " + name + '\'' +
+                ", Descripcion: " + description + '\'' +
+                ", Precio: " + price +
+                ", Stock: " + stock +
+                ", Categoria: " + category;
+    }
 }
