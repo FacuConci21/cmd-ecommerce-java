@@ -63,11 +63,7 @@ public final class CmdEcommerce {
                 System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
-<<<<<<< HEAD
-                        1, optionSelection,productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
-=======
-                        productId, productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
->>>>>>> 22930b185536ec6892cacd8bedcc82a3fa8771ba
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
                 );
 
                 this.productsList.add(newProductInstance);
@@ -89,11 +85,7 @@ public final class CmdEcommerce {
 
                 /**/
                 newProductInstance = new Dairy(
-<<<<<<< HEAD
-                        dairyFatPercentage,dairyDateExpiry, dairyVitamins, 1, optionSelection,productName, productDescription, productPrice, productStock
-=======
-                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, productName, productDescription, productPrice, productStock
->>>>>>> 22930b185536ec6892cacd8bedcc82a3fa8771ba
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, this.optionSelection,productName, productDescription, productPrice, productStock
                 );
 
                 this.productsList.add(newProductInstance);
@@ -108,7 +100,7 @@ public final class CmdEcommerce {
                 System.out.print("Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
 
                 newProductInstance = new Stiff(
-                        productId, productName, productDescription, productPrice, productStock, stiffDateExpiry, stiffFatPercentage
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock, stiffDateExpiry, stiffFatPercentage
                 );
 
                 this.productsList.add(newProductInstance);
@@ -167,7 +159,7 @@ public final class CmdEcommerce {
 
                     int dairyFatPercentage;
                     String dairyDateExpiry, dairySingleVitamin;
-                    Vector<String> dairyVitamins = new Vector<String>();
+                    Vector<String> dairyVitamins = new Vector<>();
 
                     System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
                     System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.nextLine();
@@ -226,12 +218,12 @@ public final class CmdEcommerce {
         String[] optionsList = {
                 "Salir",
                 "Alta de producto",
-                "Modificacion de producto",
+                "Modificación de producto",
                 "Baja de producto",
                 "Lista de productos"
 
         };
-        String menuMessage = "Elija una opcion: ";
+        String menuMessage = "Elija una opción: ";
         int programResult = 0;
 
         /*      PROGRAM LOOP        */
