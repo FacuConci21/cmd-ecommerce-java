@@ -22,7 +22,7 @@ public final class CmdEcommerce {
     private boolean optionsMenu(String [] optionsList, String message) {
 
         for (int i = 0; i < optionsList.length; i++) {
-            System.out.println( (i) + " - " + optionsList[i]);
+            System.out.println( (i + 1) + " - " + optionsList[i]);
         }
 
         this.validateInput(optionsList.length, message);
@@ -46,7 +46,7 @@ public final class CmdEcommerce {
 
         this.optionsMenu(optionsList, optionMessage);
 
-        productId = (productsList.isEmpty()) ? 1 : productsList.size();
+        productId = (productsList.isEmpty()) ? 1 : productsList.size() + 1;
         // Asking for data
         System.out.print("Nombre: "); productName = scanner.next();
         System.out.print("Description: "); productDescription = scanner.next();
@@ -216,7 +216,6 @@ public final class CmdEcommerce {
     public int main_loop_program() {
 
         String[] optionsList = {
-                "Salir",
                 "Alta de producto",
                 "Modificación de producto",
                 "Baja de producto",
