@@ -44,14 +44,15 @@ public final class CmdEcommerce {
         Product newProductInstance;
         String productName, productDescription;
         float productPrice;
-        int productStock;
+        int productStock, productId;
 
         this.optionsMenu(optionsList, optionMessage);
 
+        productId = (productsList.isEmpty()) ? 1 : productsList.size();
         // Asking for data
-        System.out.print("Nombre: "); productName = scanner.nextLine();
-        System.out.print("Description: "); productDescription = scanner.nextLine();
-        System.out.print("Precio: "); productPrice = scanner.nextFloat();
+        System.out.print("Nombre: "); productName = scanner.next();
+        System.out.print("Description: "); productDescription = scanner.next();
+        System.out.print("Precio: "); productPrice = (float) scanner.nextFloat();
         System.out.print("Cant. en Stock: "); productStock = scanner.nextInt();
 
         switch (this.optionSelection) {
@@ -60,11 +61,11 @@ public final class CmdEcommerce {
                 float beverageLiter;
                 int beveragePercentage;
 
-                System.out.print("Litros: "); beverageLiter = scanner.nextFloat();
+                System.out.print("Litros: "); beverageLiter = (float) scanner.nextFloat();
                 System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
-                        1, productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
+                        productId, productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
                 );
 
                 this.productsList.add(newProductInstance);
@@ -76,16 +77,17 @@ public final class CmdEcommerce {
                 String dairyDateExpiry, dairySingleVitamin;
                 Vector<String> dairyVitamins = new Vector<String>();
 
-                System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
-                System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.nextLine();
                 System.out.print("Ingrese las vitaminas: ");
                 for (int i = 0; i < 3; i++) {
-                    System.out.print(" "); dairySingleVitamin = scanner.next();
+                    dairySingleVitamin = scanner.next();System.out.print(" ");
                     dairyVitamins.add(dairySingleVitamin);
                 }
+                System.out.print("Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
+                System.out.print("Fecha de caducidad: "); dairyDateExpiry = scanner.next();
 
+                /**/
                 newProductInstance = new Dairy(
-                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, 1, productName, productDescription, productPrice, productStock
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, productName, productDescription, productPrice, productStock
                 );
 
                 this.productsList.add(newProductInstance);
