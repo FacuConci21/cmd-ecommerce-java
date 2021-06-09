@@ -21,4 +21,11 @@ public class Stiff extends Product {
     public int getFat_percentage() {
         return fat_percentage;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + "Fecha de expiracion: " + date_expiry
+                + "Porcentaje en calorias: " + fat_percentage;
+    }
 }

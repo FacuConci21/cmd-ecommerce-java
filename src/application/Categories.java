@@ -19,4 +19,10 @@ public class Categories {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Id Categoria: " + id
+                +"Nombre de categoria: "+ name;
+    }
 }

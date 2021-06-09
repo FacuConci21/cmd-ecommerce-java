@@ -30,4 +30,12 @@ public class Dairy extends Product{
     public Vector<String> getVitamins() {
         return vitamins;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + "Porcentaje de calorias: " + fat_percentage
+                + "Fecha de expiracion: " + date_expiry
+                + "Vitaminas que contiene: " + vitamins;
+    }
 }

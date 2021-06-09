@@ -34,4 +34,10 @@ public class AlcoholicBeverage extends Product{
     public void setPercentage(int percentage) {
         this.percentage = percentage;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Contenido en Litros: " + liter
+                +"Porcentaje de alcohol: "+ percentage;
+    }
 }
