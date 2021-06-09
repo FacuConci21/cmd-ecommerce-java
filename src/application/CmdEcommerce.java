@@ -6,7 +6,7 @@ import java.util.Vector;
 public final class CmdEcommerce {
 
     // Private attributes
-    private Vector<Product> productsList;
+    private final Vector<Product> productsList;
     int optionSelection;
 
     // Private methods
@@ -27,9 +27,7 @@ public final class CmdEcommerce {
 
         this.validateInput(optionsList.length, message);
 
-        if (optionSelection != 0) return true;
-
-        return false;
+        return (optionSelection != 0);
     }
 
     private int createOption() {
@@ -52,7 +50,7 @@ public final class CmdEcommerce {
         // Asking for data
         System.out.print("Nombre: "); productName = scanner.next();
         System.out.print("Description: "); productDescription = scanner.next();
-        System.out.print("Precio: "); productPrice = (float) scanner.nextFloat();
+        System.out.print("Precio: "); productPrice = scanner.nextFloat();
         System.out.print("Cant. en Stock: "); productStock = scanner.nextInt();
 
         switch (this.optionSelection) {
@@ -61,7 +59,7 @@ public final class CmdEcommerce {
                 float beverageLiter;
                 int beveragePercentage;
 
-                System.out.print("Litros: "); beverageLiter = (float) scanner.nextFloat();
+                System.out.print("Litros: "); beverageLiter = scanner.nextFloat();
                 System.out.print("Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
@@ -75,7 +73,7 @@ public final class CmdEcommerce {
             {
                 int dairyFatPercentage;
                 String dairyDateExpiry, dairySingleVitamin;
-                Vector<String> dairyVitamins = new Vector<String>();
+                Vector<String> dairyVitamins = new Vector<>();
 
                 System.out.print("Ingrese las vitaminas: ");
                 for (int i = 0; i < 3; i++) {
@@ -111,7 +109,7 @@ public final class CmdEcommerce {
 
         }
 
-        System.out.println("\tProducto: \'" + productName + "\'; \'" + productDescription + "\',\n\tfue dado de alta exitosamente." );
+        System.out.println("\tProducto: '" + productName + "'; '" + productDescription + "',\n\tfue dado de alta exitosamente." );
         return 0;
     }
 
@@ -132,7 +130,7 @@ public final class CmdEcommerce {
 
     // Constructors
     public CmdEcommerce() {
-        productsList = new Vector<Product>();
+        this.productsList = new Vector<>();
     }
 
     // Public methods
@@ -145,34 +143,35 @@ public final class CmdEcommerce {
                 "Lista de productos"
         };
         String menuMessage = "Elija una opcion: ";
+        int programResult = 0;
 
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
             switch (this.optionSelection) {
                 case 1:
                 {
-                    this.createOption();
+                    programResult = this.createOption();
                     break;
                 }
                 case 2:
                 {
-                    this.updateOption();
+                    programResult = this.updateOption();
                     break;
                 }
                 case 3:
                 {
-                    this.deleteOption();
+                    programResult = this.deleteOption();
                     break;
                 }
                 case 4:
                 {
-                    this.listingOption();
+                    programResult = this.listingOption();
                     break;
                 }
             }
         }
 
-        return 0;
+        return programResult;
     }
 
 }
