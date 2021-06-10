@@ -48,13 +48,13 @@ public class Stiff extends Product {
 
                 if (Integer.parseInt(arrayDate[0]) >= day && Integer.parseInt(arrayDate[0]) <= maxDay) {
                     isDate = true;
-                } else{ isDate = false;}
+                } else{ return false; }
                 if (Integer.parseInt(arrayDate[1]) >= month && Integer.parseInt(arrayDate[1]) <= maxMonth) {
                     isDate = true;
-                } else{ isDate = false;}
+                } else{ return false;}
                 if (Integer.parseInt(arrayDate[2]) >= year && Integer.parseInt(arrayDate[2]) <= maxYear) {
                     isDate = true;
-                } else{ isDate = false;}
+                } else{ return false;}
             }
 
         }
