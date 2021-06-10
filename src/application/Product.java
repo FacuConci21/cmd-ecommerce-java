@@ -47,11 +47,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Id: " + id +
-                " Nombre del producto: " + name +
-                " Descripcion: " + description +
-                " Precio: " + price + "$" +
-                " Stock: " + stock +
-                " Categoria: " + category;
+        return Colors.ANSI_GREEN + "Id: " + Colors.ANSI_DEFAULT  + id +
+               Colors.ANSI_GREEN + " Nombre del producto: " + Colors.ANSI_DEFAULT  + name +
+               Colors.ANSI_GREEN + " Descripcion: " + Colors.ANSI_DEFAULT  + description +
+               Colors.ANSI_GREEN + " Precio: $" + Colors.ANSI_DEFAULT  + price +
+               Colors.ANSI_GREEN + " Stock: " + Colors.ANSI_DEFAULT + stock +
+               Colors.ANSI_GREEN + " Categoria: " + Colors.ANSI_DEFAULT  + category;
     }
 }
