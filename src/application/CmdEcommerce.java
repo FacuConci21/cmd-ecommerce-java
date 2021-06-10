@@ -85,7 +85,10 @@ public final class CmdEcommerce {
                     dairyVitamins.add(dairySingleVitamin);
                 }
                 System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
-                System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); dairyDateExpiry = scanner.next();
+                do{
+                    System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); dairyDateExpiry = scanner.next();
+
+                } while( Dairy.controlDate(dairyDateExpiry) );
 
                 newProductInstance = new Dairy(
                         dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, this.optionSelection,productName, productDescription, productPrice, productStock
@@ -99,11 +102,17 @@ public final class CmdEcommerce {
                 String stiffDateExpiry;
                 int stiffFatPercentage;
 
-                System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); stiffDateExpiry = scanner.next();
+
                 System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
 
+                do{
+                    System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); stiffDateExpiry = scanner.next();
+
+                } while( Stiff.controlDate(stiffDateExpiry) );
+
                 newProductInstance = new Stiff(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock, stiffDateExpiry, stiffFatPercentage
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        stiffDateExpiry, stiffFatPercentage
                 );
 
                 this.productsList.add(newProductInstance);
