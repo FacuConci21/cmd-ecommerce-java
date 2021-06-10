@@ -48,7 +48,7 @@ public class Product {
     @Override
     public String toString() {
         return "Id: " + id +
-                " Nombre del producto : " + name +
+                " Nombre del producto: " + name +
                 " Descripcion: " + description +
                 " Precio: " + price + "$" +
                 " Stock: " + stock +
