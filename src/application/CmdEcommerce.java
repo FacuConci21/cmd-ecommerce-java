@@ -67,9 +67,11 @@ public final class CmdEcommerce {
                 System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock, beverageLiter, beveragePercentage
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        beverageLiter, beveragePercentage
                 );
 
+                // Adding product on the list
                 this.productsList.add(newProductInstance);
                 break;
             }
@@ -90,9 +92,11 @@ public final class CmdEcommerce {
                 } while( !Dairy.controlDate(dairyDateExpiry) );
 
                 newProductInstance = new Dairy(
-                        dairyFatPercentage, dairyDateExpiry, dairyVitamins, productId, this.optionSelection,productName, productDescription, productPrice, productStock
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins
                 );
 
+                // Adding product on the list
                 this.productsList.add(newProductInstance);
                 break;
             }
@@ -112,23 +116,27 @@ public final class CmdEcommerce {
                         stiffDateExpiry, stiffFatPercentage
                 );
 
+                // Adding product on the list
                 this.productsList.add(newProductInstance);
                 break;
             }
 
         }
 
-        System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" + productDescription + "',\n\tfue dado de alta exitosamente." );
+        System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" +
+                productDescription + "',\n\tfue dado de alta exitosamente." );
         return 0;
     }
 
     private int updateOption(){
 
+        /*      DECLARATIONS        */
         String[] optionsList = new String[this.productsList.size()];
         String productName, productDescription;
         float productPrice;
         int productStock;
         Product newProductInstance;
+
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para modificar." );
         } else{
@@ -163,6 +171,7 @@ public final class CmdEcommerce {
                             productDescription, productPrice, productStock, beverageLiter, beveragePercentage
                     );
 
+                    // Updating product
                     this.productsList.setElementAt(newProductInstance, optionSelection - 1);
                     break;
                 }
@@ -184,11 +193,12 @@ public final class CmdEcommerce {
                     } while( !Dairy.controlDate(dairyDateExpiry) );
 
                     newProductInstance = new Dairy(
-                            dairyFatPercentage,dairyDateExpiry, dairyVitamins, this.productsList.elementAt(
-                                    optionSelection - 1).getId(),
-                            optionSelection,productName, productDescription, productPrice, productStock
+                            this.productsList.elementAt(optionSelection - 1).getId(),
+                            optionSelection,productName, productDescription, productPrice, productStock,
+                            dairyFatPercentage,dairyDateExpiry, dairyVitamins
                     );
 
+                    // Updating product
                     this.productsList.setElementAt(newProductInstance, optionSelection - 1);
                     break;
                 }
@@ -205,7 +215,9 @@ public final class CmdEcommerce {
                             optionSelection, productName, productDescription, productPrice, productStock, stiffDateExpiry,
                             stiffFatPercentage);
 
+                    // Updating product
                     this.productsList.setElementAt(newProductInstance, optionSelection - 1);
+                    break;
                 }
             }
 
@@ -229,6 +241,7 @@ public final class CmdEcommerce {
 
             this.optionsMenu(optionsList, optionMessage);
 
+            // Deleting product
             this.productsList.removeElementAt(optionSelection -1 );
 
             System.out.println(Colors.ANSI_BLUE + "Producto con ID " + (optionSelection) +" eliminado correctamente");
@@ -247,8 +260,6 @@ public final class CmdEcommerce {
         } else {
             System.out.println(Colors.ANSI_RED + "No hay productos cargados! Por favor, dé de alta uno como mínimo");
         }
-
-
 
         return 0;
     }

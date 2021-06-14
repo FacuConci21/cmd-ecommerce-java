@@ -1,6 +1,8 @@
 package application;
 
 public class Product {
+
+    // Private atrributes
     private int id;
     private String name;
     private String description;
@@ -8,6 +10,7 @@ public class Product {
     private int stock;
     private int category;
 
+    // Constructors
     public Product(){};
 
     public Product(int id, int category, String name, String description, float price, int stock) {
@@ -19,6 +22,7 @@ public class Product {
         this.stock = stock;
     }
 
+    // Public methods
     public int getId() {
         return id;
     }
@@ -31,7 +35,6 @@ public class Product {
         return name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -43,8 +46,6 @@ public class Product {
     public int getStock() {
         return stock;
     }
-
-
 
     @Override
     public String toString() {

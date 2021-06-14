@@ -4,22 +4,24 @@ import java.time.LocalDate;
 
 public class Dairy extends Product{
 
+    // Private atrributes
     private int fat_percentage;
     private String date_expiry;
     private Vector <String> vitamins;
 
-    public Dairy() {
-    }
+    // Constructors
+    public Dairy() {}
 
-    public Dairy(int fat_percentage, String date_expiry, Vector<String> vitamins,
-                 int id, int category, String name, String description, float price, int stock) {
-
+    public Dairy(int id, int category, String name, String description, float price, int stock,
+            int fat_percentage, String date_expiry, Vector<String> vitamins)
+    {
         super(id, category, name, description, price, stock);
         this.fat_percentage = fat_percentage;
         this.date_expiry = date_expiry;
         this.vitamins = vitamins;
     }
 
+    // Public methods
     public int getFat_percentage() {
         return fat_percentage;
     }
@@ -40,7 +42,7 @@ public class Dairy extends Product{
                 Colors.ANSI_GREEN+ " Vitaminas que contiene: " + Colors.ANSI_DEFAULT + vitamins;
     }
 
-
+    // Public static methods
     public static boolean controlDate(String date){
         boolean isDate = false;
 
@@ -48,12 +50,12 @@ public class Dairy extends Product{
             String [] arrayDate = date.split("-");
             if(arrayDate.length == 3) {
 
-                int day = LocalDate.now().getDayOfMonth();
-                int maxDay = LocalDate.MAX.getDayOfMonth();
-                int month = LocalDate.now().getMonthValue();
-                int maxMonth = LocalDate.MAX.getMonthValue();
-                int year = LocalDate.now().getYear();
-                int maxYear = LocalDate.MAX.getYear();
+                int day = LocalDate.now().getDayOfMonth(),
+                    maxDay = LocalDate.MAX.getDayOfMonth(),
+                    month = LocalDate.now().getMonthValue(),
+                    maxMonth = LocalDate.MAX.getMonthValue(),
+                    year = LocalDate.now().getYear(),
+                    maxYear = LocalDate.MAX.getYear();
 
                 if (Integer.parseInt(arrayDate[0]) >= day && Integer.parseInt(arrayDate[0]) <= maxDay) {
                     isDate = true;
