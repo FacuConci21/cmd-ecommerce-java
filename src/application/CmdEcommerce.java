@@ -92,7 +92,7 @@ public final class CmdEcommerce implements Options{
                 "Lácteo",
                 "Fiambre"
         };
-        String optionMessage = "Que tipo de producto desea registrar?: ";
+        String optionMessage = "Que tipo de producto desea registrar? (0-salir): ";
         Scanner scanner = new Scanner(System.in);
         Product newProductInstance;
         String productName, productDescription;
@@ -100,6 +100,9 @@ public final class CmdEcommerce implements Options{
         int productStock, productId;
 
         this.optionsMenu(optionsList, optionMessage);
+
+        // Harcoded to solve cancelation issue. '1' is for cancelation code.
+        if (this.optionSelection <= 0) { return 1; }
 
         productId = (productsList.isEmpty()) ? 1 : productsList.size() + 1;
         // Asking for data
@@ -171,7 +174,6 @@ public final class CmdEcommerce implements Options{
                 this.productsList.add(newProductInstance);
                 break;
             }
-
         }
 
         System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" +
@@ -191,7 +193,7 @@ public final class CmdEcommerce implements Options{
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para modificar." );
         } else{
-            String optionMessage = "Que producto desea modificar?: ";
+            String optionMessage = "Que producto desea modificar? (0-salir): ";
             Scanner scanner = new Scanner(System.in);
 
             for(int i = 0; i < this.productsList.size(); i++){
@@ -199,6 +201,9 @@ public final class CmdEcommerce implements Options{
             }
 
             this.optionsMenu(optionsList, optionMessage);
+
+            // Harcoded to solve index issue.
+            if (this.optionSelection <= 0) { return 1; }
 
             /*Request of data to modify*/
 
@@ -285,13 +290,16 @@ public final class CmdEcommerce implements Options{
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para eliminar." );
         } else {
-            String optionMessage = "Seleccione el producto a eliminar: ";
+            String optionMessage = "Seleccione el producto a eliminar (0-salir): ";
 
             for (int i = 0; i < this.productsList.size(); i++) {
                 optionsList[i] = this.productsList.elementAt(i).getName();
             }
 
             this.optionsMenu(optionsList, optionMessage);
+
+            // Harcoded to solve index issue.
+            if (this.optionSelection <= 0) { return 1; }
 
             // Deleting product
             this.productsList.removeElementAt(optionSelection -1 );
