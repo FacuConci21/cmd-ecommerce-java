@@ -40,6 +40,13 @@ public final class CmdEcommerce implements Options{
     // Public methods
     public int main_loop_program() {
 
+        String[] outputMessages = {
+                Colors.ANSI_BLUE + "La operacion de llevo a cabo con exito!",
+                Colors.ANSI_YELLOW + "La operacion fue cancelada.",
+                Colors.ANSI_YELLOW + "La lista de productos esta vacia.",
+                Colors.ANSI_RED + "Se produjo un error, reinicie el programa.",
+                Colors.ANSI_GREEN + "Agradecemos su visita, Adios!"
+        };
         String[] optionsList = {
                 "Alta de producto",
                 "Modificación de producto",
@@ -49,7 +56,7 @@ public final class CmdEcommerce implements Options{
 
         };
         String menuMessage = "Elija una opción: ";
-        int programResult = 0;
+        int programResult = -1;
 
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
@@ -75,8 +82,10 @@ public final class CmdEcommerce implements Options{
                     break;
                 }
             }
+            System.out.println(outputMessages[programResult]);
         }
 
+        System.out.println(outputMessages[4]); // '4' is for a goodbye message code.
         return programResult;
     }
 
@@ -192,6 +201,7 @@ public final class CmdEcommerce implements Options{
 
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para modificar." );
+            return 2; // Empty list code
         } else{
             String optionMessage = "Que producto desea modificar? (0-salir): ";
             Scanner scanner = new Scanner(System.in);
@@ -289,6 +299,7 @@ public final class CmdEcommerce implements Options{
 
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para eliminar." );
+            return 2; // Empty list code
         } else {
             String optionMessage = "Seleccione el producto a eliminar (0-salir): ";
 
@@ -319,6 +330,7 @@ public final class CmdEcommerce implements Options{
             }
         } else {
             System.out.println(Colors.ANSI_RED + "No hay productos cargados! Por favor, dé de alta uno como mínimo");
+            return 2; // Empty list code
         }
 
         return 0;
