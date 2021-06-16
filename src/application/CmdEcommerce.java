@@ -1,11 +1,11 @@
 package application;
 
 import iapplication.Colors;
-
+import iapplication.Options;
 import java.util.Scanner;
 import java.util.Vector;
 
-public final class CmdEcommerce {
+public final class CmdEcommerce implements Options{
 
     // Private attributes
     private final Vector<Product> productsList;
@@ -32,7 +32,56 @@ public final class CmdEcommerce {
         return (optionSelection != 0 && optionSelection != optionsList.length);
     }
 
-    private int createOption() {
+    // Constructors
+    public CmdEcommerce() {
+        this.productsList = new Vector<>();
+    }
+
+    // Public methods
+    public int main_loop_program() {
+
+        String[] optionsList = {
+                "Alta de producto",
+                "Modificación de producto",
+                "Baja de producto",
+                "Lista de productos",
+                "Salir",
+
+        };
+        String menuMessage = "Elija una opción: ";
+        int programResult = 0;
+
+        /*      PROGRAM LOOP        */
+        while (this.optionsMenu(optionsList, menuMessage)) {
+            switch (this.optionSelection) {
+                case 1:
+                {
+                    programResult = this.createOption();
+                    break;
+                }
+                case 2:
+                {
+                    programResult = this.updateOption();
+                    break;
+                }
+                case 3:
+                {
+                    programResult = this.deleteOption();
+                    break;
+                }
+                case 4:
+                {
+                    programResult = this.listingOption();
+                    break;
+                }
+            }
+        }
+
+        return programResult;
+    }
+
+    @Override
+    public int createOption() {
         /*      DECLARATIONS        */
         System.out.println(Colors.ANSI_BLUE + "_______________________");
         System.out.println(Colors.ANSI_BLUE + " Registro de productos ");
@@ -130,8 +179,8 @@ public final class CmdEcommerce {
         return 0;
     }
 
-    private int updateOption(){
-
+    @Override
+    public int updateOption() {
         /*      DECLARATIONS        */
         String[] optionsList = new String[this.productsList.size()];
         String productName, productDescription;
@@ -146,7 +195,7 @@ public final class CmdEcommerce {
             Scanner scanner = new Scanner(System.in);
 
             for(int i = 0; i < this.productsList.size(); i++){
-                    optionsList[i] = this.productsList.elementAt(i).getName();
+                optionsList[i] = this.productsList.elementAt(i).getName();
             }
 
             this.optionsMenu(optionsList, optionMessage);
@@ -229,7 +278,8 @@ public final class CmdEcommerce {
         return 0;
     }
 
-    private int deleteOption() {
+    @Override
+    public int deleteOption() {
         String[] optionsList = new String[this.productsList.size()];
 
         if (optionsList.length == 0){
@@ -252,8 +302,8 @@ public final class CmdEcommerce {
         return 0;
     }
 
-    private int listingOption() {
-
+    @Override
+    public int listingOption() {
         if(this.productsList.size() > 0 ){
             System.out.println(Colors.ANSI_BLUE + "Lista de productos");
             for (int i = 0; i < this.productsList.size(); i++) {
@@ -265,53 +315,4 @@ public final class CmdEcommerce {
 
         return 0;
     }
-
-    // Constructors
-    public CmdEcommerce() {
-        this.productsList = new Vector<>();
-    }
-
-    // Public methods
-    public int main_loop_program() {
-
-        String[] optionsList = {
-                "Alta de producto",
-                "Modificación de producto",
-                "Baja de producto",
-                "Lista de productos",
-                "Salir",
-
-        };
-        String menuMessage = "Elija una opción: ";
-        int programResult = 0;
-
-        /*      PROGRAM LOOP        */
-        while (this.optionsMenu(optionsList, menuMessage)) {
-            switch (this.optionSelection) {
-                case 1:
-                {
-                    programResult = this.createOption();
-                    break;
-                }
-                case 2:
-                {
-                    programResult = this.updateOption();
-                    break;
-                }
-                case 3:
-                {
-                    programResult = this.deleteOption();
-                    break;
-                }
-                case 4:
-                {
-                    programResult = this.listingOption();
-                    break;
-                }
-            }
-        }
-
-        return programResult;
-    }
-
 }

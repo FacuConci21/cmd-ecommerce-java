@@ -1,0 +1,13 @@
+ private int listingOption() {
+
+        if(this.productsList.size() > 0 ){
+            System.out.println(Colors.ANSI_BLUE + "Lista de productos");
+            for (int i = 0; i < this.productsList.size(); i++) {
+                System.out.println(this.productsList.elementAt(i).toString());
+            }
+        } else {
+            System.out.println(Colors.ANSI_RED + "No hay productos cargados! Por favor, dé de alta uno como mínimo");
+        }
+
+        return 0;
+    }

@@ -1,0 +1,97 @@
+private int createOption() {
+        /*      DECLARATIONS        */
+        System.out.println(Colors.ANSI_BLUE + "_______________________");
+        System.out.println(Colors.ANSI_BLUE + " Registro de productos ");
+        System.out.println(Colors.ANSI_BLUE + "_______________________");
+
+        String[] optionsList = {
+                "Bebida alcohólica",
+                "Lácteo",
+                "Fiambre"
+        };
+        String optionMessage = "Que tipo de producto desea registrar?: ";
+        Scanner scanner = new Scanner(System.in);
+        Product newProductInstance;
+        String productName, productDescription;
+        float productPrice;
+        int productStock, productId;
+
+        this.optionsMenu(optionsList, optionMessage);
+
+        productId = (productsList.isEmpty()) ? 1 : productsList.size() + 1;
+        // Asking for data
+        System.out.print(Colors.ANSI_DEFAULT + "Nombre: "); productName = scanner.next();
+        System.out.print(Colors.ANSI_DEFAULT + "Precio: "); productPrice = scanner.nextFloat();
+        System.out.print(Colors.ANSI_DEFAULT + "Cant. en Stock: "); productStock = scanner.nextInt();
+        System.out.print(Colors.ANSI_DEFAULT + "Description: "); productDescription = scanner.next();
+
+        switch (this.optionSelection) {
+            case 1:
+            {
+                float beverageLiter;
+                int beveragePercentage;
+
+                System.out.print(Colors.ANSI_DEFAULT + "Litros: "); beverageLiter = scanner.nextFloat();
+                System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
+
+                newProductInstance = new AlcoholicBeverage(
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        beverageLiter, beveragePercentage
+                );
+
+                // Adding product on the list
+                this.productsList.add(newProductInstance);
+                break;
+            }
+            case 2:
+            {
+                int dairyFatPercentage;
+                String dairyDateExpiry, dairySingleVitamin;
+                Vector<String> dairyVitamins = new Vector<>();
+
+                System.out.print(Colors.ANSI_DEFAULT+"Ingrese las vitaminas: ");
+                for (int i = 0; i < 3; i++) {
+                    dairySingleVitamin = scanner.next();System.out.print(" ");
+                    dairyVitamins.add(dairySingleVitamin);
+                }
+                System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de grasa: "); dairyFatPercentage = scanner.nextInt();
+                do{
+                    System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); dairyDateExpiry = scanner.next();
+                } while( !Dairy.controlDate(dairyDateExpiry) );
+
+                newProductInstance = new Dairy(
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        dairyFatPercentage, dairyDateExpiry, dairyVitamins
+                );
+
+                // Adding product on the list
+                this.productsList.add(newProductInstance);
+                break;
+            }
+            case 3:
+            {
+                String stiffDateExpiry;
+                int stiffFatPercentage;
+
+                System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
+
+                do{
+                    System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); stiffDateExpiry = scanner.next();
+                } while( !Stiff.controlDate(stiffDateExpiry) );
+
+                newProductInstance = new Stiff(
+                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        stiffDateExpiry, stiffFatPercentage
+                );
+
+                // Adding product on the list
+                this.productsList.add(newProductInstance);
+                break;
+            }
+
+        }
+
+        System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" +
+                productDescription + "',\n\tfue dado de alta exitosamente." );
+        return 0;
+    }
