@@ -1,5 +1,7 @@
 package application;
 
+import iapplication.Colors;
+
 public class AlcoholicBeverage extends Product{
 
     // Private atrributes

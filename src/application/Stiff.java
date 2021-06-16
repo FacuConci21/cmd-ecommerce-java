@@ -1,5 +1,7 @@
 package application;
 
+import iapplication.Colors;
+
 import java.time.LocalDate;
 
 public class Stiff extends Product {
