@@ -5,6 +5,7 @@
 
 
 ## Descripción general
+![release](https://img.shields.io/github/release/FacuConci21/cmd-ecommerce-java.svg) ![is-open](https://img.shields.io/github/issues-pr/FacuConci21/cmd-ecommerce-java.svg) ![is-close](https://img.shields.io/github/issues-pr-closed/FacuConci21/cmd-ecommerce-java.svg) ![watchers](https://img.shields.io/github/watchers/FacuConci21/cmd-ecommerce-java.svg) ![stars](https://img.shields.io/github/stars/FacuConci21/cmd-ecommerce-java.svg) ![downloads](https://img.shields.io/github/downloads/FacuConci21/cmd-ecommerce-java/total.svg)
 
 Aplicación ecommerce de consola en lenguaje Java. El propósito de esta aplicación es practicar lenguajes, integrar conceptos y
 practicar el trabajo en equipo en Github.
@@ -28,6 +29,7 @@ Al iniciar la aplicación podrás ver un menú como este:
 Si seleccionás la opción "Alta de producto" verás las opciones correspondientes y deberás ingresar los datos solicitados:
 
 ![image](https://raw.githubusercontent.com/FacuConci21/cmd-ecommerce-java/develop/resources/images/option-1-create-product-list.jpeg)
+
 ![image](https://raw.githubusercontent.com/FacuConci21/cmd-ecommerce-java/develop/resources/images/option-1-create-success.jpeg)
 
 
