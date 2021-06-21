@@ -1,5 +1,6 @@
 package application;
 
+import backend.Index;
 import iapplication.Colors;
 import iapplication.Options;
 import java.util.Scanner;
@@ -45,6 +46,8 @@ public final class CmdEcommerce implements Options{
                 Colors.ANSI_YELLOW + "La operacion fue cancelada.",
                 Colors.ANSI_YELLOW + "La lista de productos esta vacia.",
                 Colors.ANSI_RED + "Se produjo un error, reinicie el programa.",
+                Colors.ANSI_RED + "No se pudo conectar a la base de datos.",
+                Colors.ANSI_GREEN + "Conectado a la base de datos!",
                 Colors.ANSI_GREEN + "Agradecemos su visita, Adios!"
         };
         String[] optionsList = {
@@ -57,7 +60,13 @@ public final class CmdEcommerce implements Options{
         };
         String menuMessage = "Elija una opción: ";
         int programResult = -1;
+        Index index = new Index();
 
+        {
+            programResult = index.connect();
+            System.out.println(outputMessages[programResult]);
+            index.POST(new Dairy());
+        }
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
             switch (this.optionSelection) {
