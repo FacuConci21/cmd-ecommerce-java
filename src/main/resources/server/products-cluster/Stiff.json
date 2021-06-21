@@ -1,0 +1,14 @@
+{
+  "collection": [
+    {
+      "_id": "",
+      "name": "",
+      "description": "",
+      "price": "",
+      "stock": "",
+      "category": "",
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}

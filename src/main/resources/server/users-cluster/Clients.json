@@ -1,0 +1,13 @@
+{
+  "collection": [
+    {
+      "_id": "",
+      "firstname": "",
+      "lastname": "",
+      "email": "",
+      "password": "",
+      "createdAt": "",
+      "updatedAt": ""
+    }
+  ]
+}
