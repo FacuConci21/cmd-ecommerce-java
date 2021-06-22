@@ -60,13 +60,7 @@ public final class CmdEcommerce implements Options{
         };
         String menuMessage = "Elija una opción: ";
         int programResult = -1;
-        Index index = new Index();
 
-        {
-            programResult = index.connect();
-            System.out.println(outputMessages[programResult]);
-            index.POST(new Dairy());
-        }
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
             switch (this.optionSelection) {

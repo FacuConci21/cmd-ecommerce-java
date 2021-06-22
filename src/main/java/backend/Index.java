@@ -2,27 +2,30 @@ package backend;
 
 import application.Dairy;
 import application.Product;
-import iapplication.Router;
+import iapplication.Service;
 import iapplication.RoutesAndPaths;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public final class Index implements Router, RoutesAndPaths {
+public final class Index implements Service, RoutesAndPaths {
 
     // Private attributes
     private String collectionName;
     private DairyController dairyController;
     private FileReader collectionReader;
+    private FileWriter collectionWriter;
 
     // Private methods
-    private FileReader connectTo() {
+    private FileReader connectToRead(String URL) {
         try {
-            return this.collectionReader = new FileReader(DAIRY_URL);
+            this.collectionReader = new FileReader(URL);
+            return this.collectionReader;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -32,6 +35,24 @@ public final class Index implements Router, RoutesAndPaths {
     private void closeReader() {
         try {
             this.collectionReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private FileWriter connectToWrite(String URL) {
+        try {
+            this.collectionWriter = new FileWriter(URL);
+            return this.collectionWriter;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void closeWriter() {
+        try {
+            this.collectionWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -62,7 +83,8 @@ public final class Index implements Router, RoutesAndPaths {
 
     @Override
     public JSONArray GET() {
-        return null;
+        dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+        return dairyController.GET();
     }
 
     @Override
@@ -74,9 +96,9 @@ public final class Index implements Router, RoutesAndPaths {
     public int POST(Product newRecord) {
 
         if (newRecord instanceof Dairy) {
-            System.out.println(this.connectTo());
-            this.closeReader();
+            System.out.println(this.connectToWrite(DAIRY_URL));
             dairyController.POST(newRecord);
+            this.closeReader();
         }
 
         return 0;

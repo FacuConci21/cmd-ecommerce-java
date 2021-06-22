@@ -1,14 +1,16 @@
 {
   "collection": [
     {
-      "_id": "",
-      "name": "",
-      "description": "",
-      "price": "",
-      "stock": "",
-      "category": "",
-      "createdAt": "",
-      "updatedAt": ""
+      "_id": "bcrt845i2ctvo3dsblt23d5t7",
+      "name": "primer producto lacteo",
+      "description": "es el primer producto lacteo registrado",
+      "price": "100,0",
+      "stock": "12",
+      "category": "3",
+      "fatPercentage": "20",
+      "dateExpiry": "23-7-2022",
+      "createdAt": "21-6-2021",
+      "updatedAt": "21-6-2021"
     }
   ]
 }

@@ -1,22 +1,46 @@
 package backend;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import application.Product;
-import iapplication.Router;
-import iapplication.RoutesAndPaths;
+import iapplication.Service;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class DairyController implements Router {
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class DairyController implements Service {
+
+    // Private attributes
+    private FileWriter dairyCollectionWriter;
+    private FileReader dairyCollectionReader;
+
+    // Constructors
+    public DairyController() {
+    }
+
+    public void setDairyCollectionWriter(FileWriter dairyCollectionWriter) {
+        this.dairyCollectionWriter = dairyCollectionWriter;
+    }
+
+    public void setDairyCollectionReader(FileReader dairyCollectionReader) {
+        this.dairyCollectionReader = dairyCollectionReader;
+    }
 
     @Override
     public JSONArray GET() {
-        return null;
+        JSONParser jsonParser = new JSONParser();
+        JSONObject collection = new JSONObject();
+
+        try {
+            collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
+            return (JSONArray) collection.get("collection");
+        } catch (IOException | ParseException e) {
+            // e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
