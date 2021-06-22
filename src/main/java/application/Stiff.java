@@ -1,21 +1,27 @@
 package application;
 
+import iapplication.Colors;
+
 import java.time.LocalDate;
 
 public class Stiff extends Product {
+
+    // Private atrributes
     private String date_expiry;
     private int fat_percentage;
 
-    public Stiff() {
+    // Constructors
+    public Stiff() {}
 
-    }
-
-    public Stiff(int id, int category, String name, String description, float price, int stock, String date_expiry, int fat_percentage) {
+    public Stiff(int id, int category, String name, String description, float price, int stock,
+                 String date_expiry, int fat_percentage)
+    {
         super(id, category,name, description, price, stock);
         this.date_expiry = date_expiry;
         this.fat_percentage = fat_percentage;
     }
 
+    // Public methods
     public String getDate_expiry() {
         return date_expiry;
     }
@@ -31,7 +37,7 @@ public class Stiff extends Product {
                 Colors.ANSI_GREEN + "Porcentaje en calorias: " + Colors.ANSI_DEFAULT + fat_percentage;
     }
 
-
+    // Public static methods
     public static boolean controlDate(String date){
         boolean isDate = false;
 
