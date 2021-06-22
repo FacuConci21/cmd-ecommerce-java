@@ -84,7 +84,9 @@ public final class Index implements Service, RoutesAndPaths {
     @Override
     public JSONArray GET() {
         dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        return dairyController.GET();
+        JSONArray result = dairyController.GET();
+        this.closeReader();
+        return result;
     }
 
     @Override
@@ -94,14 +96,19 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public int POST(Product newRecord) {
+        int result = -1;
 
         if (newRecord instanceof Dairy) {
-            System.out.println(this.connectToWrite(DAIRY_URL));
-            dairyController.POST(newRecord);
+            dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+            dairyController.GET();
             this.closeReader();
+
+            dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+            result = dairyController.POST(newRecord);
+            this.closeWriter();
         }
 
-        return 0;
+        return result;
     }
 
     @Override

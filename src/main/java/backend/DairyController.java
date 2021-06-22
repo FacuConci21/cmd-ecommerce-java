@@ -1,5 +1,6 @@
 package backend;
 
+import application.Dairy;
 import application.Product;
 import iapplication.Service;
 import org.json.simple.JSONArray;
@@ -16,11 +17,13 @@ public class DairyController implements Service {
     // Private attributes
     private FileWriter dairyCollectionWriter;
     private FileReader dairyCollectionReader;
+    public JSONObject collection = new JSONObject();
 
     // Constructors
     public DairyController() {
     }
 
+    // Public methods
     public void setDairyCollectionWriter(FileWriter dairyCollectionWriter) {
         this.dairyCollectionWriter = dairyCollectionWriter;
     }
@@ -32,14 +35,15 @@ public class DairyController implements Service {
     @Override
     public JSONArray GET() {
         JSONParser jsonParser = new JSONParser();
-        JSONObject collection = new JSONObject();
 
         try {
-            collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
-            return (JSONArray) collection.get("collection");
+            this.collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
+            dairyCollectionReader.close();
+
+            return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
             // e.printStackTrace();
-            return null;
+            return new JSONArray();
         }
     }
 
@@ -50,7 +54,29 @@ public class DairyController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        return 0;
+        JSONObject newDairyProduct = new JSONObject();
+
+        newDairyProduct.put("_id", newRecord.getId());
+        newDairyProduct.put("name", newRecord.getName());
+        newDairyProduct.put("description", newRecord.getDescription());
+        newDairyProduct.put("price", newRecord.getPrice());
+        newDairyProduct.put("stock", newRecord.getStock());
+        newDairyProduct.put("category", newRecord.getCategory());
+        newDairyProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
+        newDairyProduct.put("dateExpiry", ((Dairy)newRecord).getDate_expiry());
+        newDairyProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
+
+        ((JSONArray)this.collection.get("collection")).add(newDairyProduct);
+
+        try {
+            this.dairyCollectionWriter.write(this.collection.toJSONString());
+            this.dairyCollectionWriter.flush();
+
+            return 0;
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return 3;
+        }
     }
 
     @Override
