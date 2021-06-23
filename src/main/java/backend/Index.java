@@ -90,9 +90,9 @@ public final class Index implements Service, RoutesAndPaths {
     }
 
     @Override
-    public JSONObject GET(Long _id) {
+    public JSONObject GET(String id) {
         dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        JSONObject result = dairyController.GET(_id);
+        JSONObject result = dairyController.GET(id);
         this.closeReader();
         return result;
     }
@@ -115,15 +115,15 @@ public final class Index implements Service, RoutesAndPaths {
     }
 
     @Override
-    public JSONObject PUT(String _id) {
+    public JSONObject PUT(String id) {
         return null;
     }
 
 
     @Override
-    public int DELETE(Long _id) {
+    public int DELETE(String id) {
         dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        int result = dairyController.DELETE(_id);
+        int result = dairyController.DELETE(id);
         this.closeReader();
         return result;
     }

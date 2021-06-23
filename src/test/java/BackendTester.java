@@ -83,13 +83,13 @@ public class BackendTester {
             }
 
             /**Prueba de GET by INDEX*/
-            System.out.println("GET BY ID Operation");
-            JSONObject dairyObjectCollection = index.GET(2L);
+            System.out.println("GET BY ID Operation:");
+            JSONObject dairyObjectCollection = index.GET("2");
             System.out.println(dairyObjectCollection);
 
             /**Prueba de DELETE*/
-            System.out.println("DELETE Operation");
-            int dairyDelete = index.DELETE(3L);
+            System.out.println("DELETE Operation:");
+            int dairyDelete = index.DELETE("3");
             if(dairyDelete == 0 ){
                 System.out.println("Eliminado Correctamente");
                 /** Obteniendo colección de nuevo para ver si se eliminó */

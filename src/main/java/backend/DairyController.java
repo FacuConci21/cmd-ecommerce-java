@@ -50,13 +50,15 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject GET(Long _id) {
+    public JSONObject GET(String id) {
 
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
         for (int i = 0; i < sizeOfCollection; i++) {
 
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
-            if (_id == product.get("_id")){
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)){
                 return product;
             }
         }
@@ -92,19 +94,21 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject PUT(String _id) {
+    public JSONObject PUT(String id) {
 
 
         return null;
     }
 
     @Override
-    public int DELETE(Long _id) {
+    public int DELETE(String id) {
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
         for (int i = 0; i < sizeOfCollection; i++) {
 
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
-            if (_id == product.get("_id")){
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)){
                 ((JSONArray) this.collection.get("collection")).remove(i);
                 return 0;
             }
