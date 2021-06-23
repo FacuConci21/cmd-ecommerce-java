@@ -10,9 +10,9 @@ public class BackendTester {
         Index index = new Index();
 
         /**
-         * Antes de cualquier operacion se comprueba la conexion con el servidor.
+         * Antes de cualquier operación se comprueba la conexión con el servidor.
          * Para este caso en particular el servidor se simula con un directorio, si el path
-         * del mismo es valido y existe entonces se toma por una conexion correcta.
+         * del mismo es valido y existe entonces se toma por una conexión correcta.
          *
          * De no conectarse, dirigirse al archivo de clase 'RoutesAndPaths', en el paquete 'iapplication'
          * y cambiar la ruta absoluta de la constante PROJECT_DIR por la ruta donde tengas guardado el proyecto,
@@ -52,10 +52,10 @@ public class BackendTester {
                  * Basta con comentar estas lineas para evitar que se graben estos datos
                  * y poder ver la respuesta del backend con una lista vacia.
                  */
-                /*
-                System.out.println(index.POST(dProduct));
-                System.out.println(index.POST(dProduct2));
-                System.out.println(index.POST(dProduct3));*/
+
+                /**System.out.println(index.POST(dProduct));
+                 System.out.println(index.POST(dProduct2));
+                 System.out.println(index.POST(dProduct3));*/
             }
 
             System.out.println("GET opperation:");
@@ -75,12 +75,45 @@ public class BackendTester {
                     JSONObject dairy = (JSONObject) dairyCollection.get(i);
 
                     System.out.println("[");
-                    for (Object key: dairy.keySet()) {
+                    for (Object key : dairy.keySet()) {
                         System.out.println("\t" + key + ": " + dairy.get(key));
                     }
                     System.out.println("]");
                 }
             }
+
+            /**Prueba de GET by INDEX*/
+            System.out.println("GET BY ID Operation");
+            JSONObject dairyObjectCollection = index.GET(2L);
+            System.out.println(dairyObjectCollection);
+
+            /**Prueba de DELETE*/
+            System.out.println("DELETE Operation");
+            int dairyDelete = index.DELETE(3L);
+            if(dairyDelete == 0 ){
+                System.out.println("Eliminado Correctamente");
+                /** Obteniendo colección de nuevo para ver si se eliminó */
+
+                if (dairyCollection.size() == 0) {
+                    System.out.println(dairyCollection);
+                } else {
+                    for (int i = 0; i < dairyCollection.size(); i++) {
+                        JSONObject dairy = (JSONObject) dairyCollection.get(i);
+
+                        System.out.println("[");
+                        for (Object key : dairy.keySet()) {
+                            System.out.println("\t" + key + ": " + dairy.get(key));
+                        }
+                        System.out.println("]");
+                    }
+                }
+
+            } else {
+                System.out.println("No se pudo eliminar");
+            }
+
+        } else {
+            System.out.println("    --  Not connected   --");
         }
     }
 }

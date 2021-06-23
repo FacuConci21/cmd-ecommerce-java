@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class DairyController implements Service {
     public JSONArray GET() {
         JSONParser jsonParser = new JSONParser();
 
+
         try {
             this.collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
             dairyCollectionReader.close();
@@ -48,8 +50,18 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject GET(String _id) {
-        return null;
+    public JSONObject GET(Long _id) {
+
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            if (_id == product.get("_id")){
+                return product;
+            }
+        }
+
+        return new JSONObject();
     }
 
     @Override
@@ -63,10 +75,10 @@ public class DairyController implements Service {
         newDairyProduct.put("stock", newRecord.getStock());
         newDairyProduct.put("category", newRecord.getCategory());
         newDairyProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
-        newDairyProduct.put("dateExpiry", ((Dairy)newRecord).getDate_expiry());
+        newDairyProduct.put("dateExpiry", ((Dairy) newRecord).getDate_expiry());
         newDairyProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
 
-        ((JSONArray)this.collection.get("collection")).add(newDairyProduct);
+        ((JSONArray) this.collection.get("collection")).add(newDairyProduct);
 
         try {
             this.dairyCollectionWriter.write(this.collection.toJSONString());
@@ -81,11 +93,22 @@ public class DairyController implements Service {
 
     @Override
     public JSONObject PUT(String _id) {
+
+
         return null;
     }
 
     @Override
-    public int DELETE(String _id) {
-        return 0;
+    public int DELETE(Long _id) {
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            if (_id == product.get("_id")){
+                ((JSONArray) this.collection.get("collection")).remove(i);
+                return 0;
+            }
+        }
+        return -1;
     }
 }

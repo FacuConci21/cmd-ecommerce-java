@@ -6,8 +6,8 @@ import org.json.simple.JSONObject;
 
 public interface Service {
     JSONArray GET();
-    JSONObject GET(String _id);
+    JSONObject GET(Long _id);
     int POST(Product newRecord);
     JSONObject PUT(String _id);
-    int DELETE(String _id);
+    int DELETE(Long _id);
 }
