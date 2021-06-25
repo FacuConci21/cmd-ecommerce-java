@@ -22,7 +22,7 @@ public class DairyProductsTest {
         }
     }
 
-    public static void GetDairyProducts(Index index){
+    public static void GetDairyProducts(Index index, String color){
 
         /**
          * Metodo creado para consultar los datos que se almacenarán en Dairy.json.
@@ -32,31 +32,31 @@ public class DairyProductsTest {
 
         JSONArray dairyCollection = index.GET();
         if (dairyCollection.size() == 0) {
-            System.out.println(dairyCollection);
+            System.out.println(color + dairyCollection);
         } else {
             for (int i = 0; i < dairyCollection.size(); i++) {
                 JSONObject dairy = (JSONObject) dairyCollection.get(i);
 
-                System.out.println("[");
+                System.out.println(color + "[");
                 for (Object key : dairy.keySet()) {
-                    System.out.println("\t" + key + ": " + dairy.get(key));
+                    System.out.println(color + "\t" + key + ": " + dairy.get(key));
                 }
-                System.out.println("]");
+                System.out.println(color + "]");
             }
         }
     }
 
-    public static void GetDairyProductsById(Index index, String id){
+    public static void GetDairyProductsById(Index index, String id, String color){
         JSONObject dairyObjectCollection = index.GET(id);
-        System.out.println(dairyObjectCollection);
+        System.out.println(color + dairyObjectCollection);
     }
 
-    public static void DeleteDairyProducts(Index index, String id){
+    public static void DeleteDairyProducts(Index index, String id, String errorColor ,String color){
         JSONArray dairyCollection = index.GET();
 
         int dairyDelete = index.DELETE(id);
         if(dairyDelete == 0 ){
-            System.out.println("Eliminado Correctamente");
+            System.out.println(color + "Eliminado Correctamente");
             /** Obteniendo colección de nuevo para ver si se eliminó */
             if (dairyCollection.size() == 0) {
                 System.out.println(dairyCollection);
@@ -64,16 +64,16 @@ public class DairyProductsTest {
                 for (int i = 0; i < dairyCollection.size(); i++) {
                     JSONObject dairy = (JSONObject) dairyCollection.get(i);
 
-                    System.out.println("[");
+                    System.out.println(color + "[");
                     for (Object key : dairy.keySet()) {
-                        System.out.println("\t" + key + ": " + dairy.get(key));
+                        System.out.println(color + "\t" + key + ": " + dairy.get(key));
                     }
-                    System.out.println("]");
+                    System.out.println(color + "]");
                 }
             }
 
         } else {
-            System.out.println("No se pudo eliminar");
+            System.out.println(errorColor + "No se pudo eliminar");
         }
     }
 

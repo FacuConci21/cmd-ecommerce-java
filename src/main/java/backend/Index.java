@@ -4,7 +4,7 @@ import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
 import application.models.Stiff;
-import backend.controllers.AlcoholicBeverageControler;
+import backend.controllers.AlcoholicBeverageController;
 import backend.controllers.DairyController;
 import appinterfaces.backend.Service;
 import appinterfaces.backend.RoutesAndPaths;
@@ -23,7 +23,7 @@ public final class Index implements Service, RoutesAndPaths {
     // Private attributes
     private String collectionName;
     private final DairyController dairyController;
-    private final AlcoholicBeverageControler alcoholController;
+    private final AlcoholicBeverageController alcoholController;
     private final StiffController stiffController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
@@ -68,14 +68,14 @@ public final class Index implements Service, RoutesAndPaths {
     // Contructors
     public Index() {
         this.dairyController = new DairyController();
-        this.alcoholController = new AlcoholicBeverageControler();
+        this.alcoholController = new AlcoholicBeverageController();
         this.stiffController = new StiffController();
     }
 
     public Index(String collectionName) {
         this.collectionName = collectionName;
         this.dairyController = new DairyController();
-        this.alcoholController = new AlcoholicBeverageControler();
+        this.alcoholController = new AlcoholicBeverageController();
         this.stiffController = new StiffController();
     }
 
@@ -110,6 +110,12 @@ public final class Index implements Service, RoutesAndPaths {
                 this.closeReader();
                 return result;
             }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                result = this.alcoholController.GET();
+                this.closeReader();
+                return result;
+            }
             default:
             {
                 /**
@@ -123,10 +129,25 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONObject GET(String id) {
-        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        JSONObject result = this.dairyController.GET(id);
-        this.closeReader();
-        return result;
+        switch(this.collectionName){
+            case "dairy":{
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                JSONObject result = this.dairyController.GET(id);
+                this.closeReader();
+                return result;
+            }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                JSONObject result = this.alcoholController.GET(id);
+                this.closeReader();
+                return result;
+            }
+            default:{
+                return null;
+            }
+        }
+
+
     }
 
     @Override
@@ -171,13 +192,27 @@ public final class Index implements Service, RoutesAndPaths {
         return null;
     }
 
-
     @Override
     public int DELETE(String id) {
-        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        int result = this.dairyController.DELETE(id);
-        this.closeReader();
-        return result;
+
+        switch (this.collectionName){
+            case "dairy":{
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                int result = this.dairyController.DELETE(id);
+                this.closeReader();
+                return result;
+            }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                int result = this.alcoholController.DELETE(id);
+                this.closeReader();
+                return result;
+            }
+            default:{
+                return -1;
+            }
+        }
+
     }
 
 

@@ -5,7 +5,7 @@ import backend.Index;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class StiffTest {
+public class StiffProductsTest {
     public static void test(Index index) {
         System.out.println("POST opperation:");
 

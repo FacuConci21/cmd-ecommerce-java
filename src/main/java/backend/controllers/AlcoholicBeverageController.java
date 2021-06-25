@@ -12,19 +12,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class AlcoholicBeverageControler implements Service {
-    private FileWriter AlcoholCollectionWriter;
-    private FileReader AlcoholCollectionReader;
+public class AlcoholicBeverageController implements Service {
+    private FileWriter alcoholCollectionWriter;
+    private FileReader alcoholCollectionReader;
     public JSONObject collection = new JSONObject();
 
-    public AlcoholicBeverageControler(){}
+    public AlcoholicBeverageController(){}
 
     public void setAlcoholCollectionWriter(FileWriter alcoholCollectionWriter) {
-        AlcoholCollectionWriter = alcoholCollectionWriter;
+        this.alcoholCollectionWriter = alcoholCollectionWriter;
     }
 
     public void setAlcoholCollectionReader(FileReader alcoholCollectionReader) {
-        AlcoholCollectionReader = alcoholCollectionReader;
+        this.alcoholCollectionReader = alcoholCollectionReader;
     }
 
     @Override
@@ -33,12 +33,11 @@ public class AlcoholicBeverageControler implements Service {
 
 
         try {
-            this.collection = (JSONObject) jsonParser.parse(this.AlcoholCollectionReader);
-            AlcoholCollectionReader.close();
+            this.collection = (JSONObject) jsonParser.parse(this.alcoholCollectionReader);
+            this.alcoholCollectionReader.close();
 
             return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
-            // e.printStackTrace();
             return new JSONArray();
         }
 
@@ -46,7 +45,18 @@ public class AlcoholicBeverageControler implements Service {
 
     @Override
     public JSONObject GET(String id) {
-        return null;
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)){
+                return product;
+            }
+        }
+
+        return new JSONObject();
     }
 
     @Override
@@ -67,8 +77,8 @@ public class AlcoholicBeverageControler implements Service {
 
         try {
 
-            this.AlcoholCollectionWriter.write(this.collection.toJSONString());
-            this.AlcoholCollectionWriter.flush();
+            this.alcoholCollectionWriter.write(this.collection.toJSONString());
+            this.alcoholCollectionWriter.flush();
 
             return 0;
         } catch (IOException e) {
@@ -83,6 +93,17 @@ public class AlcoholicBeverageControler implements Service {
 
     @Override
     public int DELETE(String id) {
-        return 0;
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)){
+                ((JSONArray) this.collection.get("collection")).remove(i);
+                return 0;
+            }
+        }
+        return -1;
     }
 }

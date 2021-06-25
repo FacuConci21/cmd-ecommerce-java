@@ -1,14 +1,8 @@
-import application.models.AlcoholicBeverage;
-import application.models.Dairy;
-import application.models.Stiff;
+import appinterfaces.Colors;
 import backend.Index;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import productstests.DairyProductsTest;
 
-import java.util.Vector;
-
-public class BackendTester {
+public class BackendTester implements Colors{
     public static void main(String[] args) {
         Index index = new Index();
 
@@ -22,37 +16,41 @@ public class BackendTester {
          * incluyendo "src/main/".
          */
         if (index.connect() == 5) {
-            System.out.println("    --  connected   --");
+            System.out.println(ANSI_BLUE + "    --  connected   --");
 
+            System.out.println(ANSI_GREEN + "POST opperation:");
             {
                 /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
             }
 
-            System.out.println("GET opperation:");
+            System.out.println(ANSI_GREEN + "GET opperation :");
+            /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion
+             * en la línea siguiente
+             * NAMES:
+             * dairy (for dairys products)
+             * alcoholic (for alcoholic beverages products)
+             * stiff (for stiff products)
+             * */
             index.setCollectionName("dairy");
-            DairyProductsTest.GetDairyProducts(index);
 
+            DairyProductsTest.GetDairyProducts(index,ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
 
             /**Prueba de GET by INDEX*/
-            System.out.println("GET BY ID Operation:");
-            DairyProductsTest.GetDairyProductsById(index, "2");
+            System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+            DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
 
             /**Prueba de DELETE*/
 
-            System.out.println("DELETE Operation:");
-            DairyProductsTest.DeleteDairyProducts(index, "3");
+            System.out.println(ANSI_GREEN + "DELETE Operation:");
+            DairyProductsTest.DeleteDairyProducts(index, "3", ANSI_RED, ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
-
-           /* System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
-            {
-                AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Vodka Saborizado", "Vodka Saborizado de Maracuyá", 1500.0f, 2,
-                        1.0f, 50);
-                System.out.println(index.POST(aProduct1));
-            }*/
         } else {
-            System.out.println("    --  Not connected   --");
+            System.out.println(ANSI_RED + "    --  Not connected   --");
         }
     } // main()
 } // BackendTester
