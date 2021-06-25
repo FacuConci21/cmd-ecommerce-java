@@ -2,6 +2,7 @@ package backend.controllers;
 
 import application.models.Product;
 import appinterfaces.backend.Service;
+import application.models.Stiff;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,7 +54,28 @@ public class StiffController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        return 0;
+        JSONObject newStiffProduct = new JSONObject();
+
+        newStiffProduct.put("_id", newRecord.getId());
+        newStiffProduct.put("name", newRecord.getName());
+        newStiffProduct.put("description", newRecord.getDescription());
+        newStiffProduct.put("price", newRecord.getPrice());
+        newStiffProduct.put("stock", newRecord.getStock());
+        newStiffProduct.put("category", newRecord.getCategory());
+        newStiffProduct.put("dateExpiry", ((Stiff) newRecord).getDateExpiry());
+        newStiffProduct.put("fatPercentage", ((Stiff) newRecord).getFatPercentage());
+
+        ((JSONArray) this.collection.get("collection")).add(newStiffProduct);
+
+        try {
+            this.stiffCollectionWriter.write(this.collection.toJSONString());
+            this.stiffCollectionWriter.flush();
+
+            return 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 3;
+        }
     }
 
     @Override

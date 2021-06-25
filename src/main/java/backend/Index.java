@@ -3,6 +3,7 @@ package backend;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
+import application.models.Stiff;
 import backend.controllers.AlcoholicBeverageControler;
 import backend.controllers.DairyController;
 import appinterfaces.backend.Service;
@@ -21,9 +22,9 @@ public final class Index implements Service, RoutesAndPaths {
 
     // Private attributes
     private String collectionName;
-    private DairyController dairyController;
-    private AlcoholicBeverageControler alcoholController;
-    private StiffController stiffController;
+    private final DairyController dairyController;
+    private final AlcoholicBeverageControler alcoholController;
+    private final StiffController stiffController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
 
@@ -151,6 +152,17 @@ public final class Index implements Service, RoutesAndPaths {
             result = this.alcoholController.POST(newRecord);
             this.closeWriter();
         }
+
+        if (newRecord instanceof Stiff) {
+            this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+            this.stiffController.GET();
+            this.closeReader();
+
+            this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+            result = this.stiffController.POST(newRecord);
+            this.closeWriter();
+        }
+
         return result;
     }
 
