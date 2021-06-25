@@ -2,7 +2,7 @@ package backend.controllers;
 
 import application.models.Dairy;
 import application.models.Product;
-import iapplication.Service;
+import appinterfaces.backend.Service;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -4,8 +4,8 @@ import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
 import application.models.Stiff;
-import iapplication.Colors;
-import iapplication.Options;
+import appinterfaces.Colors;
+import appinterfaces.Options;
 import java.util.Scanner;
 import java.util.Vector;
 

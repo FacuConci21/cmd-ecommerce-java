@@ -1,11 +1,12 @@
 package backend;
 
 import application.models.AlcoholicBeverage;
+import application.models.Dairy;
 import application.models.Product;
 import backend.controllers.AlcoholicBeverageControler;
 import backend.controllers.DairyController;
-import iapplication.Service;
-import iapplication.RoutesAndPaths;
+import appinterfaces.backend.Service;
+import appinterfaces.backend.RoutesAndPaths;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -87,16 +88,25 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONArray GET() {
-        dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        JSONArray result = dairyController.GET();
-        this.closeReader();
-        return result;
+        switch (this.collectionName) {
+            case "dairy":
+            {
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                JSONArray result = this.dairyController.GET();
+                this.closeReader();
+                return result;
+            }
+            default:
+            {
+                return null;
+            }
+        }
     }
 
     @Override
     public JSONObject GET(String id) {
-        dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        JSONObject result = dairyController.GET(id);
+        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+        JSONObject result = this.dairyController.GET(id);
         this.closeReader();
         return result;
     }
@@ -105,23 +115,23 @@ public final class Index implements Service, RoutesAndPaths {
     public int POST(Product newRecord) {
         int result = -1;
 
-        /*if (newRecord instanceof Dairy) {
-            dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-            dairyController.GET();
+        if (newRecord instanceof Dairy) {
+            this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+            this.dairyController.GET();
             this.closeReader();
 
-            dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-            result = dairyController.POST(newRecord);
+            this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+            result = this.dairyController.POST(newRecord);
             this.closeWriter();
-        }*/
+        }
 
         if (newRecord instanceof AlcoholicBeverage) {
-            alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
-            alcoholController.GET();
+            this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+            this.alcoholController.GET();
             this.closeReader();
 
-            alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
-            result = alcoholController.POST(newRecord);
+            this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
+            result = this.alcoholController.POST(newRecord);
             this.closeWriter();
         }
         return result;
@@ -135,8 +145,8 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public int DELETE(String id) {
-        dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        int result = dairyController.DELETE(id);
+        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+        int result = this.dairyController.DELETE(id);
         this.closeReader();
         return result;
     }

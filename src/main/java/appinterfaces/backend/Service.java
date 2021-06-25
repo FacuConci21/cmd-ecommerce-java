@@ -1,8 +1,10 @@
-package iapplication;
+package appinterfaces.backend;
 
 import application.models.Product;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import java.io.FileReader;
 
 public interface Service {
     JSONArray GET();

@@ -1,5 +1,5 @@
 package application.models;
-import iapplication.Colors;
+import appinterfaces.Colors;
 
 import java.util.Vector;
 import java.time.LocalDate;
