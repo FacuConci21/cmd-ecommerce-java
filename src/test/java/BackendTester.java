@@ -1,4 +1,5 @@
-import application.Dairy;
+import application.models.AlcoholicBeverage;
+import application.models.Dairy;
 import backend.Index;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -112,6 +113,13 @@ public class BackendTester {
                 System.out.println("No se pudo eliminar");
             }
 
+            /**prueba con nuevo controlador*/
+            System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
+            {
+                AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Vodka Saborizado", "Vodka Saborizado de Maracuyá", 1500.0f, 2,
+                        1.0f, 50);
+                System.out.println(index.POST(aProduct1));
+            }
         } else {
             System.out.println("    --  Not connected   --");
         }

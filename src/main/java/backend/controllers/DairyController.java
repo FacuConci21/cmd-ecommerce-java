@@ -1,14 +1,13 @@
-package backend;
+package backend.controllers;
 
-import application.Dairy;
-import application.Product;
+import application.models.Dairy;
+import application.models.Product;
 import iapplication.Service;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class DairyController implements Service {
 
             return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
-            // e.printStackTrace();
+
             return new JSONArray();
         }
     }
