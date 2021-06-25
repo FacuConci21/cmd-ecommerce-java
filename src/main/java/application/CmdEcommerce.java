@@ -1,6 +1,9 @@
 package application;
 
-import backend.Index;
+import application.models.AlcoholicBeverage;
+import application.models.Dairy;
+import application.models.Product;
+import application.models.Stiff;
 import iapplication.Colors;
 import iapplication.Options;
 import java.util.Scanner;

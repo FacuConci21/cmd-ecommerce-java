@@ -1,7 +1,9 @@
 package backend;
 
-import application.Dairy;
-import application.Product;
+import application.models.AlcoholicBeverage;
+import application.models.Product;
+import backend.controllers.AlcoholicBeverageControler;
+import backend.controllers.DairyController;
 import iapplication.Service;
 import iapplication.RoutesAndPaths;
 import org.json.simple.JSONArray;
@@ -18,6 +20,7 @@ public final class Index implements Service, RoutesAndPaths {
     // Private attributes
     private String collectionName;
     private DairyController dairyController;
+    private AlcoholicBeverageControler alcoholController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
 
@@ -61,6 +64,7 @@ public final class Index implements Service, RoutesAndPaths {
     // Contructors
     public Index() {
         this.dairyController = new DairyController();
+        this.alcoholController = new AlcoholicBeverageControler();
     }
 
     public Index(String collectionName) {
@@ -101,7 +105,7 @@ public final class Index implements Service, RoutesAndPaths {
     public int POST(Product newRecord) {
         int result = -1;
 
-        if (newRecord instanceof Dairy) {
+        /*if (newRecord instanceof Dairy) {
             dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
             dairyController.GET();
             this.closeReader();
@@ -109,8 +113,17 @@ public final class Index implements Service, RoutesAndPaths {
             dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
             result = dairyController.POST(newRecord);
             this.closeWriter();
-        }
+        }*/
 
+        if (newRecord instanceof AlcoholicBeverage) {
+            alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+            alcoholController.GET();
+            this.closeReader();
+
+            alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
+            result = alcoholController.POST(newRecord);
+            this.closeWriter();
+        }
         return result;
     }
 

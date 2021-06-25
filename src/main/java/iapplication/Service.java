@@ -1,6 +1,6 @@
 package iapplication;
 
-import application.Product;
+import application.models.Product;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
