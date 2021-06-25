@@ -1,13 +1,15 @@
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
+import appinterfaces.Colors;
 import backend.Index;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import productstests.AlcoholBeverageProductsTest;
 import productstests.DairyProductsTest;
 
 import java.util.Vector;
 
-public class BackendTester {
+public class BackendTester implements Colors{
     public static void main(String[] args) {
         Index index = new Index();
 
@@ -21,9 +23,9 @@ public class BackendTester {
          * incluyendo "src/main/".
          */
         if (index.connect() == 5) {
-            System.out.println("    --  connected   --");
+            System.out.println(ANSI_BLUE + "    --  connected   --");
 
-            System.out.println("POST opperation:");
+            System.out.println(ANSI_GREEN + "POST opperation:");
 
             {
                 /**
@@ -56,72 +58,38 @@ public class BackendTester {
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
             }
 
-            System.out.println("GET opperation:");
+            System.out.println(ANSI_GREEN + "GET opperation :");
+            /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion
+             * en la línea siguiente
+             * NAMES:
+             * dairy (for dairys products)
+             * alcoholic (for alcoholic beverages proucts)
+             * stiff (for stiff products)
+             * */
             index.setCollectionName("alcoholic");
-            /**DairyProductsTest.GetDairyProducts(index);*/
-            JSONArray alcoholCollection = index.GET();
-            if (alcoholCollection.size() == 0) {
-                System.out.println(alcoholCollection);
-            } else {
-                for (int i = 0; i < alcoholCollection.size(); i++) {
-                    JSONObject alcohol = (JSONObject) alcoholCollection.get(i);
 
-                    System.out.println("[");
-                    for (Object key : alcohol.keySet()) {
-                        System.out.println("\t" + key + ": " + alcohol.get(key));
-                    }
-                    System.out.println("]");
-                }
-            }
+            /**DairyProductsTest.GetDairyProducts(index);*/
+            AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
 
             /**Prueba de GET by INDEX*/
-            System.out.println("GET BY ID Operation:");
-
-            JSONObject alcoholObjectCollection = index.GET("1");
-            System.out.println(alcoholObjectCollection.toJSONString());
+            System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+            AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);
 
             /**DairyProductsTest.GetDairyProductsById(index, "2");*/
 
             /**Prueba de DELETE*/
 
-            System.out.println("DELETE Operation:");
+            System.out.println(ANSI_GREEN + "DELETE Operation:");
             /**DairyProductsTest.DeleteDairyProducts(index, "3");*/
+            AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);
 
 
-
-            int alcoholDelete = index.DELETE("2");
-            if(alcoholDelete == 0 ){
-                System.out.println("Eliminado Correctamente");
-                /** Obteniendo colección de nuevo para ver si se eliminó */
-                if (alcoholCollection.size() == 0) {
-                    System.out.println(alcoholCollection);
-                } else {
-                    for (int i = 0; i < alcoholCollection.size(); i++) {
-                        JSONObject dairy = (JSONObject) alcoholCollection.get(i);
-
-                        System.out.println("[");
-                        for (Object key : dairy.keySet()) {
-                            System.out.println("\t" + key + ": " + dairy.get(key));
-                        }
-                        System.out.println("]");
-                    }
-                }
-
-            } else {
-                System.out.println("No se pudo eliminar");
-            }
-           /* System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
-            {
-                AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Vodka Saborizado", "Vodka Saborizado de Maracuyá", 1500.0f, 2,
-                        1.0f, 50);
-                System.out.println(index.POST(aProduct1));
-            }*/
 
 
 
 
         } else {
-            System.out.println("    --  Not connected   --");
+            System.out.println(ANSI_BLUE + "    --  Not connected   --");
         }
     }
 }
