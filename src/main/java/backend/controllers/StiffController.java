@@ -4,17 +4,46 @@ import application.models.Product;
 import appinterfaces.backend.Service;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class StiffController implements Service {
 
     // Private attributes
+    private FileWriter stiffCollectionWriter;
+    private FileReader stiffCollectionReader;
+    public JSONObject collection = new JSONObject();
 
     // Constructors
+    public StiffController() {
+    }
 
     // Public methods
+    public void setStiffCollectionWriter(FileWriter stiffCollectionWriter) {
+        this.stiffCollectionWriter = stiffCollectionWriter;
+    }
+
+    public void setStiffCollectionReader(FileReader stiffCollectionReader) {
+        this.stiffCollectionReader = stiffCollectionReader;
+    }
+
     @Override
     public JSONArray GET() {
-        return null;
+        JSONParser jsonParser = new JSONParser();
+
+        try {
+            this.collection = (JSONObject) jsonParser.parse(this.stiffCollectionReader);
+            this.stiffCollectionReader.close();
+
+            return  (JSONArray) this.collection.get("collection");
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return new JSONArray();
+        }
     }
 
     @Override

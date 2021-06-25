@@ -36,14 +36,12 @@ public class DairyController implements Service {
     public JSONArray GET() {
         JSONParser jsonParser = new JSONParser();
 
-
         try {
             this.collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
             dairyCollectionReader.close();
 
             return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
-
             return new JSONArray();
         }
     }
@@ -57,7 +55,7 @@ public class DairyController implements Service {
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
             String idProduct = product.get("_id").toString();
 
-            if (idProduct.equals(id)){
+            if (idProduct.equals(id)) {
                 return product;
             }
         }
@@ -107,7 +105,7 @@ public class DairyController implements Service {
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
             String idProduct = product.get("_id").toString();
 
-            if (idProduct.equals(id)){
+            if (idProduct.equals(id)) {
                 ((JSONArray) this.collection.get("collection")).remove(i);
                 return 0;
             }

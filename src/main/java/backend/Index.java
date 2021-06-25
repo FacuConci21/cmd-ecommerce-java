@@ -7,6 +7,7 @@ import backend.controllers.AlcoholicBeverageControler;
 import backend.controllers.DairyController;
 import appinterfaces.backend.Service;
 import appinterfaces.backend.RoutesAndPaths;
+import backend.controllers.StiffController;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -22,6 +23,7 @@ public final class Index implements Service, RoutesAndPaths {
     private String collectionName;
     private DairyController dairyController;
     private AlcoholicBeverageControler alcoholController;
+    private StiffController stiffController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
 
@@ -66,11 +68,14 @@ public final class Index implements Service, RoutesAndPaths {
     public Index() {
         this.dairyController = new DairyController();
         this.alcoholController = new AlcoholicBeverageControler();
+        this.stiffController = new StiffController();
     }
 
     public Index(String collectionName) {
         this.collectionName = collectionName;
-        dairyController = new DairyController();
+        this.dairyController = new DairyController();
+        this.alcoholController = new AlcoholicBeverageControler();
+        this.stiffController = new StiffController();
     }
 
     // Public methods
@@ -88,16 +93,28 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONArray GET() {
+        JSONArray result;
         switch (this.collectionName) {
             case "dairy":
             {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-                JSONArray result = this.dairyController.GET();
+                result = this.dairyController.GET();
+                this.closeReader();
+                return result;
+            }
+            case "stiff":
+            {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                result = this.stiffController.GET();
                 this.closeReader();
                 return result;
             }
             default:
             {
+                /**
+                 * Importante que retorne null, a modo de error en caso de que se ingrese mal
+                 * un nombre de coleccion.
+                 */
                 return null;
             }
         }
