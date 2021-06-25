@@ -3,7 +3,7 @@ package backend;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
-import backend.controllers.AlcoholicBeverageControler;
+import backend.controllers.AlcoholicBeverageController;
 import backend.controllers.DairyController;
 import appinterfaces.backend.Service;
 import appinterfaces.backend.RoutesAndPaths;
@@ -21,7 +21,7 @@ public final class Index implements Service, RoutesAndPaths {
     // Private attributes
     private String collectionName;
     private DairyController dairyController;
-    private AlcoholicBeverageControler alcoholController;
+    private AlcoholicBeverageController alcoholController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
 
@@ -65,7 +65,7 @@ public final class Index implements Service, RoutesAndPaths {
     // Contructors
     public Index() {
         this.dairyController = new DairyController();
-        this.alcoholController = new AlcoholicBeverageControler();
+        this.alcoholController = new AlcoholicBeverageController();
     }
 
     public Index(String collectionName) {
@@ -96,6 +96,12 @@ public final class Index implements Service, RoutesAndPaths {
                 this.closeReader();
                 return result;
             }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                JSONArray result = this.alcoholController.GET();
+                this.closeReader();
+                return result;
+            }
             default:
             {
                 return null;
@@ -105,10 +111,25 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONObject GET(String id) {
-        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        JSONObject result = this.dairyController.GET(id);
-        this.closeReader();
-        return result;
+        switch(this.collectionName){
+            case "dairy":{
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                JSONObject result = this.dairyController.GET(id);
+                this.closeReader();
+                return result;
+            }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                JSONObject result = this.alcoholController.GET(id);
+                this.closeReader();
+                return result;
+            }
+            default:{
+                return null;
+            }
+        }
+
+
     }
 
     @Override

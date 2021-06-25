@@ -57,18 +57,33 @@ public class BackendTester {
             }
 
             System.out.println("GET opperation:");
-            index.setCollectionName("dairy");
-            DairyProductsTest.GetDairyProducts(index);
+            index.setCollectionName("alcoholic");
+            /**DairyProductsTest.GetDairyProducts(index);*/
+            JSONArray alcholCollection = index.GET();
+            if (alcholCollection.size() == 0) {
+                System.out.println(alcholCollection);
+            } else {
+                for (int i = 0; i < alcholCollection.size(); i++) {
+                    JSONObject alcohol = (JSONObject) alcholCollection.get(i);
 
+                    System.out.println("[");
+                    for (Object key : alcohol.keySet()) {
+                        System.out.println("\t" + key + ": " + alcohol.get(key));
+                    }
+                    System.out.println("]");
+                }
+            }
 
             /**Prueba de GET by INDEX*/
             System.out.println("GET BY ID Operation:");
-            DairyProductsTest.GetDairyProductsById(index, "2");
+
+
+            /**DairyProductsTest.GetDairyProductsById(index, "2");*/
 
             /**Prueba de DELETE*/
 
             System.out.println("DELETE Operation:");
-            DairyProductsTest.DeleteDairyProducts(index, "3");
+            /**DairyProductsTest.DeleteDairyProducts(index, "3");*/
 
 
            /* System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
@@ -77,6 +92,10 @@ public class BackendTester {
                         1.0f, 50);
                 System.out.println(index.POST(aProduct1));
             }*/
+
+
+
+
         } else {
             System.out.println("    --  Not connected   --");
         }
