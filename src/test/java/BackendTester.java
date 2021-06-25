@@ -3,6 +3,7 @@ import application.models.Dairy;
 import backend.Index;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import productstests.DairyProductsTest;
 
 import java.util.Vector;
 
@@ -49,77 +50,33 @@ public class BackendTester {
                         30, "25-7-2023", vitamins
                 );
 
-                /**
-                 * Basta con comentar estas lineas para evitar que se graben estos datos
-                 * y poder ver la respuesta del backend con una lista vacia.
-                 */
 
-                /**System.out.println(index.POST(dProduct));
-                 System.out.println(index.POST(dProduct2));
-                 System.out.println(index.POST(dProduct3));*/
+                /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
             }
 
             System.out.println("GET opperation:");
-            JSONArray dairyCollection = index.GET();
+            index.setCollectionName("dairy");
+            DairyProductsTest.GetDairyProducts(index);
 
-            /**
-             * Aca inicio la operacion de obtencion de datos, para consultar los datos que se almacenaron
-             * en el anterior paso.
-             * Si esta vacio se muestra [], la coleccion vacia.
-             * Y si se traen los datos correctamente se muestran los productos listados.
-             */
-
-            if (dairyCollection.size() == 0) {
-                System.out.println(dairyCollection);
-            } else {
-                for (int i = 0; i < dairyCollection.size(); i++) {
-                    JSONObject dairy = (JSONObject) dairyCollection.get(i);
-
-                    System.out.println("[");
-                    for (Object key : dairy.keySet()) {
-                        System.out.println("\t" + key + ": " + dairy.get(key));
-                    }
-                    System.out.println("]");
-                }
-            }
 
             /**Prueba de GET by INDEX*/
             System.out.println("GET BY ID Operation:");
-            JSONObject dairyObjectCollection = index.GET("2");
-            System.out.println(dairyObjectCollection);
+            DairyProductsTest.GetDairyProductsById(index, "2");
 
             /**Prueba de DELETE*/
+
             System.out.println("DELETE Operation:");
-            int dairyDelete = index.DELETE("3");
-            if(dairyDelete == 0 ){
-                System.out.println("Eliminado Correctamente");
-                /** Obteniendo colección de nuevo para ver si se eliminó */
+            DairyProductsTest.DeleteDairyProducts(index, "3");
 
-                if (dairyCollection.size() == 0) {
-                    System.out.println(dairyCollection);
-                } else {
-                    for (int i = 0; i < dairyCollection.size(); i++) {
-                        JSONObject dairy = (JSONObject) dairyCollection.get(i);
 
-                        System.out.println("[");
-                        for (Object key : dairy.keySet()) {
-                            System.out.println("\t" + key + ": " + dairy.get(key));
-                        }
-                        System.out.println("]");
-                    }
-                }
-
-            } else {
-                System.out.println("No se pudo eliminar");
-            }
-
-            /**prueba con nuevo controlador*/
-            System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
+           /* System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
             {
                 AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Vodka Saborizado", "Vodka Saborizado de Maracuyá", 1500.0f, 2,
                         1.0f, 50);
                 System.out.println(index.POST(aProduct1));
-            }
+            }*/
         } else {
             System.out.println("    --  Not connected   --");
         }
