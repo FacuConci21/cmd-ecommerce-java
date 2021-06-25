@@ -59,12 +59,12 @@ public class BackendTester {
             System.out.println("GET opperation:");
             index.setCollectionName("alcoholic");
             /**DairyProductsTest.GetDairyProducts(index);*/
-            JSONArray alcholCollection = index.GET();
-            if (alcholCollection.size() == 0) {
-                System.out.println(alcholCollection);
+            JSONArray alcoholCollection = index.GET();
+            if (alcoholCollection.size() == 0) {
+                System.out.println(alcoholCollection);
             } else {
-                for (int i = 0; i < alcholCollection.size(); i++) {
-                    JSONObject alcohol = (JSONObject) alcholCollection.get(i);
+                for (int i = 0; i < alcoholCollection.size(); i++) {
+                    JSONObject alcohol = (JSONObject) alcoholCollection.get(i);
 
                     System.out.println("[");
                     for (Object key : alcohol.keySet()) {
@@ -77,8 +77,8 @@ public class BackendTester {
             /**Prueba de GET by INDEX*/
             System.out.println("GET BY ID Operation:");
 
-            JSONObject dairyObjectCollection = index.GET("1");
-            System.out.println(dairyObjectCollection.toJSONString());
+            JSONObject alcoholObjectCollection = index.GET("1");
+            System.out.println(alcoholObjectCollection.toJSONString());
 
             /**DairyProductsTest.GetDairyProductsById(index, "2");*/
 
@@ -88,6 +88,28 @@ public class BackendTester {
             /**DairyProductsTest.DeleteDairyProducts(index, "3");*/
 
 
+
+            int alcoholDelete = index.DELETE("2");
+            if(alcoholDelete == 0 ){
+                System.out.println("Eliminado Correctamente");
+                /** Obteniendo colección de nuevo para ver si se eliminó */
+                if (alcoholCollection.size() == 0) {
+                    System.out.println(alcoholCollection);
+                } else {
+                    for (int i = 0; i < alcoholCollection.size(); i++) {
+                        JSONObject dairy = (JSONObject) alcoholCollection.get(i);
+
+                        System.out.println("[");
+                        for (Object key : dairy.keySet()) {
+                            System.out.println("\t" + key + ": " + dairy.get(key));
+                        }
+                        System.out.println("]");
+                    }
+                }
+
+            } else {
+                System.out.println("No se pudo eliminar");
+            }
            /* System.out.println("POST OPERATION ALCOHOL BEVERAGE:");
             {
                 AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Vodka Saborizado", "Vodka Saborizado de Maracuyá", 1500.0f, 2,

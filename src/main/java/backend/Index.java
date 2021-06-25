@@ -166,10 +166,25 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public int DELETE(String id) {
-        this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-        int result = this.dairyController.DELETE(id);
-        this.closeReader();
-        return result;
+
+        switch (this.collectionName){
+            case "dairy":{
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                int result = this.dairyController.DELETE(id);
+                this.closeReader();
+                return result;
+            }
+            case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                int result = this.alcoholController.DELETE(id);
+                this.closeReader();
+                return result;
+            }
+            default:{
+                return -1;
+            }
+        }
+
     }
 
 
