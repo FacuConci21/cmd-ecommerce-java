@@ -66,22 +66,23 @@ public class BackendTester implements Colors{
              * alcoholic (for alcoholic beverages proucts)
              * stiff (for stiff products)
              * */
-            index.setCollectionName("alcoholic");
+            index.setCollectionName("dairy");
 
-            /**DairyProductsTest.GetDairyProducts(index);*/
-            AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
+            DairyProductsTest.GetDairyProducts(index,ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
 
             /**Prueba de GET by INDEX*/
             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
-            AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);
+            DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
 
-            /**DairyProductsTest.GetDairyProductsById(index, "2");*/
+
 
             /**Prueba de DELETE*/
 
             System.out.println(ANSI_GREEN + "DELETE Operation:");
-            /**DairyProductsTest.DeleteDairyProducts(index, "3");*/
-            AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);
+            DairyProductsTest.DeleteDairyProducts(index, "3", ANSI_RED, ANSI_DEFAULT);
+            /**AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
 
 
@@ -89,7 +90,7 @@ public class BackendTester implements Colors{
 
 
         } else {
-            System.out.println(ANSI_BLUE + "    --  Not connected   --");
+            System.out.println(ANSI_RED + "    --  Not connected   --");
         }
     }
 }
