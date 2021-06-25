@@ -77,6 +77,8 @@ public class BackendTester {
             /**Prueba de GET by INDEX*/
             System.out.println("GET BY ID Operation:");
 
+            JSONObject dairyObjectCollection = index.GET("1");
+            System.out.println(dairyObjectCollection.toJSONString());
 
             /**DairyProductsTest.GetDairyProductsById(index, "2");*/
 
