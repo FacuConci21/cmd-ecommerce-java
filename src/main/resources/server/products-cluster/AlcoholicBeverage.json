@@ -1,44 +1,4 @@
 {
   "collection": [
-    {
-      "price": 1500.0,
-      "liters": 1.0,
-      "name": "Vodka Saborizado",
-      "alcohol_percentage": 50,
-      "description": "Vodka Saborizado de Maracuyá",
-      "_id": 1,
-      "stock": 2,
-      "category": 2
-    },
-    {
-      "price": 1500.0,
-      "liters": 1.0,
-      "name": "Vodka Saborizado",
-      "alcohol_percentage": 50,
-      "description": "Vodka Saborizado de Maracuyá",
-      "_id": 1,
-      "stock": 2,
-      "category": 2
-    },
-    {
-      "price": 1500.0,
-      "liters": 1.0,
-      "name": "Vodka Saborizado",
-      "alcohol_percentage": 50,
-      "description": "Vodka Saborizado de Maracuyá",
-      "_id": 1,
-      "stock": 2,
-      "category": 2
-    },
-    {
-      "price": 1500.0,
-      "liters": 1.0,
-      "name": "Vodka Saborizado",
-      "alcohol_percentage": 50,
-      "description": "Vodka Saborizado de Maracuyá",
-      "_id": 1,
-      "stock": 2,
-      "category": 2
-    }
   ]
 }
