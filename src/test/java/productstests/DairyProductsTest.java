@@ -51,6 +51,14 @@ public class DairyProductsTest {
         System.out.println(color + dairyObjectCollection);
     }
 
+    public static void PutDairyProducts(Index index, String id, String color) {
+        JSONObject dProduct = index.GET(id);
+
+        dProduct.replace("_id", "4");
+
+        System.out.println(color + index.PUT(id, dProduct));
+    }
+
     public static void DeleteDairyProducts(Index index, String id, String errorColor ,String color){
         JSONArray dairyCollection = index.GET();
 

@@ -2,47 +2,41 @@
   "collection": [
     {
       "vitamins": [
-        "a2",
-        "h",
-        "bc"
+        "a"
       ],
       "price": 100.0,
-      "fatPercentage": 30,
-      "name": "Yogurt en Sachet",
-      "dateExpiry": "25-7-2023",
-      "description": "Y nos da la leche!",
+      "fatPercentage": "34",
+      "name": "Quesardo",
+      "dateExpiry": "25-6-2021",
+      "description": "Queso Sardo",
       "_id": 1,
-      "stock": 12,
+      "stock": "67",
       "category": 3
     },
     {
       "vitamins": [
-        "a2",
-        "h",
-        "bc"
+        "a"
       ],
       "price": 100.0,
-      "fatPercentage": 30,
-      "name": "Queso",
-      "dateExpiry": "25-7-2023",
-      "description": "Y el dulce de leche!",
+      "fatPercentage": "40",
+      "name": "Jamon Serrano",
+      "dateExpiry": "25-6-2021",
+      "description": "Jamon Serrano de las Sierras de Cordoba",
       "_id": 2,
-      "stock": 12,
+      "stock": "9",
       "category": 3
     },
     {
       "vitamins": [
-        "a2",
-        "h",
-        "bc"
+        "a"
       ],
-      "price": 100.0,
-      "fatPercentage": 30,
-      "name": "Dulce de Leche",
-      "dateExpiry": "25-7-2023",
-      "description": "Y la manteca que se come con el pan!",
-      "_id": 3,
-      "stock": 12,
+      "price": "400.20",
+      "fatPercentage": 1,
+      "name": "Paleta de Cerdo",
+      "dateExpiry": "25-6-2021",
+      "description": "marca Paladini",
+      "_id": "4",
+      "stock": "10",
       "category": 3
     }
   ]

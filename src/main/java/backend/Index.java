@@ -188,8 +188,44 @@ public final class Index implements Service, RoutesAndPaths {
     }
 
     @Override
-    public JSONObject PUT(String id) {
-        return null;
+    public JSONObject PUT(String id, JSONObject updatedObject) {
+        JSONObject jsonResult = new JSONObject();
+
+        if (!updatedObject.get("_id").equals(id)) {
+            /**
+             * No se permite cambiar el valor de los Ids
+             */
+            return null;
+        }
+
+        switch (this.collectionName) {
+            case "dairy":
+            {
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
+                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+                jsonResult = this.dairyController.PUT(id, updatedObject);
+                this.closeWriter();
+
+                return jsonResult;
+            }
+            case "stiff":
+            {
+                jsonResult.put("class", "stiff");
+                return jsonResult;
+            }
+            case "alcoholic":
+            {
+                jsonResult.put("class", "alcoholic");
+                return jsonResult;
+            }
+            default:
+            {
+                return null;
+            }
+        }
     }
 
     @Override

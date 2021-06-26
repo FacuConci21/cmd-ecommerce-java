@@ -19,6 +19,22 @@ public class DairyController implements Service {
     private FileReader dairyCollectionReader;
     public JSONObject collection = new JSONObject();
 
+    // Private methods
+    private JSONObject findById(String id) {
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                return product;
+            }
+        }
+
+        return new JSONObject();
+    }
+
     // Constructors
     public DairyController() {
     }
@@ -91,10 +107,29 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject PUT(String id) {
+    public JSONObject PUT(String id, JSONObject updatedObject) {
 
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
 
-        return null;
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                ((JSONArray) this.collection.get("collection")).set(i, updatedObject);
+
+                try {
+                    this.dairyCollectionWriter.write(this.collection.toJSONString());
+                    this.dairyCollectionWriter.flush();
+
+                    return (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+                } catch (IOException e) {
+                    //e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+        return new JSONObject();
     }
 
     @Override

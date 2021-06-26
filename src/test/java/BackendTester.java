@@ -1,6 +1,10 @@
 import appinterfaces.Colors;
+import application.models.Dairy;
 import backend.Index;
+import org.json.simple.JSONObject;
 import productstests.DairyProductsTest;
+
+import java.util.Vector;
 
 public class BackendTester implements Colors{
     public static void main(String[] args) {
@@ -20,12 +24,29 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "POST opperation:");
             {
-                /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
-                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
-                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
+                /**
+                Vector<String> vitamins = new Vector<>();
+
+                vitamins.add("a");
+                Dairy dProduct1 = new Dairy(
+                        1, 3, "a","bb", 100f, 1,
+                        1, "25-6-2021", vitamins
+                );
+                Dairy dProduct2 = new Dairy(
+                        2, 3, "b","cc", 100f, 1,
+                        1, "25-6-2021", vitamins
+                );
+                Dairy dProduct3 = new Dairy(
+                        3, 3, "c","dd", 100f, 1,
+                        1, "25-6-2021", vitamins
+                );
+
+                DairyProductsTest.PostDairyProduct(index, dProduct1);
+                DairyProductsTest.PostDairyProduct(index, dProduct2);
+                DairyProductsTest.PostDairyProduct(index, dProduct3);*/
             }
 
-            System.out.println(ANSI_GREEN + "GET opperation :");
+            System.out.println(ANSI_GREEN + "GET opperation: ");
             /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion
              * en la línea siguiente
              * NAMES:
@@ -35,19 +56,25 @@ public class BackendTester implements Colors{
              * */
             index.setCollectionName("dairy");
 
-            DairyProductsTest.GetDairyProducts(index,ANSI_DEFAULT);
+            DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
             /**AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
 
             /**Prueba de GET by INDEX*/
-            System.out.println(ANSI_GREEN + "GET BY ID Operation:");
-            DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT);
-            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
+
+             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+            DairyProductsTest.GetDairyProductsById(index, "3", ANSI_DEFAULT);
+             /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
+
+
+             /**    Prueba para PUT     */
+
+             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);
 
             /**Prueba de DELETE*/
-
-            System.out.println(ANSI_GREEN + "DELETE Operation:");
-            DairyProductsTest.DeleteDairyProducts(index, "3", ANSI_RED, ANSI_DEFAULT);
-            /**AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
+/**
+             System.out.println(ANSI_GREEN + "DELETE Operation:");
+             DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
+             AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
         } else {
             System.out.println(ANSI_RED + "    --  Not connected   --");

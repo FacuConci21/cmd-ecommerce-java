@@ -10,6 +10,6 @@ public interface Service {
     JSONArray GET();
     JSONObject GET(String id);
     int POST(Product newRecord);
-    JSONObject PUT(String id);
+    JSONObject PUT(String id, JSONObject updatedObject);
     int DELETE(String id);
 }
