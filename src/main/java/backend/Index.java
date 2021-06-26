@@ -142,6 +142,13 @@ public final class Index implements Service, RoutesAndPaths {
                 this.closeReader();
                 return result;
             }
+            case "stiff":
+            {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                JSONObject result = this.stiffController.GET(id);
+                this.closeReader();
+                return result;
+            }
             default:{
                 return null;
             }
@@ -243,6 +250,10 @@ public final class Index implements Service, RoutesAndPaths {
                 int result = this.alcoholController.DELETE(id);
                 this.closeReader();
                 return result;
+            }
+            case "stiff":
+            {
+                return 10213231;
             }
             default:{
                 return -1;

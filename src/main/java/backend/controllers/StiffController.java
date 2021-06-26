@@ -49,7 +49,18 @@ public class StiffController implements Service {
 
     @Override
     public JSONObject GET(String id) {
-        return null;
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                return product;
+            }
+        }
+
+        return new JSONObject();
     }
 
     @Override

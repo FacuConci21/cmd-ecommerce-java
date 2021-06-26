@@ -3,6 +3,7 @@ import application.models.Dairy;
 import backend.Index;
 import org.json.simple.JSONObject;
 import productstests.DairyProductsTest;
+import productstests.StiffProductsTest;
 
 import java.util.Vector;
 
@@ -24,7 +25,7 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "POST opperation:");
             {
-                /**
+
                 Vector<String> vitamins = new Vector<>();
 
                 vitamins.add("a");
@@ -41,9 +42,7 @@ public class BackendTester implements Colors{
                         1, "25-6-2021", vitamins
                 );
 
-                DairyProductsTest.PostDairyProduct(index, dProduct1);
-                DairyProductsTest.PostDairyProduct(index, dProduct2);
-                DairyProductsTest.PostDairyProduct(index, dProduct3);*/
+                //StiffProductsTest.PostTest(index, ANSI_BLUE);
             }
 
             System.out.println(ANSI_GREEN + "GET opperation: ");
@@ -54,25 +53,35 @@ public class BackendTester implements Colors{
              * alcoholic (for alcoholic beverages products)
              * stiff (for stiff products)
              * */
-            index.setCollectionName("dairy");
+            index.setCollectionName("stiff");
+
+            StiffProductsTest.GetTest(index, ANSI_DEFAULT);
+            /**
 
             DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
-            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
+            AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
 
             /**Prueba de GET by INDEX*/
 
-             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+            System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+
+            StiffProductsTest.GetByIdTest(index, "2", ANSI_DEFAULT);
+            /**
+
             DairyProductsTest.GetDairyProductsById(index, "3", ANSI_DEFAULT);
-             /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
+            AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
 
 
              /**    Prueba para PUT     */
 
-             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);
+            System.out.println(ANSI_GREEN + "PUT opperation: ");
+            /**
+            DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);*/
 
             /**Prueba de DELETE*/
-/**
-             System.out.println(ANSI_GREEN + "DELETE Operation:");
+
+            System.out.println(ANSI_GREEN + "DELETE Operation:");
+            /**
              DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
              AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
