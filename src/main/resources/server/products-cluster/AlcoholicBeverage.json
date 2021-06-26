@@ -9,6 +9,46 @@
       "_id": 1,
       "stock": 2,
       "category": 2
+    },
+    {
+      "price": 50.0,
+      "liters": 0.5,
+      "name": "Vino Toro ",
+      "alcohol_percentage": 25,
+      "description": "Vino Tinto Toro Viejo",
+      "_id": 2,
+      "stock": 20,
+      "category": 2
+    },
+    {
+      "price": 50.0,
+      "liters": 0.5,
+      "name": "Vino Toro ",
+      "alcohol_percentage": 25,
+      "description": "Vino Blanco Toro Viejo",
+      "_id": 3,
+      "stock": 20,
+      "category": 2
+    },
+    {
+      "price": 50.0,
+      "liters": 0.5,
+      "name": "Vino Toro ",
+      "alcohol_percentage": 25,
+      "description": "Vino Blanco Toro Viejo",
+      "_id": 4,
+      "stock": 20,
+      "category": 2
+    },
+    {
+      "price": 250.0,
+      "liters": 0.5,
+      "name": "Dada",
+      "alcohol_percentage": 25,
+      "description": "Dada 7",
+      "_id": 5,
+      "stock": 20,
+      "category": 2
     }
   ]
 }

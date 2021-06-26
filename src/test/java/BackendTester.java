@@ -28,11 +28,22 @@ public class BackendTester implements Colors{
             System.out.println(ANSI_GREEN + "POST opperation:");
 
             {
-                /**
+                AlcoholicBeverage aProduct1 = new AlcoholicBeverage(5, 2, "Dada", "Dada 7", 250.0f, 20,
+                        0.5f, 25);
+                int result = index.POST(aProduct1);
+                if (result != 0){
+                    System.out.println(ANSI_RED + "No se pudo agregar el producto");
+                } else {
+                    System.out.println(ANSI_GREEN + "Producto agregado correctamente");
+                }
+
+            }
+           /* {
+                *//**
                  * Aca genero objetos para guardar en la BD, en la coleccion de datos
                  * de productos Dairy, lo encerre dentro de {} para que cuando termine de hacer POST
                  * se destruyan los objetos que ya no se van a usar para que no ocupen memoria.
-                 */
+                 *//*
                 Vector<String> vitamins = new Vector<>();
 
                 vitamins.add("a2");
@@ -53,10 +64,10 @@ public class BackendTester implements Colors{
                 );
 
 
-                /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
+                *//**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
-                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
-            }
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*//*
+            }*/
 
             System.out.println(ANSI_GREEN + "GET opperation :");
             /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion

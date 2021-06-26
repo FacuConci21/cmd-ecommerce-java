@@ -155,7 +155,7 @@ public final class Index implements Service, RoutesAndPaths {
             result = this.alcoholController.POST(newRecord);
             this.closeWriter();
         }
-        return result;
+        return  result;
     }
 
     @Override
