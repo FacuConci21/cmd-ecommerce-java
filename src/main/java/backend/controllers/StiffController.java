@@ -91,7 +91,9 @@ public class StiffController implements Service {
 
     @Override
     public JSONObject PUT(String id, JSONObject updatedObject) {
-        return null;
+        JSONObject jsonResult = new JSONObject();
+        jsonResult.put("class", "stiff");
+        return jsonResult;
     }
 
     @Override

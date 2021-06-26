@@ -59,8 +59,15 @@ public class StiffProductsTest {
     }
 
     public static void GetByIdTest(Index index, String id, String color) {
-
         System.out.println(color + index.GET(id));
     }
+
+    public static void PutTest(Index index, String id, String color) {
+        JSONObject obj = new JSONObject();
+
+        obj.put("_id", "1");
+        System.out.println(color + index.PUT(id, obj));
+    }
+
 
 } // StiffProductsTest

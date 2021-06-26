@@ -220,8 +220,7 @@ public final class Index implements Service, RoutesAndPaths {
             }
             case "stiff":
             {
-                jsonResult.put("class", "stiff");
-                return jsonResult;
+                return this.stiffController.PUT(id, updatedObject);
             }
             case "alcoholic":
             {

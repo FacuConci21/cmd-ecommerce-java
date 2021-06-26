@@ -55,7 +55,7 @@ public class BackendTester implements Colors{
              * */
             index.setCollectionName("stiff");
 
-            StiffProductsTest.GetTest(index, ANSI_DEFAULT);
+            StiffProductsTest.GetTest(index, ANSI_YELLOW);
             /**
 
             DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
@@ -75,6 +75,8 @@ public class BackendTester implements Colors{
              /**    Prueba para PUT     */
 
             System.out.println(ANSI_GREEN + "PUT opperation: ");
+
+            StiffProductsTest.PutTest(index, "1", ANSI_YELLOW);
             /**
             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);*/
 
