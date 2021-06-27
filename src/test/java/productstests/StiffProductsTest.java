@@ -63,10 +63,12 @@ public class StiffProductsTest {
     }
 
     public static void PutTest(Index index, String id, String color) {
-        JSONObject obj = new JSONObject();
+        JSONObject sProduct = index.GET(id);
 
-        obj.put("_id", "1");
-        System.out.println(color + index.PUT(id, obj));
+        sProduct.replace("name", "otro fiambre coño");
+        //sProduct.replace("_id", "6457357");
+
+        System.out.println(color + index.PUT(id, sProduct));
     }
 
 

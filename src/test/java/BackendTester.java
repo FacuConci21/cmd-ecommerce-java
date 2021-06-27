@@ -65,7 +65,7 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
 
-            StiffProductsTest.GetByIdTest(index, "2", ANSI_DEFAULT);
+            StiffProductsTest.GetByIdTest(index, "3", ANSI_DEFAULT);
             /**
 
             DairyProductsTest.GetDairyProductsById(index, "3", ANSI_DEFAULT);
@@ -76,7 +76,7 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "PUT opperation: ");
 
-            StiffProductsTest.PutTest(index, "1", ANSI_YELLOW);
+            StiffProductsTest.PutTest(index, "3", ANSI_YELLOW);
             /**
             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);*/
 

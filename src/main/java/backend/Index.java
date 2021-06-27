@@ -198,7 +198,7 @@ public final class Index implements Service, RoutesAndPaths {
     public JSONObject PUT(String id, JSONObject updatedObject) {
         JSONObject jsonResult = new JSONObject();
 
-        if (!updatedObject.get("_id").equals(id)) {
+        if (!updatedObject.get("_id").toString().equals(id)) {
             /**
              * No se permite cambiar el valor de los Ids
              */
@@ -220,7 +220,15 @@ public final class Index implements Service, RoutesAndPaths {
             }
             case "stiff":
             {
-                return this.stiffController.PUT(id, updatedObject);
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                this.stiffController.GET();
+                this.closeReader();
+
+                this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+                jsonResult = this.stiffController.PUT(id, updatedObject);
+                this.closeWriter();
+
+                return jsonResult;
             }
             case "alcoholic":
             {
