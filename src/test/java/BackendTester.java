@@ -25,7 +25,11 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "POST opperation:");
             {
-
+                /**
+                 * Aca genero objetos para guardar en la BD, en la coleccion de datos
+                 * de productos Dairy, lo encerre dentro de {} para que cuando termine de hacer POST
+                 * se destruyan los objetos que ya no se van a usar para que no ocupen memoria.
+                 */
                 Vector<String> vitamins = new Vector<>();
 
                 vitamins.add("a");
@@ -42,7 +46,11 @@ public class BackendTester implements Colors{
                         1, "25-6-2021", vitamins
                 );
 
-                //StiffProductsTest.PostTest(index, ANSI_BLUE);
+                StiffProductsTest.PostTest(index, ANSI_BLUE);
+
+                /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*/
             }
 
             System.out.println(ANSI_GREEN + "GET opperation: ");

@@ -31,7 +31,6 @@ public class AlcoholicBeverageController implements Service {
     public JSONArray GET() {
         JSONParser jsonParser = new JSONParser();
 
-
         try {
             this.collection = (JSONObject) jsonParser.parse(this.alcoholCollectionReader);
             this.alcoholCollectionReader.close();
@@ -61,29 +60,44 @@ public class AlcoholicBeverageController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        JSONObject newProduct = new JSONObject();
+        int result = 3;
+        try{
 
-        newProduct.put("_id", newRecord.getId());
-        newProduct.put("name", newRecord.getName());
-        newProduct.put("description", newRecord.getDescription());
-        newProduct.put("price", newRecord.getPrice());
-        newProduct.put("stock", newRecord.getStock());
-        newProduct.put("category", newRecord.getCategory());
-        newProduct.put("liters", ((AlcoholicBeverage) newRecord).getLiter());
-        newProduct.put("alcohol_percentage", ((AlcoholicBeverage) newRecord).getPercentage());
+            int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+            JSONObject newProduct = new JSONObject();
 
+            newProduct.put("name", newRecord.getName());
+            newProduct.put("description", newRecord.getDescription());
+            newProduct.put("price", newRecord.getPrice());
+            newProduct.put("stock", newRecord.getStock());
+            newProduct.put("category", newRecord.getCategory());
+            newProduct.put("liters", ((AlcoholicBeverage) newRecord).getLiter());
+            newProduct.put("alcohol_percentage", ((AlcoholicBeverage) newRecord).getPercentage());
 
-        ((JSONArray) this.collection.get("collection")).add(newProduct);
+            if (sizeOfCollection > 0){
 
-        try {
+                for (int i = 0; i < sizeOfCollection; i++) {
+                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
 
-            this.alcoholCollectionWriter.write(this.collection.toJSONString());
-            this.alcoholCollectionWriter.flush();
+                    int idProduct = Integer.parseInt(product.get("_id").toString());
+                    int newProductId = newRecord.getId();
 
-            return 0;
+                    if (idProduct == newProductId) {
+                        newProduct.put("_id", sizeOfCollection + 1 );
+                    } else {
+                        newProduct.put("_id",newRecord.getId());
+                    }
+                }
+
+                ((JSONArray) this.collection.get("collection")).add(newProduct);
+                this.alcoholCollectionWriter.write(this.collection.toJSONString());
+                this.alcoholCollectionWriter.flush();
+                result = 0;
+            }
         } catch (IOException e) {
-            return 3;
+            return result;
         }
+        return result;
     }
 
     @Override

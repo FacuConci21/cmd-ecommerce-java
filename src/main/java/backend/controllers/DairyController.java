@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
 import appinterfaces.backend.Service;
@@ -81,29 +82,44 @@ public class DairyController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        JSONObject newDairyProduct = new JSONObject();
+        int result = 3;
+        try{
 
-        newDairyProduct.put("_id", newRecord.getId());
-        newDairyProduct.put("name", newRecord.getName());
-        newDairyProduct.put("description", newRecord.getDescription());
-        newDairyProduct.put("price", newRecord.getPrice());
-        newDairyProduct.put("stock", newRecord.getStock());
-        newDairyProduct.put("category", newRecord.getCategory());
-        newDairyProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
-        newDairyProduct.put("dateExpiry", ((Dairy) newRecord).getDate_expiry());
-        newDairyProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
+            int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+            JSONObject newProduct = new JSONObject();
 
-        ((JSONArray) this.collection.get("collection")).add(newDairyProduct);
+            newProduct.put("name", newRecord.getName());
+            newProduct.put("description", newRecord.getDescription());
+            newProduct.put("price", newRecord.getPrice());
+            newProduct.put("stock", newRecord.getStock());
+            newProduct.put("category", newRecord.getCategory());
+            newProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
+            newProduct.put("dateExpiry", ((Dairy) newRecord).getDate_expiry());
+            newProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
 
-        try {
-            this.dairyCollectionWriter.write(this.collection.toJSONString());
-            this.dairyCollectionWriter.flush();
+            if (sizeOfCollection > 0){
+                for (int i = 0; i < sizeOfCollection; i++) {
+                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
 
-            return 0;
+                    int idProduct = Integer.parseInt(product.get("_id").toString());
+                    int newProductId = newRecord.getId();
+
+                    if (idProduct == newProductId) {
+                        newProduct.put("_id", sizeOfCollection + 1 );
+                    } else {
+                        newProduct.put("_id",newRecord.getId());
+                    }
+                }
+
+                ((JSONArray) this.collection.get("collection")).add(newProduct);
+                this.dairyCollectionWriter.write(this.collection.toJSONString());
+                this.dairyCollectionWriter.flush();
+                result = 0;
+            }
         } catch (IOException e) {
-            //e.printStackTrace();
-            return 3;
+            return result;
         }
+        return result;
     }
 
     @Override
