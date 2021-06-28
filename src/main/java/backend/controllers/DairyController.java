@@ -109,7 +109,7 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject PUT(String id) {
+    public JSONObject PUT(String id,  JSONObject updatedObject) {
 
 
         return null;

@@ -159,8 +159,43 @@ public final class Index implements Service, RoutesAndPaths {
     }
 
     @Override
-    public JSONObject PUT(String id) {
-        return null;
+    public JSONObject PUT(String id, JSONObject updatedObject) {
+        JSONObject jsonResult = new JSONObject();
+
+        if (!updatedObject.get("_id").toString().equals(id)) {
+            /**
+             * No se permite cambiar el valor de los Ids
+             */
+            return null;
+        }
+
+        switch (this.collectionName) {
+            case "dairy": {
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
+                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+                jsonResult = this.dairyController.PUT(id, updatedObject);
+                this.closeWriter();
+
+                return jsonResult;
+            }
+
+            case "alcoholic": {
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                this.alcoholController.GET();
+                this.closeReader();
+
+                this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
+                jsonResult = this.alcoholController.PUT(id, updatedObject);
+                this.closeWriter();
+                return jsonResult;
+            }
+            default: {
+                return null;
+            }
+        }
     }
 
 

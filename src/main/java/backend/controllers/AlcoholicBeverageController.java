@@ -55,7 +55,7 @@ public class AlcoholicBeverageController implements Service {
             }
         }
 
-        return new JSONObject();
+        return null;
     }
 
     @Override
@@ -101,7 +101,30 @@ public class AlcoholicBeverageController implements Service {
     }
 
     @Override
-    public JSONObject PUT(String id) {
+    public JSONObject PUT(String id, JSONObject updatedObject) {
+        JSONObject product = new JSONObject();
+        String idProduct;
+
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+
+        for (int i = 0; i < sizeOfCollection; i++) {
+            product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                ((JSONArray) this.collection.get("collection")).set(i, updatedObject);
+
+                try {
+                    this.alcoholCollectionWriter.write(this.collection.toJSONString());
+                    this.alcoholCollectionWriter.flush();
+
+                    return (JSONObject)((JSONArray) this.collection.get("collection")).get(i);
+                } catch (IOException e) {
+                    return null;
+                }
+            }
+        }
+
         return null;
     }
 

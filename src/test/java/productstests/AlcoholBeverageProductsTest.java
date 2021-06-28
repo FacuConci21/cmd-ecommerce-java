@@ -15,6 +15,7 @@ public class AlcoholBeverageProductsTest {
     public static void GetAlcoholBeverageProducts(Index index, String color){
 
         JSONArray AlcoholCollection = index.GET();
+
         if (AlcoholCollection.size() == 0) {
             System.out.println( color + AlcoholCollection);
         } else {
@@ -35,6 +36,16 @@ public class AlcoholBeverageProductsTest {
         System.out.println(color + AlcoholObjectCollection);
     }
 
+    public static void PutTest(Index index, String id, String color, String errorColor){
+        JSONObject aProduct = index.GET(id);
+        if (aProduct == null){
+            System.out.println(errorColor + "No se encontro el producto que desea modificar.");
+        } else {
+            aProduct.replace("name", "Vino Toro");
+            System.out.println(color + index.PUT(id, aProduct));
+        }
+
+    }
     public static void DeleteAlcoholBeverageProducts(Index index, String id, String errorColor, String color){
         JSONArray AlcoholCollection = index.GET();
 

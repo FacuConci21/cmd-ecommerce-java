@@ -77,22 +77,24 @@ public class BackendTester implements Colors{
              * alcoholic (for alcoholic beverages proucts)
              * stiff (for stiff products)
              * */
-            index.setCollectionName("dairy");
+            index.setCollectionName("alcoholic");
 
-            DairyProductsTest.GetDairyProducts(index,ANSI_DEFAULT);
-            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
-
+            /**DairyProductsTest.GetDairyProducts(index,ANSI_DEFAULT);*/
+            AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
             /**Prueba de GET by INDEX*/
             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
-            DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT);
-            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "1", ANSI_DEFAULT);*/
+            /**DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT);*/
+            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "2", ANSI_DEFAULT);*/
 
 
+            System.out.println(ANSI_GREEN + "PUT opperation: ");
+
+            AlcoholBeverageProductsTest.PutTest(index, "8", ANSI_YELLOW, ANSI_RED);
 
             /**Prueba de DELETE*/
 
             System.out.println(ANSI_GREEN + "DELETE Operation:");
-            DairyProductsTest.DeleteDairyProducts(index, "3", ANSI_RED, ANSI_DEFAULT);
+            /**DairyProductsTest.DeleteDairyProducts(index, "3", ANSI_RED, ANSI_DEFAULT);*/
             /**AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
 
