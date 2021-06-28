@@ -1,6 +1,6 @@
-package application;
+package application.models;
 
-import iapplication.Colors;
+import appinterfaces.Colors;
 
 public class AlcoholicBeverage extends Product{
 

@@ -1,40 +1,40 @@
-package application;
+package application.models;
 
-import iapplication.Colors;
+import appinterfaces.Colors;
 
 import java.time.LocalDate;
 
 public class Stiff extends Product {
 
     // Private atrributes
-    private String date_expiry;
-    private int fat_percentage;
+    private String dateExpiry;
+    private int fatPercentage;
 
     // Constructors
     public Stiff() {}
 
     public Stiff(int id, int category, String name, String description, float price, int stock,
-                 String date_expiry, int fat_percentage)
+                 String dateExpiry, int fatPercentage)
     {
         super(id, category,name, description, price, stock);
-        this.date_expiry = date_expiry;
-        this.fat_percentage = fat_percentage;
+        this.dateExpiry = dateExpiry;
+        this.fatPercentage = fatPercentage;
     }
 
     // Public methods
-    public String getDate_expiry() {
-        return date_expiry;
+    public String getDateExpiry() {
+        return dateExpiry;
     }
 
-    public int getFat_percentage() {
-        return fat_percentage;
+    public int getFatPercentage() {
+        return fatPercentage;
     }
 
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN + "Fecha de expiracion: " + Colors.ANSI_DEFAULT + date_expiry +
-                Colors.ANSI_GREEN + "Porcentaje en calorias: " + Colors.ANSI_DEFAULT + fat_percentage;
+                Colors.ANSI_GREEN + "Fecha de expiracion: " + Colors.ANSI_DEFAULT + dateExpiry +
+                Colors.ANSI_GREEN + "Porcentaje en calorias: " + Colors.ANSI_DEFAULT + fatPercentage;
     }
 
     // Public static methods

@@ -1,7 +1,11 @@
 package application;
 
-import iapplication.Colors;
-import iapplication.Options;
+import application.models.AlcoholicBeverage;
+import application.models.Dairy;
+import application.models.Product;
+import application.models.Stiff;
+import appinterfaces.Colors;
+import appinterfaces.Options;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -45,6 +49,8 @@ public final class CmdEcommerce implements Options{
                 Colors.ANSI_YELLOW + "La operacion fue cancelada.",
                 Colors.ANSI_YELLOW + "La lista de productos esta vacia.",
                 Colors.ANSI_RED + "Se produjo un error, reinicie el programa.",
+                Colors.ANSI_RED + "No se pudo conectar a la base de datos.",
+                Colors.ANSI_GREEN + "Conectado a la base de datos!",
                 Colors.ANSI_GREEN + "Agradecemos su visita, Adios!"
         };
         String[] optionsList = {
