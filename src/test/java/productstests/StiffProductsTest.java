@@ -71,5 +71,7 @@ public class StiffProductsTest {
         System.out.println(color + index.PUT(id, sProduct));
     }
 
-
+    public static void DeleteTest(Index index, String id, String color) {
+        System.out.println(color + index.DELETE(id));
+    }
 } // StiffProductsTest

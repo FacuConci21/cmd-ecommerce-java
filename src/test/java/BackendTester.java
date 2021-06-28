@@ -46,7 +46,7 @@ public class BackendTester implements Colors{
                         1, "25-6-2021", vitamins
                 );
 
-                StiffProductsTest.PostTest(index, ANSI_BLUE);
+                //StiffProductsTest.PostTest(index, ANSI_BLUE);
 
                 /**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
@@ -84,13 +84,16 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "PUT opperation: ");
 
-            StiffProductsTest.PutTest(index, "3", ANSI_YELLOW);
             /**
+            StiffProductsTest.PutTest(index, "3", ANSI_YELLOW);
             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);*/
 
             /**Prueba de DELETE*/
 
             System.out.println(ANSI_GREEN + "DELETE Operation:");
+
+            StiffProductsTest.DeleteTest(index, "2", ANSI_YELLOW);
+            StiffProductsTest.GetByIdTest(index, "2", ANSI_YELLOW);
             /**
              DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
              AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/

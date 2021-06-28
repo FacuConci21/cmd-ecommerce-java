@@ -40,7 +40,7 @@ public class StiffController implements Service {
             this.collection = (JSONObject) jsonParser.parse(this.stiffCollectionReader);
             this.stiffCollectionReader.close();
 
-            return  (JSONArray) this.collection.get("collection");
+            return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return new JSONArray();
@@ -108,7 +108,7 @@ public class StiffController implements Service {
                     this.stiffCollectionWriter.write(this.collection.toJSONString());
                     this.stiffCollectionWriter.flush();
 
-                    return (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+                    return (JSONObject)((JSONArray) this.collection.get("collection")).get(i);
                 } catch (IOException e) {
                     //e.printStackTrace();
                     return null;
@@ -121,7 +121,31 @@ public class StiffController implements Service {
 
     @Override
     public int DELETE(String id) {
-        return 0;
+        JSONObject product = new JSONObject();
+        String idProduct;
+        int result = 1;
+
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+
+        for (int i = 0; i < sizeOfCollection; i++) {
+            product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                ((JSONArray) this.collection.get("collection")).remove(i);
+                result = 0;
+                break;
+            }
+        }
+        try {
+            this.stiffCollectionWriter.write(this.collection.toJSONString());
+            this.stiffCollectionWriter.flush();
+
+            return result;
+        } catch (IOException e) {
+            //e.printStackTrace();
+            return -1;
+        }
     }
 
 } // StiffController

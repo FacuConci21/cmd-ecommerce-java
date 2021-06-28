@@ -260,7 +260,15 @@ public final class Index implements Service, RoutesAndPaths {
             }
             case "stiff":
             {
-                return 10213231;
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                this.stiffController.GET();
+                this.closeReader();
+
+                this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+                int result = this.stiffController.DELETE(id);
+                this.closeWriter();
+
+                return result;
             }
             default:{
                 return -1;
