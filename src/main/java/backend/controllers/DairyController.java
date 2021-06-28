@@ -20,6 +20,22 @@ public class DairyController implements Service {
     private FileReader dairyCollectionReader;
     public JSONObject collection = new JSONObject();
 
+    // Private methods
+    private JSONObject findById(String id) {
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
+
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                return product;
+            }
+        }
+
+        return new JSONObject();
+    }
+
     // Constructors
     public DairyController() {
     }
@@ -37,14 +53,12 @@ public class DairyController implements Service {
     public JSONArray GET() {
         JSONParser jsonParser = new JSONParser();
 
-
         try {
             this.collection = (JSONObject) jsonParser.parse(this.dairyCollectionReader);
             dairyCollectionReader.close();
 
             return (JSONArray) this.collection.get("collection");
         } catch (IOException | ParseException e) {
-
             return new JSONArray();
         }
     }
@@ -58,7 +72,7 @@ public class DairyController implements Service {
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
             String idProduct = product.get("_id").toString();
 
-            if (idProduct.equals(id)){
+            if (idProduct.equals(id)) {
                 return product;
             }
         }
@@ -109,10 +123,33 @@ public class DairyController implements Service {
     }
 
     @Override
+<<<<<<< HEAD
     public JSONObject PUT(String id,  JSONObject updatedObject) {
+=======
+    public JSONObject PUT(String id, JSONObject updatedObject) {
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
 
+        int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+        for (int i = 0; i < sizeOfCollection; i++) {
 
-        return null;
+            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            String idProduct = product.get("_id").toString();
+
+            if (idProduct.equals(id)) {
+                ((JSONArray) this.collection.get("collection")).set(i, updatedObject);
+
+                try {
+                    this.dairyCollectionWriter.write(this.collection.toJSONString());
+                    this.dairyCollectionWriter.flush();
+
+                    return (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+                } catch (IOException e) {
+                    //e.printStackTrace();
+                    return null;
+                }
+            }
+        }
+        return new JSONObject();
     }
 
     @Override
@@ -124,12 +161,18 @@ public class DairyController implements Service {
                 JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
                 String idProduct = product.get("_id").toString();
 
+<<<<<<< HEAD
                 if (idProduct.equals(id)){
                     ((JSONArray) this.collection.get("collection")).remove(i);
                     this.dairyCollectionWriter.write(this.collection.toJSONString());
                     this.dairyCollectionWriter.flush();
                     return 0;
                 }
+=======
+            if (idProduct.equals(id)) {
+                ((JSONArray) this.collection.get("collection")).remove(i);
+                return 0;
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
             }
         }catch (IOException e) {
             return -1;

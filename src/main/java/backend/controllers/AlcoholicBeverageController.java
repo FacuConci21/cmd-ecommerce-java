@@ -102,6 +102,7 @@ public class AlcoholicBeverageController implements Service {
 
     @Override
     public JSONObject PUT(String id, JSONObject updatedObject) {
+<<<<<<< HEAD
         JSONObject product = new JSONObject();
         String idProduct;
 
@@ -125,6 +126,8 @@ public class AlcoholicBeverageController implements Service {
             }
         }
 
+=======
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
         return null;
     }
 

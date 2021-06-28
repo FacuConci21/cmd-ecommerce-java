@@ -3,10 +3,12 @@ package backend;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
+import application.models.Stiff;
 import backend.controllers.AlcoholicBeverageController;
 import backend.controllers.DairyController;
 import appinterfaces.backend.Service;
 import appinterfaces.backend.RoutesAndPaths;
+import backend.controllers.StiffController;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -20,8 +22,9 @@ public final class Index implements Service, RoutesAndPaths {
 
     // Private attributes
     private String collectionName;
-    private DairyController dairyController;
-    private AlcoholicBeverageController alcoholController;
+    private final DairyController dairyController;
+    private final AlcoholicBeverageController alcoholController;
+    private final StiffController stiffController;
     private FileReader collectionReader;
     private FileWriter collectionWriter;
 
@@ -66,11 +69,14 @@ public final class Index implements Service, RoutesAndPaths {
     public Index() {
         this.dairyController = new DairyController();
         this.alcoholController = new AlcoholicBeverageController();
+        this.stiffController = new StiffController();
     }
 
     public Index(String collectionName) {
         this.collectionName = collectionName;
-        dairyController = new DairyController();
+        this.dairyController = new DairyController();
+        this.alcoholController = new AlcoholicBeverageController();
+        this.stiffController = new StiffController();
     }
 
     // Public methods
@@ -88,22 +94,31 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONArray GET() {
+        JSONArray result;
         switch (this.collectionName) {
-            case "dairy":
-            {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-                JSONArray result = this.dairyController.GET();
+                result = this.dairyController.GET();
                 this.closeReader();
                 return result;
             }
-            case "alcoholic":{
+            case "stiff": {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                result = this.stiffController.GET();
+                this.closeReader();
+                return result;
+            }
+            case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
-                JSONArray result = this.alcoholController.GET();
+                result = this.alcoholController.GET();
                 this.closeReader();
                 return result;
             }
-            default:
-            {
+            default: {
+                /**
+                 * Importante que retorne null, a modo de error en caso de que se ingrese mal
+                 * un nombre de coleccion.
+                 */
                 return null;
             }
         }
@@ -111,25 +126,35 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONObject GET(String id) {
-        switch(this.collectionName){
-            case "dairy":{
+        switch (this.collectionName) {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
                 JSONObject result = this.dairyController.GET(id);
-                this.closeReader();
                 return result;
             }
-            case "alcoholic":{
+            case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
-                JSONObject result = this.alcoholController.GET(id);
+                this.alcoholController.GET();
                 this.closeReader();
+
+                JSONObject result = this.alcoholController.GET(id);
                 return result;
             }
-            default:{
+            case "stiff": {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                this.stiffController.GET();
+                this.closeReader();
+
+                JSONObject result = this.stiffController.GET(id);
+                return result;
+            }
+            default: {
                 return null;
             }
         }
-
-
     }
 
     @Override
@@ -155,12 +180,24 @@ public final class Index implements Service, RoutesAndPaths {
             result = this.alcoholController.POST(newRecord);
             this.closeWriter();
         }
-        return  result;
+
+        if (newRecord instanceof Stiff) {
+            this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+            this.stiffController.GET();
+            this.closeReader();
+
+            this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+            result = this.stiffController.POST(newRecord);
+            this.closeWriter();
+        }
+
+        return result;
     }
 
     @Override
     public JSONObject PUT(String id, JSONObject updatedObject) {
         JSONObject jsonResult = new JSONObject();
+<<<<<<< HEAD
 
         if (!updatedObject.get("_id").toString().equals(id)) {
             /**
@@ -197,30 +234,91 @@ public final class Index implements Service, RoutesAndPaths {
             }
         }
     }
+=======
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
 
+        if (!updatedObject.get("_id").toString().equals(id)) {
+            /**
+             * No se permite cambiar el valor de los Ids
+             */
+            return null;
+        }
+
+        switch (this.collectionName) {
+            case "dairy": {
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
+                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+                jsonResult = this.dairyController.PUT(id, updatedObject);
+                this.closeWriter();
+
+                return jsonResult;
+            }
+            case "stiff": {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                this.stiffController.GET();
+                this.closeReader();
+
+                this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+                jsonResult = this.stiffController.PUT(id, updatedObject);
+                this.closeWriter();
+
+                return jsonResult;
+            }
+            case "alcoholic": {
+                jsonResult.put("class", "alcoholic");
+                return jsonResult;
+            }
+            default: {
+                return null;
+            }
+        }
+    }
 
     @Override
     public int DELETE(String id) {
 
+<<<<<<< HEAD
         switch (this.collectionName){
             case "dairy":{
                 this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+=======
+        switch (this.collectionName) {
+            case "dairy": {
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
                 int result = this.dairyController.DELETE(id);
                 this.closeWriter();
                 return result;
             }
+<<<<<<< HEAD
             case "alcoholic":{
                 this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
+=======
+            case "alcoholic": {
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+>>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
                 int result = this.alcoholController.DELETE(id);
                 this.closeWriter();
                 return result;
             }
-            default:{
+            case "stiff": {
+                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                this.stiffController.GET();
+                this.closeReader();
+
+                this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+                int result = this.stiffController.DELETE(id);
+                this.closeWriter();
+
+                return result;
+            }
+            default: {
                 return -1;
             }
         }
-
     }
 
-
-}
+} // Index
