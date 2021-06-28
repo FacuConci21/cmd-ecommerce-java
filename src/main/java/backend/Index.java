@@ -96,28 +96,25 @@ public final class Index implements Service, RoutesAndPaths {
     public JSONArray GET() {
         JSONArray result;
         switch (this.collectionName) {
-            case "dairy":
-            {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
                 result = this.dairyController.GET();
                 this.closeReader();
                 return result;
             }
-            case "stiff":
-            {
+            case "stiff": {
                 this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
                 result = this.stiffController.GET();
                 this.closeReader();
                 return result;
             }
-            case "alcoholic":{
+            case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
                 result = this.alcoholController.GET();
                 this.closeReader();
                 return result;
             }
-            default:
-            {
+            default: {
                 /**
                  * Importante que retorne null, a modo de error en caso de que se ingrese mal
                  * un nombre de coleccion.
@@ -129,32 +126,35 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public JSONObject GET(String id) {
-        switch(this.collectionName){
-            case "dairy":{
+        switch (this.collectionName) {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
                 JSONObject result = this.dairyController.GET(id);
-                this.closeReader();
                 return result;
             }
-            case "alcoholic":{
+            case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                this.alcoholController.GET();
+                this.closeReader();
+
                 JSONObject result = this.alcoholController.GET(id);
-                this.closeReader();
                 return result;
             }
-            case "stiff":
-            {
+            case "stiff": {
                 this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
-                JSONObject result = this.stiffController.GET(id);
+                this.stiffController.GET();
                 this.closeReader();
+
+                JSONObject result = this.stiffController.GET(id);
                 return result;
             }
-            default:{
+            default: {
                 return null;
             }
         }
-
-
     }
 
     @Override
@@ -206,8 +206,7 @@ public final class Index implements Service, RoutesAndPaths {
         }
 
         switch (this.collectionName) {
-            case "dairy":
-            {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
                 this.dairyController.GET();
                 this.closeReader();
@@ -218,8 +217,7 @@ public final class Index implements Service, RoutesAndPaths {
 
                 return jsonResult;
             }
-            case "stiff":
-            {
+            case "stiff": {
                 this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
                 this.stiffController.GET();
                 this.closeReader();
@@ -230,13 +228,11 @@ public final class Index implements Service, RoutesAndPaths {
 
                 return jsonResult;
             }
-            case "alcoholic":
-            {
+            case "alcoholic": {
                 jsonResult.put("class", "alcoholic");
                 return jsonResult;
             }
-            default:
-            {
+            default: {
                 return null;
             }
         }
@@ -245,21 +241,20 @@ public final class Index implements Service, RoutesAndPaths {
     @Override
     public int DELETE(String id) {
 
-        switch (this.collectionName){
-            case "dairy":{
+        switch (this.collectionName) {
+            case "dairy": {
                 this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
                 int result = this.dairyController.DELETE(id);
                 this.closeReader();
                 return result;
             }
-            case "alcoholic":{
+            case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
                 int result = this.alcoholController.DELETE(id);
                 this.closeReader();
                 return result;
             }
-            case "stiff":
-            {
+            case "stiff": {
                 this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
                 this.stiffController.GET();
                 this.closeReader();
@@ -270,12 +265,10 @@ public final class Index implements Service, RoutesAndPaths {
 
                 return result;
             }
-            default:{
+            default: {
                 return -1;
             }
         }
-
     }
 
-
-}
+} // Index

@@ -63,8 +63,9 @@ public class BackendTester implements Colors{
              * */
             index.setCollectionName("stiff");
 
-            StiffProductsTest.GetTest(index, ANSI_YELLOW);
             /**
+            StiffProductsTest.GetTest(index, ANSI_YELLOW);
+
 
             DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
             AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);*/
@@ -73,7 +74,7 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "GET BY ID Operation:");
 
-            StiffProductsTest.GetByIdTest(index, "3", ANSI_DEFAULT);
+            StiffProductsTest.GetByIdTest(index, "3252354", ANSI_DEFAULT);
             /**
 
             DairyProductsTest.GetDairyProductsById(index, "3", ANSI_DEFAULT);
@@ -84,17 +85,18 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "PUT opperation: ");
 
-            /**
             StiffProductsTest.PutTest(index, "3", ANSI_YELLOW);
+            /**
             DairyProductsTest.PutDairyProducts(index,"3", ANSI_DEFAULT);*/
 
             /**Prueba de DELETE*/
 
             System.out.println(ANSI_GREEN + "DELETE Operation:");
 
+            /**
             StiffProductsTest.DeleteTest(index, "2", ANSI_YELLOW);
             StiffProductsTest.GetByIdTest(index, "2", ANSI_YELLOW);
-            /**
+
              DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
              AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);*/
 
