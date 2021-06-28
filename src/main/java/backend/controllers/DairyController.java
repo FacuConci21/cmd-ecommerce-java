@@ -77,7 +77,7 @@ public class DairyController implements Service {
             }
         }
 
-        return new JSONObject();
+        return null;
     }
 
     @Override
@@ -115,7 +115,13 @@ public class DairyController implements Service {
                 this.dairyCollectionWriter.write(this.collection.toJSONString());
                 this.dairyCollectionWriter.flush();
                 result = 0;
+            } else {
+                ((JSONArray) this.collection.get("collection")).add(newProduct);
+                this.dairyCollectionWriter.write(this.collection.toJSONString());
+                this.dairyCollectionWriter.flush();
+                result = 0;
             }
+
         } catch (IOException e) {
             return result;
         }
@@ -123,11 +129,8 @@ public class DairyController implements Service {
     }
 
     @Override
-<<<<<<< HEAD
     public JSONObject PUT(String id,  JSONObject updatedObject) {
-=======
-    public JSONObject PUT(String id, JSONObject updatedObject) {
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
+
 
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
         for (int i = 0; i < sizeOfCollection; i++) {
@@ -144,7 +147,6 @@ public class DairyController implements Service {
 
                     return (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
                 } catch (IOException e) {
-                    //e.printStackTrace();
                     return null;
                 }
             }
@@ -161,18 +163,14 @@ public class DairyController implements Service {
                 JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
                 String idProduct = product.get("_id").toString();
 
-<<<<<<< HEAD
+
                 if (idProduct.equals(id)){
                     ((JSONArray) this.collection.get("collection")).remove(i);
                     this.dairyCollectionWriter.write(this.collection.toJSONString());
                     this.dairyCollectionWriter.flush();
                     return 0;
                 }
-=======
-            if (idProduct.equals(id)) {
-                ((JSONArray) this.collection.get("collection")).remove(i);
-                return 0;
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
+
             }
         }catch (IOException e) {
             return -1;

@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 
 public class StiffProductsTest {
 
-    public static void PostTest(Index index,String color) {
+    public static void PostTest(Index index, String color) {
         Stiff sProduct1 = new Stiff(
                 1, 2, "Queso", "Queso La Paulina", 200.12f, 5,
                 "24-6-2021", 30
@@ -41,6 +41,8 @@ public class StiffProductsTest {
          * Y si se traen los datos correctamente se muestran los productos listados.
          */
 
+
+
         if (stiffCollection.size() == 0) {
             System.out.println(color + stiffCollection);
         } else {
@@ -58,17 +60,23 @@ public class StiffProductsTest {
         }
     }
 
-    public static void GetByIdTest(Index index, String id, String color) {
-        System.out.println(color + index.GET(id));
+    public static void GetByIdTest(Index index, String id, String color, String errorColor) {
+        JSONObject StiffObjectCollection = index.GET(id);
+        if (StiffObjectCollection == null){
+            System.out.println(errorColor + "No se encontro el producto.");
+        } else {
+            System.out.println(color + StiffObjectCollection);
+        }
     }
 
-    public static void PutTest(Index index, String id, String color) {
+    public static void PutTest(Index index, String id, String color, String errorColor) {
         JSONObject sProduct = index.GET(id);
-
-        sProduct.replace("name", "otro fiambre coño");
-        //sProduct.replace("_id", "6457357");
-
-        System.out.println(color + index.PUT(id, sProduct));
+        if (sProduct == null){
+            System.out.println(errorColor + "No se encontro el producto que desea modificar.");
+        } else {
+            sProduct.replace("name", "otro fiambre coño");
+            System.out.println(color + index.PUT(id, sProduct));
+        }
     }
 
     public static void DeleteTest(Index index, String id, String color) {

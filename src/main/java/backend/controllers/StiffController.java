@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import application.models.Dairy;
 import application.models.Product;
 import appinterfaces.backend.Service;
 import application.models.Stiff;
@@ -37,6 +38,7 @@ public class StiffController implements Service {
         JSONParser jsonParser = new JSONParser();
 
         try {
+
             this.collection = (JSONObject) jsonParser.parse(this.stiffCollectionReader);
             this.stiffCollectionReader.close();
 
@@ -60,41 +62,61 @@ public class StiffController implements Service {
             }
         }
 
-        return new JSONObject();
+        return null;
     }
 
     @Override
     public int POST(Product newRecord) {
         JSONObject newStiffProduct = new JSONObject();
+        int result = 3;
 
-        newStiffProduct.put("_id", newRecord.getId());
-        newStiffProduct.put("name", newRecord.getName());
-        newStiffProduct.put("description", newRecord.getDescription());
-        newStiffProduct.put("price", newRecord.getPrice());
-        newStiffProduct.put("stock", newRecord.getStock());
-        newStiffProduct.put("category", newRecord.getCategory());
-        newStiffProduct.put("dateExpiry", ((Stiff) newRecord).getDateExpiry());
-        newStiffProduct.put("fatPercentage", ((Stiff) newRecord).getFatPercentage());
+        try{
 
-        ((JSONArray) this.collection.get("collection")).add(newStiffProduct);
+            int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
+            JSONObject newProduct = new JSONObject();
 
-        try {
-            this.stiffCollectionWriter.write(this.collection.toJSONString());
-            this.stiffCollectionWriter.flush();
+            newProduct.put("_id", newRecord.getId());
+            newProduct.put("name", newRecord.getName());
+            newProduct.put("description", newRecord.getDescription());
+            newProduct.put("price", newRecord.getPrice());
+            newProduct.put("stock", newRecord.getStock());
+            newProduct.put("category", newRecord.getCategory());
+            newProduct.put("dateExpiry", ((Stiff) newRecord).getDateExpiry());
+            newProduct.put("fatPercentage", ((Stiff) newRecord).getFatPercentage());
 
-            return 0;
+            if (sizeOfCollection > 0){
+                for (int i = 0; i < sizeOfCollection; i++) {
+                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+
+                    int idProduct = Integer.parseInt(product.get("_id").toString());
+                    int newProductId = newRecord.getId();
+
+                    if (idProduct == newProductId) {
+                        newProduct.put("_id", sizeOfCollection + 1 );
+                    } else {
+                        newProduct.put("_id",newRecord.getId());
+                    }
+                }
+
+                ((JSONArray) this.collection.get("collection")).add(newProduct);
+                this.stiffCollectionWriter.write(this.collection.toJSONString());
+                this.stiffCollectionWriter.flush();
+                result = 0;
+            } else {
+                ((JSONArray) this.collection.get("collection")).add(newProduct);
+                this.stiffCollectionWriter.write(this.collection.toJSONString());
+                this.stiffCollectionWriter.flush();
+                result = 0;
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-            return 3;
+            return result;
         }
+        return result;
     }
 
     @Override
-<<<<<<< HEAD
-    public JSONObject PUT(String id,  JSONObject updatedObject) {
-=======
     public JSONObject PUT(String id, JSONObject updatedObject) {
-        JSONObject jsonResult = new JSONObject();
+
         JSONObject product = new JSONObject();
         String idProduct;
 
@@ -113,13 +135,10 @@ public class StiffController implements Service {
 
                     return (JSONObject)((JSONArray) this.collection.get("collection")).get(i);
                 } catch (IOException e) {
-                    //e.printStackTrace();
                     return null;
                 }
             }
         }
-
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
         return null;
     }
 
@@ -147,7 +166,6 @@ public class StiffController implements Service {
 
             return result;
         } catch (IOException e) {
-            //e.printStackTrace();
             return -1;
         }
     }

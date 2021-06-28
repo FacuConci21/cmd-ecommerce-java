@@ -1,14 +1,27 @@
 package productstests;
 
 import application.models.Product;
+import application.models.AlcoholicBeverage;
 import backend.Index;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class AlcoholBeverageProductsTest {
-    public static void PostAlcoholBeverageProducts(Index index, Product newRecord){
+    public static void PostAlcoholBeverageProducts(Index index, String color){
         {
-            index.POST(newRecord);
+            AlcoholicBeverage aProduct1 = new AlcoholicBeverage(1, 2, "Sky Maracuya", "Sky saborizado sabor maracuya", 650.0f, 10,
+                    1.0f, 45);
+
+            AlcoholicBeverage aProduct2 = new AlcoholicBeverage(2, 2, "Dada", "Dada 7", 250.0f, 20,
+                    0.5f, 25);
+            /**
+             * Basta con comentar esta linea para evitar que se graben estos datos
+             * y poder ver la respuesta del backend con una lista vacia.
+             */
+            System.out.println(color + "Product posted: " + index.POST(aProduct1));
+            System.out.println(color + "Product posted: " + index.POST(aProduct2));
+
+
         }
     }
 
@@ -31,9 +44,14 @@ public class AlcoholBeverageProductsTest {
         }
     }
 
-    public static void GetAlcoholBeverageProductsById(Index index, String id, String color){
+    public static void GetAlcoholBeverageProductsById(Index index, String id, String color, String errorColor){
         JSONObject AlcoholObjectCollection = index.GET(id);
-        System.out.println(color + AlcoholObjectCollection);
+        if (AlcoholObjectCollection == null){
+            System.out.println(errorColor + "No se encontro el producto.");
+        } else {
+            System.out.println(color + AlcoholObjectCollection);
+        }
+
     }
 
     public static void PutTest(Index index, String id, String color, String errorColor){

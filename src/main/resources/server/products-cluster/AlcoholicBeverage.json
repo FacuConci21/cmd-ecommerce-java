@@ -1,34 +1,3 @@
 {
-  "collection": [
-    {
-      "price": 1500.0,
-      "liters": 1.0,
-      "name": "Vodka Saborizado",
-      "alcohol_percentage": 50,
-      "description": "Vodka Saborizado de Maracuyá",
-      "_id": 1,
-      "stock": 2,
-      "category": 2
-    },
-    {
-      "price": 50.0,
-      "liters": 0.5,
-      "name": "Vino Toro",
-      "alcohol_percentage": 25,
-      "description": "Vino Tinto Toro Viejo",
-      "_id": 2,
-      "stock": 20,
-      "category": 2
-    },
-    {
-      "price": 50.0,
-      "liters": 0.5,
-      "name": "Vino Toro ",
-      "alcohol_percentage": 25,
-      "description": "Vino Blanco Toro Viejo",
-      "_id": 3,
-      "stock": 20,
-      "category": 2
-    }
-  ]
+  "collection": []
 }

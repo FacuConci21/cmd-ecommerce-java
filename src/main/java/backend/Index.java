@@ -197,7 +197,6 @@ public final class Index implements Service, RoutesAndPaths {
     @Override
     public JSONObject PUT(String id, JSONObject updatedObject) {
         JSONObject jsonResult = new JSONObject();
-<<<<<<< HEAD
 
         if (!updatedObject.get("_id").toString().equals(id)) {
             /**
@@ -229,33 +228,6 @@ public final class Index implements Service, RoutesAndPaths {
                 this.closeWriter();
                 return jsonResult;
             }
-            default: {
-                return null;
-            }
-        }
-    }
-=======
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
-
-        if (!updatedObject.get("_id").toString().equals(id)) {
-            /**
-             * No se permite cambiar el valor de los Ids
-             */
-            return null;
-        }
-
-        switch (this.collectionName) {
-            case "dairy": {
-                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-                this.dairyController.GET();
-                this.closeReader();
-
-                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-                jsonResult = this.dairyController.PUT(id, updatedObject);
-                this.closeWriter();
-
-                return jsonResult;
-            }
             case "stiff": {
                 this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
                 this.stiffController.GET();
@@ -267,39 +239,26 @@ public final class Index implements Service, RoutesAndPaths {
 
                 return jsonResult;
             }
-            case "alcoholic": {
-                jsonResult.put("class", "alcoholic");
-                return jsonResult;
-            }
             default: {
                 return null;
             }
         }
     }
 
+
+
     @Override
     public int DELETE(String id) {
 
-<<<<<<< HEAD
         switch (this.collectionName){
             case "dairy":{
                 this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-=======
-        switch (this.collectionName) {
-            case "dairy": {
-                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
                 int result = this.dairyController.DELETE(id);
                 this.closeWriter();
                 return result;
             }
-<<<<<<< HEAD
             case "alcoholic":{
                 this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
-=======
-            case "alcoholic": {
-                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
->>>>>>> ef02d9605bf5b658dffc89d00533c03f55c0f3c1
                 int result = this.alcoholController.DELETE(id);
                 this.closeWriter();
                 return result;
