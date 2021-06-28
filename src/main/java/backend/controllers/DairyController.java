@@ -118,15 +118,21 @@ public class DairyController implements Service {
     @Override
     public int DELETE(String id) {
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
-        for (int i = 0; i < sizeOfCollection; i++) {
+        try {
+            for (int i = 0; i < sizeOfCollection; i++) {
 
-            JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
-            String idProduct = product.get("_id").toString();
+                JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+                String idProduct = product.get("_id").toString();
 
-            if (idProduct.equals(id)){
-                ((JSONArray) this.collection.get("collection")).remove(i);
-                return 0;
+                if (idProduct.equals(id)){
+                    ((JSONArray) this.collection.get("collection")).remove(i);
+                    this.dairyCollectionWriter.write(this.collection.toJSONString());
+                    this.dairyCollectionWriter.flush();
+                    return 0;
+                }
             }
+        }catch (IOException e) {
+            return -1;
         }
         return -1;
     }

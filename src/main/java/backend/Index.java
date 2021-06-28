@@ -169,15 +169,15 @@ public final class Index implements Service, RoutesAndPaths {
 
         switch (this.collectionName){
             case "dairy":{
-                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
                 int result = this.dairyController.DELETE(id);
-                this.closeReader();
+                this.closeWriter();
                 return result;
             }
             case "alcoholic":{
-                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
                 int result = this.alcoholController.DELETE(id);
-                this.closeReader();
+                this.closeWriter();
                 return result;
             }
             default:{

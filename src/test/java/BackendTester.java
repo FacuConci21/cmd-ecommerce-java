@@ -27,17 +27,17 @@ public class BackendTester implements Colors{
 
             System.out.println(ANSI_GREEN + "POST opperation:");
 
-            {
+            /*{
                 AlcoholicBeverage aProduct1 = new AlcoholicBeverage(5, 2, "Dada", "Dada 7", 250.0f, 20,
                         0.5f, 25);
-                int result = index.POST(aProduct1);
+                int result = AlcoholBeverageProductsTest.PostAlcoholBeverageProducts(index, aProduct1);
                 if (result != 0){
                     System.out.println(ANSI_RED + "No se pudo agregar el producto");
                 } else {
                     System.out.println(ANSI_GREEN + "Producto agregado correctamente");
                 }
 
-            }
+            }*/
            /* {
                 *//**
                  * Aca genero objetos para guardar en la BD, en la coleccion de datos
@@ -64,9 +64,9 @@ public class BackendTester implements Colors{
                 );
 
 
-                *//**System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
+                System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct););
                  System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct2););
-                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););*//*
+                 System.out.println(DairyProductsTest.PostDairyProduct(index, dProduct3););
             }*/
 
             System.out.println(ANSI_GREEN + "GET opperation :");
