@@ -47,7 +47,7 @@ public final class CmdEcommerce implements Options {
     }
 
     // Public methods
-    public int main_loop_program() {
+    public int mainLoopProgram() {
 
         String[] optionsList = {
                 "Alta de producto",
@@ -67,12 +67,6 @@ public final class CmdEcommerce implements Options {
 
             System.out.println(ResultsProgram.outputMessages[connectionResult]);
 
-            if (connectionResult == ResultsProgram.CONNECTION_SUCCESS) {
-                this.index.setCollectionName("stiff");
-                productList = this.index.GET();
-                this.productsList.addAll(Loader.loadStiff(productList));
-                productList.clear();
-            }
         }
 
         /*      PROGRAM LOOP        */
@@ -114,13 +108,14 @@ public final class CmdEcommerce implements Options {
         System.out.println(Colors.ANSI_BLUE + "_______________________");
 
         String[] optionsList = {
-                "Bebida alcohólica",
-                "Lácteo",
-                "Fiambre"
+                "Bebidas alcohólicas",
+                "Lácteos",
+                "Embutidos/Fiambres"
         };
+
         String optionMessage = "Que tipo de producto desea registrar? (0-salir): ";
         Scanner scanner = new Scanner(System.in);
-        Product newProductInstance;
+        Product newProductInstance = new Product();
         String productName, productDescription;
         float productPrice;
         int productStock, productId;
@@ -128,6 +123,7 @@ public final class CmdEcommerce implements Options {
         this.optionsMenu(optionsList, optionMessage);
 
         // Harcoded to solve cancelation issue. '1' is for cancelation code.
+
         if (this.optionSelection <= 0) { return 1; }
 
         productId = (productsList.isEmpty()) ? 1 : productsList.size() + 1;
@@ -150,9 +146,6 @@ public final class CmdEcommerce implements Options {
                         productId, this.optionSelection,productName, productDescription, productPrice, productStock,
                         beverageLiter, beveragePercentage
                 );
-
-                // Adding product on the list
-                this.productsList.add(newProductInstance);
                 break;
             }
             case 2:
@@ -175,9 +168,6 @@ public final class CmdEcommerce implements Options {
                         productId, this.optionSelection,productName, productDescription, productPrice, productStock,
                         dairyFatPercentage, dairyDateExpiry, dairyVitamins
                 );
-
-                // Adding product on the list
-                this.productsList.add(newProductInstance);
                 break;
             }
             case 3:
@@ -195,15 +185,11 @@ public final class CmdEcommerce implements Options {
                         productId, this.optionSelection,productName, productDescription, productPrice, productStock,
                         stiffDateExpiry, stiffFatPercentage
                 );
-
-                // Adding product on the list
-                this.index.POST(newProductInstance);
                 break;
             }
         }
-
-        System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" +
-                productDescription + "',\n\tfue dado de alta exitosamente." );
+        // Adding product on the list
+        this.index.POST(newProductInstance);
         return ResultsProgram.SUCCESS;
     }
 
@@ -214,10 +200,9 @@ public final class CmdEcommerce implements Options {
         String productName, productDescription;
         float productPrice;
         int productStock;
-        Product newProductInstance;
+        Product newProductInstance = new Product();
 
         if (optionsList.length == 0){
-            System.out.println(Colors.ANSI_RED + "No hay productos para modificar." );
             return ResultsProgram.EMPTY_LIST;
         } else{
             String optionMessage = "Que producto desea modificar? (0-salir): ";
@@ -233,7 +218,6 @@ public final class CmdEcommerce implements Options {
             if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
 
             /*Request of data to modify*/
-
             System.out.print(Colors.ANSI_DEFAULT + "Name: "); productName = scanner.next();
             System.out.print(Colors.ANSI_DEFAULT + "Precio: "); productPrice = scanner.nextFloat();
             System.out.print(Colors.ANSI_DEFAULT + "Cant. en Stock: "); productStock = scanner.nextInt();
@@ -297,14 +281,14 @@ public final class CmdEcommerce implements Options {
                     newProductInstance = new Stiff(this.productsList.elementAt(optionSelection - 1).getId(),
                             optionSelection, productName, productDescription, productPrice, productStock, stiffDateExpiry,
                             stiffFatPercentage);
-
                     // Updating product
-                    this.productsList.setElementAt(newProductInstance, optionSelection - 1);
+//                    this.index.PUT(newProductInstance);
+
                     break;
                 }
             }
 
-            System.out.println(Colors.ANSI_BLUE + "Producto: " + productName + " fue modificado correctamente." );
+
         }
 
         return ResultsProgram.SUCCESS;
@@ -340,16 +324,57 @@ public final class CmdEcommerce implements Options {
 
     @Override
     public int listingOption() {
-        if(this.productsList.size() > 0 ){
+        String[] productsCategories = {
+                "Bebidas Alcoholicas",
+                "Lacteos",
+                "Embutidos/Fiambres",
+                "Salir"
+        };
+        this.productsList.clear();
+        this.optionsMenu(productsCategories, "Categorías de productos disponibles: ");
+
+        int programResult = -1;
+
+        switch (this.optionSelection) {
+            case 1:
+            {
+                this.index.setCollectionName("alcoholic");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(productList);
+                productList.clear();
+                break;
+            }
+            case 2:
+            {
+                this.index.setCollectionName("dairy");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+                break;
+            }
+            case 3:
+            {
+                this.index.setCollectionName("stiff");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+                break;
+            }
+            case 4:{
+                return ResultsProgram.CANCELED;
+            }
+        }
+        if(this.productsList.isEmpty()){
+            programResult = ResultsProgram.EMPTY_LIST;
+        } else{
+            programResult = ResultsProgram.SUCCESS;
+        }
+
             System.out.println(Colors.ANSI_BLUE + "Lista de productos");
             for (int i = 0; i < this.productsList.size(); i++) {
                 System.out.println(this.productsList.elementAt(i).toString());
             }
-        } else {
-            System.out.println(Colors.ANSI_RED + "No hay productos cargados! Por favor, dé de alta uno como mínimo");
-            return ResultsProgram.EMPTY_LIST;
-        }
 
-        return ResultsProgram.SUCCESS;
+            return programResult;
     }
 }
