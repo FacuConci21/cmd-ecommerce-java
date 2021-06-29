@@ -7,7 +7,8 @@
       "alcohol_percentage": 40,
       "description": "Campari-feo-para-mi",
       "stock": 2,
-      "category": 1
+      "category": 1,
+      "_id": 1
     }
   ]
 }

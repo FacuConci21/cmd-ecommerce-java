@@ -16,6 +16,14 @@ public class Stiff extends Product {
     // Constructors
     public Stiff() {}
 
+    public Stiff(int category, String name, String description, float price, int stock,
+                 String dateExpiry, int fatPercentage)
+    {
+        super(category, name, description, price, stock);
+        this.dateExpiry = dateExpiry;
+        this.fatPercentage = fatPercentage;
+    }
+
     public Stiff(int id, int category, String name, String description, float price, int stock,
                  String dateExpiry, int fatPercentage)
     {

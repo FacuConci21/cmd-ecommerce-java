@@ -15,6 +15,14 @@ public class Product {
     // Constructors
     public Product(){};
 
+    public Product(int category, String name, String description, float price, int stock) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+    }
+
     public Product(int id, int category, String name, String description, float price, int stock) {
         this.id = id;
         this.category = category;

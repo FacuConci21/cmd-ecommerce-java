@@ -17,8 +17,17 @@ public class Dairy extends Product{
     // Constructors
     public Dairy() {}
 
+    public Dairy(int category, String name, String description, float price, int stock,
+                 int fatPercentage, String dateExpiry, Vector<String> vitamins)
+    {
+        super(category, name, description, price, stock);
+        this.fatPercentage = fatPercentage;
+        this.dateExpiry = dateExpiry;
+        this.vitamins = vitamins;
+    }
+
     public Dairy(int id, int category, String name, String description, float price, int stock,
-            int fatPercentage, String dateExpiry, Vector<String> vitamins)
+                 int fatPercentage, String dateExpiry, Vector<String> vitamins)
     {
         super(id, category, name, description, price, stock);
         this.fatPercentage = fatPercentage;

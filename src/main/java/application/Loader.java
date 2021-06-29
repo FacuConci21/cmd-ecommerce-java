@@ -50,7 +50,7 @@ public abstract class Loader {
                 jsonAlcoholicBeverage.get("description").toString(),
                 Float.parseFloat(jsonAlcoholicBeverage.get("price").toString()),
                 Integer.parseInt(jsonAlcoholicBeverage.get("stock").toString()),
-                Float.parseFloat(jsonAlcoholicBeverage.get("liter").toString()),
+                Float.parseFloat(jsonAlcoholicBeverage.get("liters").toString()),
                 Integer.parseInt(jsonAlcoholicBeverage.get("alcohol_percentage").toString())
         );
     }
@@ -59,23 +59,23 @@ public abstract class Loader {
     public static Vector<Product> loadStiff(JSONArray productsCollection) {
         Vector<Product> productsList = new Vector<>();
         productsCollection.forEach( jsonStiff -> {
-            productsList.add(parseToAlcoholicBeverageProduct((JSONObject) jsonStiff));
+            productsList.add(parseToStiffProduct((JSONObject) jsonStiff));
         });
         return productsList;
     }
 
     public static Vector<Product> loadDairy(JSONArray dairyCollection) {
         Vector<Product> productsList = new Vector<>();
-        dairyCollection.forEach( jsonStiff -> {
-            productsList.add(parseToDairyProduct((JSONObject) jsonStiff));
+        dairyCollection.forEach( jsonDairy -> {
+            productsList.add(parseToDairyProduct((JSONObject) jsonDairy));
         });
         return productsList;
     }
 
     public static Vector<Product> loadAlcoholicBeverage(JSONArray alcoholicCollection) {
         Vector<Product> productsList = new Vector<>();
-        alcoholicCollection.forEach( jsonStiff -> {
-            productsList.add(parseToStiffProduct((JSONObject) jsonStiff));
+        alcoholicCollection.forEach( jsonAlcoholic -> {
+            productsList.add(parseToAlcoholicBeverageProduct((JSONObject) jsonAlcoholic));
         });
         return productsList;
     }
