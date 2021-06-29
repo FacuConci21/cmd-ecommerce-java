@@ -32,14 +32,14 @@ public class AlcoholicBeverage extends Product{
 
         try {
             Object jsonAlcoholic = jsonParser.parse( "{"+
-                    "\"_id\":" + product.getId() +
-                    "\"name\":" + product.getName() +
-                    "\"description\":" + product.getDescription() +
-                    "\"category\":" + product.getCategory() +
-                    "\"price\":" + product.getPrice() +
-                    "\"stock\":" + product.getStock() +
-                    "\"alcohol_percentage\":" + product.getPercentage() +
-                    "\"liter\":" + product.getLiter() +
+                    "\"_id\":\"" + product.getId() + "\"," +
+                    "\"name\":\"" + product.getName() + "\"," +
+                    "\"description\":\"" + product.getDescription() + "\"," +
+                    "\"category\":\"" + product.getCategory() + "\"," +
+                    "\"price\":\"" + product.getPrice() + "\"," +
+                    "\"stock\":\"" + product.getStock() + "\"," +
+                    "\"alcohol_percentage\":\"" + product.getPercentage() + "\"," +
+                    "\"liter\":\"" + product.getLiter() + "\"" +
                     "}"
             );
             return (JSONObject) jsonAlcoholic;
