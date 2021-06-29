@@ -1,1 +1,49 @@
-{"collection":[{"vitamins":["a1","a2","a3"],"price":150.2,"fatPercentage":20,"name":"Leche-mipalo","dateExpiry":"29-10-2022","description":"leche-proveniente-de-mi-miembro","_id":1,"stock":10,"category":2},{"vitamins":["1","2","3"],"price":1.0,"fatPercentage":1,"name":"lechita","dateExpiry":"29-10-2022","description":"chelita","_id":0,"stock":1,"category":2},{"vitamins":["1","1","1"],"price":2.0,"fatPercentage":1,"name":"a","dateExpiry":"29-10-2022","description":"a","_id":3,"stock":1,"category":2}]}
+{
+  "collection": [
+    {
+      "vitamins": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "price": 150.2,
+      "fatPercentage": 20,
+      "name": "Leche-mipalo",
+      "dateExpiry": "29-10-2022",
+      "description": "leche-proveniente-de-mi-miembro",
+      "_id": 1,
+      "stock": 10,
+      "category": 2
+    },
+    {
+      "vitamins": [
+        "1",
+        "2",
+        "3"
+      ],
+      "price": 1.0,
+      "fatPercentage": 1,
+      "name": "lechita",
+      "dateExpiry": "29-10-2022",
+      "description": "chelita",
+      "_id": 0,
+      "stock": 1,
+      "category": 2
+    },
+    {
+      "vitamins": [
+        "1",
+        "1",
+        "1"
+      ],
+      "price": 2.0,
+      "fatPercentage": 1,
+      "name": "a",
+      "dateExpiry": "29-10-2022",
+      "description": "a",
+      "_id": 3,
+      "stock": 1,
+      "category": 2
+    }
+  ]
+}

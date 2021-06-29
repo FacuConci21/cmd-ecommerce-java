@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.util.Collection;
 import java.util.Vector;
 
 public abstract class Loader {
@@ -29,6 +30,10 @@ public abstract class Loader {
     }
 
     private static Dairy parseToDairyProduct(JSONObject jsonDairy) {
+        Vector<String> vitamins = new Vector<>();
+        ((JSONArray)jsonDairy.get("vitamins")).forEach( vit -> {
+            vitamins.add(vit.toString());
+        });
         return new Dairy(
                 Integer.parseInt(jsonDairy.get("_id").toString()),
                 Integer.parseInt(jsonDairy.get("category").toString()),
@@ -38,8 +43,8 @@ public abstract class Loader {
                 Integer.parseInt(jsonDairy.get("stock").toString()),
                 Integer.parseInt(jsonDairy.get("fatPercentage").toString()),
                 jsonDairy.get("dateExpiry").toString(),
-                new Vector<String>()
-                );
+                vitamins
+        );
     }
 
     private static AlcoholicBeverage parseToAlcoholicBeverageProduct(JSONObject jsonAlcoholicBeverage) {
