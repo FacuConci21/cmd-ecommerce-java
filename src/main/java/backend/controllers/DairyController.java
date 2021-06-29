@@ -94,8 +94,8 @@ public class DairyController implements Service {
             newProduct.put("price", newRecord.getPrice());
             newProduct.put("stock", newRecord.getStock());
             newProduct.put("category", newRecord.getCategory());
-            newProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
-            newProduct.put("dateExpiry", ((Dairy) newRecord).getDate_expiry());
+            newProduct.put("fatPercentage", ((Dairy) newRecord).getFatPercentage());
+            newProduct.put("dateExpiry", ((Dairy) newRecord).getDateExpiry());
             newProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
 
             if (sizeOfCollection > 0){

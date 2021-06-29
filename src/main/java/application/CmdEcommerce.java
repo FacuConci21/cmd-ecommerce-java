@@ -5,6 +5,7 @@ import application.models.*;
 import appinterfaces.Colors;
 import appinterfaces.Options;
 import backend.Index;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -196,11 +197,50 @@ public final class CmdEcommerce implements Options {
     @Override
     public int updateOption() {
         /*      DECLARATIONS        */
+        String[] productsCategories = {
+                "Bebidas Alcoholicas",
+                "Lacteos",
+                "Embutidos/Fiambres",
+                "Salir"
+        };
+
+        this.optionsMenu(productsCategories, "Elija la categoria del producto que desea modificar: ");
+        switch (this.optionSelection) {
+            case 1:
+            {
+                this.index.setCollectionName("alcoholic");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+                break;
+            }
+            case 2:
+            {
+                this.index.setCollectionName("dairy");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+                break;
+            }
+            case 3:
+            {
+                this.index.setCollectionName("stiff");
+                JSONArray productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+                break;
+            }
+            case 4:{
+                return ResultsProgram.CANCELED;
+            }
+        }
+
+
         String[] optionsList = new String[this.productsList.size()];
         String productName, productDescription;
         float productPrice;
         int productStock;
-        Product newProductInstance = new Product();
+        Product newProductInstance;
 
         if (optionsList.length == 0){
             return ResultsProgram.EMPTY_LIST;
@@ -215,8 +255,9 @@ public final class CmdEcommerce implements Options {
             this.optionsMenu(optionsList, optionMessage);
 
             // Harcoded to solve index issue.
-            if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
-
+            if (this.optionSelection <= 0) {
+                return ResultsProgram.CANCELED;
+            }
             /*Request of data to modify*/
             System.out.print(Colors.ANSI_DEFAULT + "Name: "); productName = scanner.next();
             System.out.print(Colors.ANSI_DEFAULT + "Precio: "); productPrice = scanner.nextFloat();
@@ -239,7 +280,8 @@ public final class CmdEcommerce implements Options {
                     );
 
                     // Updating product
-                    this.productsList.setElementAt(newProductInstance, optionSelection - 1);
+                    String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
+                    index.PUT(idProd, AlcoholicBeverage.toJson((AlcoholicBeverage) newProductInstance));
                     break;
                 }
                 case 2: {
@@ -266,30 +308,34 @@ public final class CmdEcommerce implements Options {
                     );
 
                     // Updating product
-                    this.productsList.setElementAt(newProductInstance, optionSelection - 1);
+                    String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
+                    index.PUT(idProd, Dairy.toJson((Dairy) newProductInstance));
                     break;
                 }
                 case 3: {
                     int stiffFatPercentage;
                     String stiffDateExpiry;
 
+
                     System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de grasa: "); stiffFatPercentage = scanner.nextInt();
-                    do{
+                   do{
                         System.out.print(Colors.ANSI_DEFAULT + "Fecha de caducidad: "); stiffDateExpiry = scanner.next();
                     } while( !Stiff.controlDate(stiffDateExpiry) );
 
                     newProductInstance = new Stiff(this.productsList.elementAt(optionSelection - 1).getId(),
-                            optionSelection, productName, productDescription, productPrice, productStock, stiffDateExpiry,
+                            optionSelection, productName, productDescription, productPrice, productStock, "12-12-2022",
                             stiffFatPercentage);
                     // Updating product
-//                    this.index.PUT(newProductInstance);
-
+                    String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
+                    index.PUT(idProd, Stiff.toJson((Stiff) newProductInstance));
+                    //System.out.println(Stiff.toJson((Stiff) newProductInstance));
                     break;
                 }
             }
 
 
         }
+
 
         return ResultsProgram.SUCCESS;
     }
@@ -333,6 +379,7 @@ public final class CmdEcommerce implements Options {
         this.productsList.clear();
         this.optionsMenu(productsCategories, "Categorías de productos disponibles: ");
 
+
         int programResult = -1;
 
         switch (this.optionSelection) {
@@ -340,7 +387,7 @@ public final class CmdEcommerce implements Options {
             {
                 this.index.setCollectionName("alcoholic");
                 JSONArray productList = this.index.GET();
-                this.productsList.addAll(productList);
+                this.productsList.addAll(Loader.loadAlcoholicBeverage(productList));
                 productList.clear();
                 break;
             }
@@ -348,7 +395,7 @@ public final class CmdEcommerce implements Options {
             {
                 this.index.setCollectionName("dairy");
                 JSONArray productList = this.index.GET();
-                this.productsList.addAll(Loader.loadStiff(productList));
+                this.productsList.addAll(Loader.loadDairy(productList));
                 productList.clear();
                 break;
             }
