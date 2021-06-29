@@ -1,3 +1,14 @@
 {
-  "collection": []
+  "collection": [
+    {
+      "price": 750.0,
+      "liters": 1.0,
+      "name": "Vodka",
+      "alcohol_percentage": 35,
+      "description": "Vodka-Wayborowa",
+      "stock": 15,
+      "_id": 1,
+      "category": 1
+    }
+  ]
 }

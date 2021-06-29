@@ -76,7 +76,6 @@ public class StiffController implements Service {
             int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
             JSONObject newProduct = new JSONObject();
 
-            newProduct.put("_id", newRecord.getId());
             newProduct.put("name", newRecord.getName());
             newProduct.put("description", newRecord.getDescription());
             newProduct.put("price", newRecord.getPrice());
@@ -84,31 +83,14 @@ public class StiffController implements Service {
             newProduct.put("category", newRecord.getCategory());
             newProduct.put("dateExpiry", ((Stiff) newRecord).getDateExpiry());
             newProduct.put("fatPercentage", ((Stiff) newRecord).getFatPercentage());
+            newProduct.put("_id", sizeOfCollection + 1);
 
-            if (sizeOfCollection > 0){
-                for (int i = 0; i < sizeOfCollection; i++) {
-                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            ((JSONArray) this.collection.get("collection")).add(newProduct);
+            this.stiffCollectionWriter.write(this.collection.toJSONString());
+            this.stiffCollectionWriter.flush();
+            result = ResultsProgram.SUCCESS;
 
-                    int idProduct = Integer.parseInt(product.get("_id").toString());
-                    int newProductId = newRecord.getId();
 
-                    if (idProduct == newProductId) {
-                        newProduct.put("_id", sizeOfCollection + 1 );
-                    } else {
-                        newProduct.put("_id",newRecord.getId());
-                    }
-                }
-
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.stiffCollectionWriter.write(this.collection.toJSONString());
-                this.stiffCollectionWriter.flush();
-                result = ResultsProgram.SUCCESS;
-            } else {
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.stiffCollectionWriter.write(this.collection.toJSONString());
-                this.stiffCollectionWriter.flush();
-                result = ResultsProgram.SUCCESS;
-            }
         } catch (IOException e) {
             return result;
         }
