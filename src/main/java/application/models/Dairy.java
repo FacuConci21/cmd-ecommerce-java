@@ -30,17 +30,19 @@ public class Dairy extends Product{
     public static JSONObject toJson(Dairy product) {
         JSONParser jsonParser = new JSONParser();
         try {
-            return (JSONObject) jsonParser.parse(
-                    "\"_id\"" + product.getId() +
-                    "\"name\"" + product.getName() +
-                    "\"description\"" + product.getDescription() +
-                    "\"category\"" + product.getCategory() +
-                    "\"price\"" + product.getPrice() +
-                    "\"stock\"" + product.getStock() +
-                    "\"fatPercentage\"" + product.getFatPercentage() +
-                    "\"dateExpiry\"" + product.getDateExpiry() +
-                    "\"vitamins\"" + product.getVitamins()
-            );
+             Object jsonDairy = jsonParser.parse( "{" +
+                    "\"_id\":" + product.getId() +
+                    "\"name\":" + product.getName() +
+                    "\"description\":" + product.getDescription() +
+                    "\"category\":" + product.getCategory() +
+                    "\"price\":" + product.getPrice() +
+                    "\"stock\":" + product.getStock() +
+                    "\"fatPercentage\":" + product.getFatPercentage() +
+                    "\"dateExpiry\":" + product.getDateExpiry() +
+                    "\"vitamins\":" + product.getVitamins() +
+                     "}"
+             );
+             return (JSONObject) jsonDairy;
         } catch (ParseException e) {
             //e.printStackTrace();
             return null;

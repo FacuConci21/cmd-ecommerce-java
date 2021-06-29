@@ -1,6 +1,9 @@
 package application.models;
 
 import appinterfaces.Colors;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class AlcoholicBeverage extends Product{
 
@@ -21,6 +24,29 @@ public class AlcoholicBeverage extends Product{
         super(id,category,name,description,price,stock);
         this.liter = liter;
         this.percentage = percentage;
+    }
+
+    // Public static methods
+    public static JSONObject toJson(AlcoholicBeverage product) {
+        JSONParser jsonParser = new JSONParser();
+
+        try {
+            Object jsonAlcoholic = jsonParser.parse( "{"+
+                    "\"_id\":" + product.getId() +
+                    "\"name\":" + product.getName() +
+                    "\"description\":" + product.getDescription() +
+                    "\"category\":" + product.getCategory() +
+                    "\"price\":" + product.getPrice() +
+                    "\"stock\":" + product.getStock() +
+                    "\"alcohol_percentage\":" + product.getPercentage() +
+                    "\"liter\":" + product.getLiter() +
+                    "}"
+            );
+            return (JSONObject) jsonAlcoholic;
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
     // Public methods
