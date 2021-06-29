@@ -44,9 +44,10 @@ public class Stiff extends Product {
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN + "Fecha de expiracion: " + Colors.ANSI_DEFAULT + dateExpiry +
-                Colors.ANSI_GREEN + "Porcentaje en calorias: " + Colors.ANSI_DEFAULT + fatPercentage;
+                Colors.ANSI_GREEN + " Vto: " + Colors.ANSI_DEFAULT + dateExpiry +
+                Colors.ANSI_GREEN + " Calorias: " + Colors.ANSI_DEFAULT + fatPercentage + "%";
     }
+
     public static JSONObject toJson(Stiff product) {
         JSONParser jsonParser = new JSONParser();
         try {

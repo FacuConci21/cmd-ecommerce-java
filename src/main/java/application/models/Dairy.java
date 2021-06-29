@@ -74,9 +74,9 @@ public class Dairy extends Product{
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN+ " Porcentaje de calorias: " + Colors.ANSI_DEFAULT +fatPercentage+
-                Colors.ANSI_GREEN+ " Fecha de expiracion: " + Colors.ANSI_DEFAULT + dateExpiry+
-                Colors.ANSI_GREEN+ " Vitaminas que contiene: " + Colors.ANSI_DEFAULT + vitamins;
+                Colors.ANSI_GREEN+ " Calorias: " + Colors.ANSI_DEFAULT +fatPercentage + "%" +
+                Colors.ANSI_GREEN+ " Vto: " + Colors.ANSI_DEFAULT + dateExpiry+
+                Colors.ANSI_GREEN+ " Vitaminas: " + Colors.ANSI_DEFAULT + vitamins;
     }
 
     // Public static methods

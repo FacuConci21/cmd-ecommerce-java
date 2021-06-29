@@ -77,7 +77,7 @@ public class AlcoholicBeverage extends Product{
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN +"Contenido en Litros: " + Colors.ANSI_DEFAULT + liter +
-                Colors.ANSI_GREEN +"Porcentaje de alcohol: " + Colors.ANSI_DEFAULT + percentage;
+                Colors.ANSI_GREEN +" Litros: " + Colors.ANSI_DEFAULT + liter +
+                Colors.ANSI_GREEN +" Alcohol: " + Colors.ANSI_DEFAULT + percentage + "%";
     }
 }

@@ -119,7 +119,7 @@ public final class CmdEcommerce implements Options {
         Product newProductInstance = new Product();
         String productName, productDescription;
         float productPrice;
-        int productStock, productId;
+        int productStock;
 
         this.optionsMenu(optionsList, optionMessage);
 
@@ -127,7 +127,6 @@ public final class CmdEcommerce implements Options {
 
         if (this.optionSelection <= 0) { return 1; }
 
-        productId = (productsList.isEmpty()) ? 1 : productsList.size() + 1;
         // Asking for data
         System.out.print(Colors.ANSI_DEFAULT + "Nombre: "); productName = scanner.next();
         System.out.print(Colors.ANSI_DEFAULT + "Precio: "); productPrice = scanner.nextFloat();
@@ -144,7 +143,7 @@ public final class CmdEcommerce implements Options {
                 System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
                 newProductInstance = new AlcoholicBeverage(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        this.optionSelection,productName, productDescription, productPrice, productStock,
                         beverageLiter, beveragePercentage
                 );
                 break;
@@ -166,7 +165,7 @@ public final class CmdEcommerce implements Options {
                 } while( !Dairy.controlDate(dairyDateExpiry) );
 
                 newProductInstance = new Dairy(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        this.optionSelection,productName, productDescription, productPrice, productStock,
                         dairyFatPercentage, dairyDateExpiry, dairyVitamins
                 );
                 break;
@@ -183,7 +182,7 @@ public final class CmdEcommerce implements Options {
                 } while( !Stiff.controlDate(stiffDateExpiry) );
 
                 newProductInstance = new Stiff(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                        this.optionSelection,productName, productDescription, productPrice, productStock,
                         stiffDateExpiry, stiffFatPercentage
                 );
                 break;

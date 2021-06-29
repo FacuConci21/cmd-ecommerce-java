@@ -98,7 +98,7 @@ public class DairyController implements Service {
             newProduct.put("dateExpiry", ((Dairy) newRecord).getDateExpiry());
             newProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
 
-            if (sizeOfCollection > 0){
+            if (sizeOfCollection >= 0){
                 for (int i = 0; i < sizeOfCollection; i++) {
                     JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
 
@@ -108,7 +108,7 @@ public class DairyController implements Service {
                     if (idProduct == newProductId) {
                         newProduct.put("_id", sizeOfCollection + 1 );
                     } else {
-                        newProduct.put("_id",newRecord.getId());
+                        newProduct.put("_id", 1);
                     }
                 }
 
