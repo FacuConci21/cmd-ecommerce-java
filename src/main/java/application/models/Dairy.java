@@ -1,5 +1,8 @@
 package application.models;
 import appinterfaces.Colors;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.util.Vector;
 import java.time.LocalDate;
@@ -7,29 +10,50 @@ import java.time.LocalDate;
 public class Dairy extends Product{
 
     // Private atrributes
-    private int fat_percentage;
-    private String date_expiry;
+    private int fatPercentage;
+    private String dateExpiry;
     private Vector <String> vitamins;
 
     // Constructors
     public Dairy() {}
 
     public Dairy(int id, int category, String name, String description, float price, int stock,
-            int fat_percentage, String date_expiry, Vector<String> vitamins)
+            int fatPercentage, String dateExpiry, Vector<String> vitamins)
     {
         super(id, category, name, description, price, stock);
-        this.fat_percentage = fat_percentage;
-        this.date_expiry = date_expiry;
+        this.fatPercentage = fatPercentage;
+        this.dateExpiry = dateExpiry;
         this.vitamins = vitamins;
     }
 
-    // Public methods
-    public int getFat_percentage() {
-        return fat_percentage;
+    // Public static methods
+    public static JSONObject toJson(Dairy product) {
+        JSONParser jsonParser = new JSONParser();
+        try {
+            return (JSONObject) jsonParser.parse(
+                    "\"_id\"" + product.getId() +
+                    "\"name\"" + product.getName() +
+                    "\"description\"" + product.getDescription() +
+                    "\"category\"" + product.getCategory() +
+                    "\"price\"" + product.getPrice() +
+                    "\"stock\"" + product.getStock() +
+                    "\"fatPercentage\"" + product.getFatPercentage() +
+                    "\"dateExpiry\"" + product.getDateExpiry() +
+                    "\"vitamins\"" + product.getVitamins()
+            );
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
-    public String getDate_expiry() {
-        return date_expiry;
+    // Public methods
+    public int getFatPercentage() {
+        return fatPercentage;
+    }
+
+    public String getDateExpiry() {
+        return dateExpiry;
     }
 
     public Vector<String> getVitamins() {
@@ -39,8 +63,8 @@ public class Dairy extends Product{
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN+ " Porcentaje de calorias: " + Colors.ANSI_DEFAULT +fat_percentage+
-                Colors.ANSI_GREEN+ " Fecha de expiracion: " + Colors.ANSI_DEFAULT + date_expiry+
+                Colors.ANSI_GREEN+ " Porcentaje de calorias: " + Colors.ANSI_DEFAULT +fatPercentage+
+                Colors.ANSI_GREEN+ " Fecha de expiracion: " + Colors.ANSI_DEFAULT + dateExpiry+
                 Colors.ANSI_GREEN+ " Vitaminas que contiene: " + Colors.ANSI_DEFAULT + vitamins;
     }
 
