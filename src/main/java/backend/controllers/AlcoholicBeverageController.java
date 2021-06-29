@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import appinterfaces.ResultsProgram;
 import application.models.AlcoholicBeverage;
 import application.models.Product;
 import appinterfaces.backend.Service;
@@ -60,7 +61,7 @@ public class AlcoholicBeverageController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        int result = 3;
+        int result = ResultsProgram.ERROR;
         try{
 
             int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
@@ -92,12 +93,12 @@ public class AlcoholicBeverageController implements Service {
                 ((JSONArray) this.collection.get("collection")).add(newProduct);
                 this.alcoholCollectionWriter.write(this.collection.toJSONString());
                 this.alcoholCollectionWriter.flush();
-                result = 0;
+                result = ResultsProgram.SUCCESS;
             } else {
                 ((JSONArray) this.collection.get("collection")).add(newProduct);
                 this.alcoholCollectionWriter.write(this.collection.toJSONString());
                 this.alcoholCollectionWriter.flush();
-                result = 0;
+                result = ResultsProgram.SUCCESS;
             }
         } catch (IOException e) {
             return result;
@@ -147,13 +148,14 @@ public class AlcoholicBeverageController implements Service {
                     ((JSONArray) this.collection.get("collection")).remove(i);
                     this.alcoholCollectionWriter.write(this.collection.toJSONString());
                     this.alcoholCollectionWriter.flush();
-                    return 0;
+
+                    return ResultsProgram.SUCCESS;
                 }
             }
 
         } catch (IOException e) {
-            return -1;
+            return ResultsProgram.ERROR;
         }
-        return -1;
+        return ResultsProgram.ERROR;
     }
 }

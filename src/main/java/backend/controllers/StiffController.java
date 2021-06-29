@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import appinterfaces.ResultsProgram;
 import application.models.Dairy;
 import application.models.Product;
 import appinterfaces.backend.Service;
@@ -68,7 +69,7 @@ public class StiffController implements Service {
     @Override
     public int POST(Product newRecord) {
         JSONObject newStiffProduct = new JSONObject();
-        int result = 3;
+        int result = ResultsProgram.ERROR;
 
         try{
 
@@ -101,12 +102,12 @@ public class StiffController implements Service {
                 ((JSONArray) this.collection.get("collection")).add(newProduct);
                 this.stiffCollectionWriter.write(this.collection.toJSONString());
                 this.stiffCollectionWriter.flush();
-                result = 0;
+                result = ResultsProgram.SUCCESS;
             } else {
                 ((JSONArray) this.collection.get("collection")).add(newProduct);
                 this.stiffCollectionWriter.write(this.collection.toJSONString());
                 this.stiffCollectionWriter.flush();
-                result = 0;
+                result = ResultsProgram.SUCCESS;
             }
         } catch (IOException e) {
             return result;
@@ -146,7 +147,7 @@ public class StiffController implements Service {
     public int DELETE(String id) {
         JSONObject product = new JSONObject();
         String idProduct;
-        int result = 1;
+        int result = ResultsProgram.NOT_FOUND;
 
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
 
@@ -156,7 +157,7 @@ public class StiffController implements Service {
 
             if (idProduct.equals(id)) {
                 ((JSONArray) this.collection.get("collection")).remove(i);
-                result = 0;
+                result = ResultsProgram.SUCCESS;
                 break;
             }
         }
@@ -166,7 +167,7 @@ public class StiffController implements Service {
 
             return result;
         } catch (IOException e) {
-            return -1;
+            return ResultsProgram.ERROR;
         }
     }
 

@@ -1,5 +1,6 @@
 package application;
 
+import appinterfaces.ResultsProgram;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
@@ -9,7 +10,7 @@ import appinterfaces.Options;
 import java.util.Scanner;
 import java.util.Vector;
 
-public final class CmdEcommerce implements Options{
+public final class CmdEcommerce implements Options {
 
     // Private attributes
     private final Vector<Product> productsList;
@@ -44,15 +45,6 @@ public final class CmdEcommerce implements Options{
     // Public methods
     public int main_loop_program() {
 
-        String[] outputMessages = {
-                Colors.ANSI_BLUE + "La operacion de llevo a cabo con exito!",
-                Colors.ANSI_YELLOW + "La operacion fue cancelada.",
-                Colors.ANSI_YELLOW + "La lista de productos esta vacia.",
-                Colors.ANSI_RED + "Se produjo un error, reinicie el programa.",
-                Colors.ANSI_RED + "No se pudo conectar a la base de datos.",
-                Colors.ANSI_GREEN + "Conectado a la base de datos!",
-                Colors.ANSI_GREEN + "Agradecemos su visita, Adios!"
-        };
         String[] optionsList = {
                 "Alta de producto",
                 "Modificación de producto",
@@ -88,10 +80,10 @@ public final class CmdEcommerce implements Options{
                     break;
                 }
             }
-            System.out.println(outputMessages[programResult]);
+            System.out.println(ResultsProgram.outputMessages[programResult]);
         }
 
-        System.out.println(outputMessages[4]); // '4' is for a goodbye message code.
+        System.out.println(ResultsProgram.outputMessages[ResultsProgram.PROGRAM_FINISHED]);
         return programResult;
     }
 
@@ -193,7 +185,7 @@ public final class CmdEcommerce implements Options{
 
         System.out.println(Colors.ANSI_BLUE + "\tProducto: '" + productName + "'; '" +
                 productDescription + "',\n\tfue dado de alta exitosamente." );
-        return 0;
+        return ResultsProgram.SUCCESS;
     }
 
     @Override
@@ -207,7 +199,7 @@ public final class CmdEcommerce implements Options{
 
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para modificar." );
-            return 2; // Empty list code
+            return ResultsProgram.EMPTY_LIST;
         } else{
             String optionMessage = "Que producto desea modificar? (0-salir): ";
             Scanner scanner = new Scanner(System.in);
@@ -219,7 +211,7 @@ public final class CmdEcommerce implements Options{
             this.optionsMenu(optionsList, optionMessage);
 
             // Harcoded to solve index issue.
-            if (this.optionSelection <= 0) { return 1; }
+            if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
 
             /*Request of data to modify*/
 
@@ -296,7 +288,7 @@ public final class CmdEcommerce implements Options{
             System.out.println(Colors.ANSI_BLUE + "Producto: " + productName + " fue modificado correctamente." );
         }
 
-        return 0;
+        return ResultsProgram.SUCCESS;
     }
 
     @Override
@@ -305,7 +297,7 @@ public final class CmdEcommerce implements Options{
 
         if (optionsList.length == 0){
             System.out.println(Colors.ANSI_RED + "No hay productos para eliminar." );
-            return 2; // Empty list code
+            return ResultsProgram.EMPTY_LIST;
         } else {
             String optionMessage = "Seleccione el producto a eliminar (0-salir): ";
 
@@ -316,7 +308,7 @@ public final class CmdEcommerce implements Options{
             this.optionsMenu(optionsList, optionMessage);
 
             // Harcoded to solve index issue.
-            if (this.optionSelection <= 0) { return 1; }
+            if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
 
             // Deleting product
             this.productsList.removeElementAt(optionSelection -1 );
@@ -324,7 +316,7 @@ public final class CmdEcommerce implements Options{
             System.out.println(Colors.ANSI_BLUE + "Producto con ID " + (optionSelection) +" eliminado correctamente");
 
         }
-        return 0;
+        return ResultsProgram.SUCCESS;
     }
 
     @Override
@@ -336,9 +328,9 @@ public final class CmdEcommerce implements Options{
             }
         } else {
             System.out.println(Colors.ANSI_RED + "No hay productos cargados! Por favor, dé de alta uno como mínimo");
-            return 2; // Empty list code
+            return ResultsProgram.EMPTY_LIST;
         }
 
-        return 0;
+        return ResultsProgram.SUCCESS;
     }
 }
