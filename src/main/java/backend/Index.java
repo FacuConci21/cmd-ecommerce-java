@@ -1,5 +1,6 @@
 package backend;
 
+import appinterfaces.ResultsProgram;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
@@ -87,9 +88,9 @@ public final class Index implements Service, RoutesAndPaths {
     public int connect() {
         File database = new File(SERVER_URI);
         if (database.exists() && database.isDirectory()) {
-            return 5;
+            return ResultsProgram.CONNECTION_SUCCESS;
         }
-        return 4;
+        return ResultsProgram.CONNECTION_FAILED;
     }
 
     @Override
@@ -159,7 +160,7 @@ public final class Index implements Service, RoutesAndPaths {
 
     @Override
     public int POST(Product newRecord) {
-        int result = -1;
+        int result = ResultsProgram.INVALID_VALUE;
 
         if (newRecord instanceof Dairy) {
             this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
@@ -275,7 +276,7 @@ public final class Index implements Service, RoutesAndPaths {
                 return result;
             }
             default: {
-                return -1;
+                return ResultsProgram.INVALID_KEY;
             }
         }
     }

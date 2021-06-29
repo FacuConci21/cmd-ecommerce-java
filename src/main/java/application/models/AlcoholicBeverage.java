@@ -1,6 +1,9 @@
 package application.models;
 
 import appinterfaces.Colors;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class AlcoholicBeverage extends Product{
 
@@ -15,12 +18,43 @@ public class AlcoholicBeverage extends Product{
         super(id,category,name,description,price,stock);
     }
 
+    public AlcoholicBeverage(int category, String name, String description, float price, int stock,
+                             float liter, int percentage)
+    {
+        super(category, name, description, price, stock);
+        this.liter = liter;
+        this.percentage = percentage;
+    }
+
     public AlcoholicBeverage(int id, int category, String name, String description, float price, int stock,
                              float liter, int percentage)
     {
         super(id,category,name,description,price,stock);
         this.liter = liter;
         this.percentage = percentage;
+    }
+
+    // Public static methods
+    public static JSONObject toJson(AlcoholicBeverage product) {
+        JSONParser jsonParser = new JSONParser();
+
+        try {
+            Object jsonAlcoholic = jsonParser.parse( "{"+
+                    "\"_id\":\"" + product.getId() + "\"," +
+                    "\"name\":\"" + product.getName() + "\"," +
+                    "\"description\":\"" + product.getDescription() + "\"," +
+                    "\"category\":\"" + product.getCategory() + "\"," +
+                    "\"price\":\"" + product.getPrice() + "\"," +
+                    "\"stock\":\"" + product.getStock() + "\"," +
+                    "\"alcohol_percentage\":\"" + product.getPercentage() + "\"," +
+                    "\"liter\":\"" + product.getLiter() + "\"" +
+                    "}"
+            );
+            return (JSONObject) jsonAlcoholic;
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
     // Public methods
@@ -43,7 +77,7 @@ public class AlcoholicBeverage extends Product{
     @Override
     public String toString() {
         return super.toString() +
-                Colors.ANSI_GREEN +"Contenido en Litros: " + Colors.ANSI_DEFAULT + liter +
-                Colors.ANSI_GREEN +"Porcentaje de alcohol: " + Colors.ANSI_DEFAULT + percentage;
+                Colors.ANSI_GREEN +" Litros: " + Colors.ANSI_DEFAULT + liter +
+                Colors.ANSI_GREEN +" Alcohol: " + Colors.ANSI_DEFAULT + percentage + "%";
     }
 }

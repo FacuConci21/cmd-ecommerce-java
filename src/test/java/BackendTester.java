@@ -1,4 +1,5 @@
 import appinterfaces.Colors;
+import appinterfaces.ResultsProgram;
 import application.models.Dairy;
 import backend.Index;
 import org.json.simple.JSONObject;
@@ -21,8 +22,8 @@ public class BackendTester implements Colors{
          * y cambiar la ruta absoluta de la constante PROJECT_DIR por la ruta donde tengas guardado el proyecto,
          * incluyendo "src/main/".
          */
-        if (index.connect() == 5) {
-            System.out.println(ANSI_BLUE + "    --  connected   --");
+        if (index.connect() == ResultsProgram.CONNECTION_SUCCESS) {
+            System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_SUCCESS]);
 
             System.out.println(ANSI_GREEN + "POST opperation:");
             /**AlcoholBeverageProductsTest.PostAlcoholBeverageProducts(index, ANSI_DEFAULT);
@@ -75,7 +76,7 @@ public class BackendTester implements Colors{
              */
 
         } else {
-            System.out.println(ANSI_RED + "    --  Not connected   --");
+            System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_FAILED]);
         }
     } // main()
 } // BackendTester

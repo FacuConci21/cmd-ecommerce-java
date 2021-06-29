@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import appinterfaces.ResultsProgram;
 import application.models.AlcoholicBeverage;
 import application.models.Dairy;
 import application.models.Product;
@@ -82,8 +83,8 @@ public class DairyController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        int result = 3;
-        try{
+        int result = ResultsProgram.ERROR;
+        try {
 
             int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
             JSONObject newProduct = new JSONObject();
@@ -93,34 +94,15 @@ public class DairyController implements Service {
             newProduct.put("price", newRecord.getPrice());
             newProduct.put("stock", newRecord.getStock());
             newProduct.put("category", newRecord.getCategory());
-            newProduct.put("fatPercentage", ((Dairy) newRecord).getFat_percentage());
-            newProduct.put("dateExpiry", ((Dairy) newRecord).getDate_expiry());
+            newProduct.put("fatPercentage", ((Dairy) newRecord).getFatPercentage());
+            newProduct.put("dateExpiry", ((Dairy) newRecord).getDateExpiry());
             newProduct.put("vitamins", ((Dairy) newRecord).getVitamins());
+            newProduct.put("_id", sizeOfCollection + 1);
 
-            if (sizeOfCollection > 0){
-                for (int i = 0; i < sizeOfCollection; i++) {
-                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
-
-                    int idProduct = Integer.parseInt(product.get("_id").toString());
-                    int newProductId = newRecord.getId();
-
-                    if (idProduct == newProductId) {
-                        newProduct.put("_id", sizeOfCollection + 1 );
-                    } else {
-                        newProduct.put("_id",newRecord.getId());
-                    }
-                }
-
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.dairyCollectionWriter.write(this.collection.toJSONString());
-                this.dairyCollectionWriter.flush();
-                result = 0;
-            } else {
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.dairyCollectionWriter.write(this.collection.toJSONString());
-                this.dairyCollectionWriter.flush();
-                result = 0;
-            }
+            ((JSONArray) this.collection.get("collection")).add(newProduct);
+            this.dairyCollectionWriter.write(this.collection.toJSONString());
+            this.dairyCollectionWriter.flush();
+            result = ResultsProgram.SUCCESS;
 
         } catch (IOException e) {
             return result;
@@ -129,7 +111,7 @@ public class DairyController implements Service {
     }
 
     @Override
-    public JSONObject PUT(String id,  JSONObject updatedObject) {
+    public JSONObject PUT(String id, JSONObject updatedObject) {
 
 
         int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
@@ -164,17 +146,18 @@ public class DairyController implements Service {
                 String idProduct = product.get("_id").toString();
 
 
-                if (idProduct.equals(id)){
+                if (idProduct.equals(id)) {
                     ((JSONArray) this.collection.get("collection")).remove(i);
                     this.dairyCollectionWriter.write(this.collection.toJSONString());
                     this.dairyCollectionWriter.flush();
-                    return 0;
+
+                    return ResultsProgram.SUCCESS;
                 }
 
             }
-        }catch (IOException e) {
-            return -1;
+        } catch (IOException e) {
+            return ResultsProgram.ERROR;
         }
-        return -1;
+        return ResultsProgram.ERROR;
     }
 }

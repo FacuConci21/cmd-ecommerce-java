@@ -1,5 +1,6 @@
 package backend.controllers;
 
+import appinterfaces.ResultsProgram;
 import application.models.AlcoholicBeverage;
 import application.models.Product;
 import appinterfaces.backend.Service;
@@ -17,7 +18,8 @@ public class AlcoholicBeverageController implements Service {
     private FileReader alcoholCollectionReader;
     public JSONObject collection = new JSONObject();
 
-    public AlcoholicBeverageController(){}
+    public AlcoholicBeverageController() {
+    }
 
     public void setAlcoholCollectionWriter(FileWriter alcoholCollectionWriter) {
         this.alcoholCollectionWriter = alcoholCollectionWriter;
@@ -50,7 +52,7 @@ public class AlcoholicBeverageController implements Service {
             JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
             String idProduct = product.get("_id").toString();
 
-            if (idProduct.equals(id)){
+            if (idProduct.equals(id)) {
                 return product;
             }
         }
@@ -60,8 +62,8 @@ public class AlcoholicBeverageController implements Service {
 
     @Override
     public int POST(Product newRecord) {
-        int result = 3;
-        try{
+        int result = ResultsProgram.ERROR;
+        try {
 
             int sizeOfCollection = ((JSONArray) this.collection.get("collection")).size();
             JSONObject newProduct = new JSONObject();
@@ -73,32 +75,14 @@ public class AlcoholicBeverageController implements Service {
             newProduct.put("category", newRecord.getCategory());
             newProduct.put("liters", ((AlcoholicBeverage) newRecord).getLiter());
             newProduct.put("alcohol_percentage", ((AlcoholicBeverage) newRecord).getPercentage());
+            newProduct.put("_id", sizeOfCollection + 1);
 
-            if (sizeOfCollection > 0){
 
-                for (int i = 0; i < sizeOfCollection; i++) {
-                    JSONObject product = (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
+            ((JSONArray) this.collection.get("collection")).add(newProduct);
+            this.alcoholCollectionWriter.write(this.collection.toJSONString());
+            this.alcoholCollectionWriter.flush();
+            result = ResultsProgram.SUCCESS;
 
-                    int idProduct = Integer.parseInt(product.get("_id").toString());
-                    int newProductId = newRecord.getId();
-
-                    if (idProduct == newProductId) {
-                        newProduct.put("_id", sizeOfCollection + 1 );
-                    } else {
-                        newProduct.put("_id",newRecord.getId());
-                    }
-                }
-
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.alcoholCollectionWriter.write(this.collection.toJSONString());
-                this.alcoholCollectionWriter.flush();
-                result = 0;
-            } else {
-                ((JSONArray) this.collection.get("collection")).add(newProduct);
-                this.alcoholCollectionWriter.write(this.collection.toJSONString());
-                this.alcoholCollectionWriter.flush();
-                result = 0;
-            }
         } catch (IOException e) {
             return result;
         }
@@ -124,7 +108,7 @@ public class AlcoholicBeverageController implements Service {
                     this.alcoholCollectionWriter.write(this.collection.toJSONString());
                     this.alcoholCollectionWriter.flush();
 
-                    return (JSONObject)((JSONArray) this.collection.get("collection")).get(i);
+                    return (JSONObject) ((JSONArray) this.collection.get("collection")).get(i);
                 } catch (IOException e) {
                     return null;
                 }
@@ -147,13 +131,14 @@ public class AlcoholicBeverageController implements Service {
                     ((JSONArray) this.collection.get("collection")).remove(i);
                     this.alcoholCollectionWriter.write(this.collection.toJSONString());
                     this.alcoholCollectionWriter.flush();
-                    return 0;
+
+                    return ResultsProgram.SUCCESS;
                 }
             }
 
         } catch (IOException e) {
-            return -1;
+            return ResultsProgram.ERROR;
         }
-        return -1;
+        return ResultsProgram.ERROR;
     }
 }

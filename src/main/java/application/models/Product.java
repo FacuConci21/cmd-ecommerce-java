@@ -15,6 +15,14 @@ public class Product {
     // Constructors
     public Product(){};
 
+    public Product(int category, String name, String description, float price, int stock) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+    }
+
     public Product(int id, int category, String name, String description, float price, int stock) {
         this.id = id;
         this.category = category;
@@ -52,8 +60,8 @@ public class Product {
     @Override
     public String toString() {
         return Colors.ANSI_GREEN + "Id: " + Colors.ANSI_DEFAULT  + id +
-               Colors.ANSI_GREEN + " Nombre del producto: " + Colors.ANSI_DEFAULT  + name +
-               Colors.ANSI_GREEN + " Descripcion: " + Colors.ANSI_DEFAULT  + description +
+               Colors.ANSI_GREEN + " Nombre: " + Colors.ANSI_DEFAULT  + name +
+               Colors.ANSI_GREEN + " Desc.: " + Colors.ANSI_DEFAULT  + description +
                Colors.ANSI_GREEN + " Precio: $" + Colors.ANSI_DEFAULT  + price +
                Colors.ANSI_GREEN + " Stock: " + Colors.ANSI_DEFAULT + stock +
                Colors.ANSI_GREEN + " Categoria: " + Colors.ANSI_DEFAULT  + category;
