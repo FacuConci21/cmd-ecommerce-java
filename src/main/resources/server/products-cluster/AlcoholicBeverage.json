@@ -1,6 +1,7 @@
 {
   "collection": [
     {
+      "_id": 1,
       "price": 15000.0,
       "liters": 1.0,
       "name": "Campari",

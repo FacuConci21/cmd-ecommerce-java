@@ -59,7 +59,7 @@ public abstract class Loader {
     public static Vector<Product> loadStiff(JSONArray productsCollection) {
         Vector<Product> productsList = new Vector<>();
         productsCollection.forEach( jsonStiff -> {
-            productsList.add(parseToAlcoholicBeverageProduct((JSONObject) jsonStiff));
+            productsList.add(parseToStiffProduct((JSONObject) jsonStiff));
         });
         return productsList;
     }
@@ -75,7 +75,7 @@ public abstract class Loader {
     public static Vector<Product> loadAlcoholicBeverage(JSONArray alcoholicCollection) {
         Vector<Product> productsList = new Vector<>();
         alcoholicCollection.forEach( jsonStiff -> {
-            productsList.add(parseToStiffProduct((JSONObject) jsonStiff));
+            productsList.add(parseToAlcoholicBeverageProduct((JSONObject) jsonStiff));
         });
         return productsList;
     }

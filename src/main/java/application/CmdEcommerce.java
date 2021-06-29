@@ -143,8 +143,7 @@ public final class CmdEcommerce implements Options {
                 System.out.print(Colors.ANSI_DEFAULT + "Litros: "); beverageLiter = scanner.nextFloat();
                 System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de alcohol: "); beveragePercentage = scanner.nextInt();
 
-                newProductInstance = new AlcoholicBeverage(
-                        productId, this.optionSelection,productName, productDescription, productPrice, productStock,
+                newProductInstance = new AlcoholicBeverage(productId, this.optionSelection,productName, productDescription, productPrice, productStock,
                         beverageLiter, beveragePercentage
                 );
                 break;
@@ -342,46 +341,45 @@ public final class CmdEcommerce implements Options {
 
     @Override
     public int deleteOption() {
-        String[] optionsList = new String[this.productsList.size()];
+        this.chargingVector();
 
-        if (optionsList.length == 0){
-            System.out.println(Colors.ANSI_RED + "No hay productos para eliminar." );
-            return ResultsProgram.EMPTY_LIST;
-        } else {
-            String optionMessage = "Seleccione el producto a eliminar (0-salir): ";
+        // Harcoded to solve index issue.
+        if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
+        // Deleting product
+        String idProd = "" + optionSelection;
+        index.DELETE(idProd);
 
-            for (int i = 0; i < this.productsList.size(); i++) {
-                optionsList[i] = this.productsList.elementAt(i).getName();
-            }
-
-            this.optionsMenu(optionsList, optionMessage);
-
-            // Harcoded to solve index issue.
-            if (this.optionSelection <= 0) { return ResultsProgram.CANCELED; }
-
-            // Deleting product
-            this.productsList.removeElementAt(optionSelection -1 );
-
-            System.out.println(Colors.ANSI_BLUE + "Producto con ID " + (optionSelection) +" eliminado correctamente");
-
-        }
         return ResultsProgram.SUCCESS;
     }
 
     @Override
     public int listingOption() {
+        int programResult;
+        this.chargingVector();
+
+        if(this.productsList.isEmpty()){
+            programResult = ResultsProgram.EMPTY_LIST;
+        } else{
+            programResult = ResultsProgram.SUCCESS;
+        }
+
+            System.out.println(Colors.ANSI_BLUE + "Lista de productos");
+            for (int i = 0; i < this.productsList.size(); i++) {
+                System.out.println(this.productsList.elementAt(i).toString());
+            }
+
+            return programResult;
+    }
+
+    public int chargingVector(){
         String[] productsCategories = {
                 "Bebidas Alcoholicas",
                 "Lacteos",
                 "Embutidos/Fiambres",
                 "Salir"
         };
-        this.productsList.clear();
-        this.optionsMenu(productsCategories, "Categorías de productos disponibles: ");
 
-
-        int programResult = -1;
-
+        this.optionsMenu(productsCategories, "Elija la categoria del producto que desea modificar: ");
         switch (this.optionSelection) {
             case 1:
             {
@@ -411,17 +409,7 @@ public final class CmdEcommerce implements Options {
                 return ResultsProgram.CANCELED;
             }
         }
-        if(this.productsList.isEmpty()){
-            programResult = ResultsProgram.EMPTY_LIST;
-        } else{
-            programResult = ResultsProgram.SUCCESS;
-        }
 
-            System.out.println(Colors.ANSI_BLUE + "Lista de productos");
-            for (int i = 0; i < this.productsList.size(); i++) {
-                System.out.println(this.productsList.elementAt(i).toString());
-            }
-
-            return programResult;
+        return ResultsProgram.SUCCESS;
     }
 }
