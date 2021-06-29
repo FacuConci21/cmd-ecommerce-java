@@ -1,12 +1,14 @@
 package application;
 
 import appinterfaces.ResultsProgram;
-import application.models.AlcoholicBeverage;
-import application.models.Dairy;
-import application.models.Product;
-import application.models.Stiff;
+import application.models.*;
 import appinterfaces.Colors;
 import appinterfaces.Options;
+import backend.Index;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -14,6 +16,7 @@ public final class CmdEcommerce implements Options {
 
     // Private attributes
     private final Vector<Product> productsList;
+    private final Index index;
     int optionSelection;
 
     // Private methods
@@ -39,6 +42,7 @@ public final class CmdEcommerce implements Options {
 
     // Constructors
     public CmdEcommerce() {
+        index = new Index();
         this.productsList = new Vector<>();
     }
 
@@ -55,6 +59,21 @@ public final class CmdEcommerce implements Options {
         };
         String menuMessage = "Elija una opción: ";
         int programResult = -1;
+
+        //  Connecting to database.
+        {
+            int connectionResult = this.index.connect();
+            JSONArray productList = new JSONArray();
+
+            System.out.println(ResultsProgram.outputMessages[connectionResult]);
+
+            if (connectionResult == ResultsProgram.CONNECTION_SUCCESS) {
+                this.index.setCollectionName("stiff");
+                productList = this.index.GET();
+                this.productsList.addAll(Loader.loadStiff(productList));
+                productList.clear();
+            }
+        }
 
         /*      PROGRAM LOOP        */
         while (this.optionsMenu(optionsList, menuMessage)) {
@@ -178,7 +197,7 @@ public final class CmdEcommerce implements Options {
                 );
 
                 // Adding product on the list
-                this.productsList.add(newProductInstance);
+                this.index.POST(newProductInstance);
                 break;
             }
         }
