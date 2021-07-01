@@ -97,10 +97,10 @@ public class BackendTester implements Colors {
 
                 /**productstests.DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
                 /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
-                //StiffProductsTest.GetByIdTest(index, "323423", ANSI_DEFAULT, ANSI_RED);
+                StiffProductsTest.GetStiffProductsById(index, "323423", ANSI_DEFAULT, ANSI_RED);
 
 
-                //System.out.println(ANSI_GREEN + "PUT opperation: ");
+                System.out.println(ANSI_GREEN + "PUT opperation: ");
 
                 /**AlcoholBeverageProductsTest.PutTest(index, "8", ANSI_YELLOW, ANSI_RED);;*/
                 //StiffProductsTest.PutTest(index, "5", ANSI_YELLOW, ANSI_RED);

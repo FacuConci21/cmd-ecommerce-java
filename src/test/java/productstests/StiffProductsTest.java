@@ -60,5 +60,12 @@ public class StiffProductsTest {
         }
     }
 
-
+    public static void GetStiffProductsById(Index index, String id, String color, String errorColor) {
+        JSONObject StiffObjectCollection = index.GET(id);
+        if (StiffObjectCollection == null){
+            System.out.println(errorColor + "No se encontro el producto.");
+        } else {
+            System.out.println(color + StiffObjectCollection);
+        }
+    }
 } // StiffProductsTest
