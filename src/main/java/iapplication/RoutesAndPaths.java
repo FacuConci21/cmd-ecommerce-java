@@ -7,7 +7,7 @@ public interface RoutesAndPaths {
      * */
 
     // Paths
-    String PROJECT_DIR = "/home/matisantillan11/Documents/Proyects/cmd-ecommerce-java/src/main/";
+    String PROJECT_DIR = "C:\\CAPACITACION_PIL\\ProyectoJava\\cmd-ecommerce-java\\src\\main\\";
     String SERVER_URI = PROJECT_DIR + "resources/server/";
     String PRODUCTS_COLLECTION_DIR = "products-cluster/";
     String USERS_COLLECTION_DIR = "users-cluster/";

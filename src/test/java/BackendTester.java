@@ -53,8 +53,8 @@ public class BackendTester {
                  * y poder ver la respuesta del backend con una lista vacia.
                  */
 
-                /**System.out.println(index.POST(dProduct));
-                 System.out.println(index.POST(dProduct2));
+                    System.out.println(index.POST(dProduct));
+                /**System.out.println(index.POST(dProduct2));
                  System.out.println(index.POST(dProduct3));*/
             }
 

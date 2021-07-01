@@ -102,12 +102,12 @@ public final class Index implements Service, RoutesAndPaths {
         int result = -1;
 
         if (newRecord instanceof Dairy) {
-            dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-            dairyController.GET();
+            this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+            this.dairyController.GET();
             this.closeReader();
 
-            dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-            result = dairyController.POST(newRecord);
+            this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+            result = this.dairyController.POST(newRecord);
             this.closeWriter();
         }
 
