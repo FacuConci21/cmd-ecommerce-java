@@ -165,13 +165,10 @@ public final class Index implements Service, RoutesAndPaths {
         if (newRecord instanceof Dairy) {
             this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
             this.dairyController.GET();
-<<<<<<< HEAD
+
             this.closeReader();
 
-            this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-            result = this.dairyController.POST(newRecord);
-=======
-            this.closeReader();
+
 
             this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
             result = this.dairyController.POST(newRecord);
@@ -195,7 +192,7 @@ public final class Index implements Service, RoutesAndPaths {
 
             this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
             result = this.stiffController.POST(newRecord);
->>>>>>> 2a41d48e83c76d7aaede97e0b3a59c1074f69ef8
+
             this.closeWriter();
         }
 

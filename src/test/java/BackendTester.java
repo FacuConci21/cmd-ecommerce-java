@@ -9,7 +9,7 @@ import productstests.StiffProductsTest;
 
 import java.util.Vector;
 
-public class BackendTester implements Colors{
+public class BackendTester implements Colors {
     public static void main(String[] args) {
         Index index = new Index();
 
@@ -22,7 +22,7 @@ public class BackendTester implements Colors{
          * y cambiar la ruta absoluta de la constante PROJECT_DIR por la ruta donde tengas guardado el proyecto,
          * incluyendo "src/main/".
          */
-<<<<<<< HEAD
+
         if (index.connect() == 5) {
             System.out.println("    --  connected   --");
 
@@ -58,70 +58,68 @@ public class BackendTester implements Colors{
                  * y poder ver la respuesta del backend con una lista vacia.
                  */
 
-                    System.out.println(index.POST(dProduct));
+                System.out.println(index.POST(dProduct));
                 /**System.out.println(index.POST(dProduct2));
                  System.out.println(index.POST(dProduct3));*/
             }
 
-            System.out.println("GET opperation:");
-            JSONArray dairyCollection = index.GET();
-=======
-        if (index.connect() == ResultsProgram.CONNECTION_SUCCESS) {
-            System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_SUCCESS]);
 
-            System.out.println(ANSI_GREEN + "POST opperation:");
-            /**AlcoholBeverageProductsTest.PostAlcoholBeverageProducts(index, ANSI_DEFAULT);
-            DairyProductsTest.PostDairyProduct(index, ANSI_DEFAULT);*/
-            StiffProductsTest.PostTest(index, ANSI_DEFAULT);
+            if (index.connect() == ResultsProgram.CONNECTION_SUCCESS) {
+                System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_SUCCESS]);
+
+                System.out.println(ANSI_GREEN + "POST opperation:");
+                /**AlcoholBeverageProductsTest.PostAlcoholBeverageProducts(index, ANSI_DEFAULT);
+                 productstests.DairyProductsTest.PostDairyProduct(index, ANSI_DEFAULT);*/
+                StiffProductsTest.PostStiffProducts(index, ANSI_DEFAULT);
 
 
+                System.out.println(ANSI_GREEN + "GET opperation: ");
+                /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion
+                 * en la línea siguiente
+                 * NAMES:
+                 * dairy (for dairys products)
+                 * alcoholic (for alcoholic beverages products)
+                 * stiff (for stiff products)
+                 * */
 
-            System.out.println(ANSI_GREEN + "GET opperation: ");
-            /**Para probar las metodos de los diferentes productos solo basta con cambiar el nombre de la coleccion
-             * en la línea siguiente
-             * NAMES:
-             * dairy (for dairys products)
-             * alcoholic (for alcoholic beverages products)
-             * stiff (for stiff products)
-             * */
-
-            index.setCollectionName("stiff");
->>>>>>> 2a41d48e83c76d7aaede97e0b3a59c1074f69ef8
-
-            /**
-             AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
-             DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
-             */
-            StiffProductsTest.GetTest(index, ANSI_DEFAULT);
-
-            /**Prueba de GET by INDEX*/
-
-            System.out.println(ANSI_GREEN + "GET BY ID Operation:");
-
-            /**DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
-            /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
-            StiffProductsTest.GetByIdTest(index, "323423", ANSI_DEFAULT, ANSI_RED);
+                index.setCollectionName("stiff");
 
 
-            System.out.println(ANSI_GREEN + "PUT opperation: ");
+                /**
+                 AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
+                 productstests.DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
+                 */
+                //StiffProductsTest.GetTest(index, ANSI_DEFAULT);
 
-            /**AlcoholBeverageProductsTest.PutTest(index, "8", ANSI_YELLOW, ANSI_RED);;*/
-            StiffProductsTest.PutTest(index, "5", ANSI_YELLOW, ANSI_RED);
-            /**DairyProductsTest.PutDairyProducts(index,"3", ANSI_YELLOW, ANSI_RED);*/
+                /**Prueba de GET by INDEX*/
+
+                //System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+
+                /**productstests.DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
+                /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
+                //StiffProductsTest.GetByIdTest(index, "323423", ANSI_DEFAULT, ANSI_RED);
 
 
-            /**Prueba de DELETE*/
+                //System.out.println(ANSI_GREEN + "PUT opperation: ");
 
-            System.out.println(ANSI_GREEN + "DELETE Operation:");
+                /**AlcoholBeverageProductsTest.PutTest(index, "8", ANSI_YELLOW, ANSI_RED);;*/
+                //StiffProductsTest.PutTest(index, "5", ANSI_YELLOW, ANSI_RED);
+                /**productstests.DairyProductsTest.PutDairyProducts(index,"3", ANSI_YELLOW, ANSI_RED);*/
 
-            /**
-             StiffProductsTest.DeleteTest(index, "2", ANSI_YELLOW);
-             DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
-             AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);
-             */
 
-        } else {
-            System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_FAILED]);
-        }
-    } // main()
-} // BackendTester
+                /**Prueba de DELETE*/
+
+                //System.out.println(ANSI_GREEN + "DELETE Operation:");
+
+                /**
+                 StiffProductsTest.DeleteTest(index, "2", ANSI_YELLOW);
+                 productstests.DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
+                 AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);
+                 */
+
+            } else {
+                System.out.println(ResultsProgram.outputMessages[ResultsProgram.CONNECTION_FAILED]);
+            }
+        } // main()
+    }
+}// BackendTester
