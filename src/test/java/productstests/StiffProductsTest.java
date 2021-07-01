@@ -68,4 +68,14 @@ public class StiffProductsTest {
             System.out.println(color + StiffObjectCollection);
         }
     }
+
+    public static void PutStiffProducts(Index index, String id, String color, String errorColor) {
+        JSONObject sProduct = index.GET(id);
+        if (sProduct == null){
+            System.out.println(errorColor + "No se encontro el producto que desea modificar.");
+        } else {
+            sProduct.replace("name", "otro fiambre coño");
+            System.out.println(color + index.PUT(id, sProduct));
+        }
+    }
 } // StiffProductsTest
