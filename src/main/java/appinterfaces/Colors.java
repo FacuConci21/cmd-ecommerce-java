@@ -1,4 +1,4 @@
-package iapplication;
+package appinterfaces;
 
 public interface Colors {
     String ANSI_BLUE = "\033[34m";

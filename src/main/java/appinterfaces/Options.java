@@ -1,4 +1,4 @@
-package iapplication;
+package appinterfaces;
 
 public interface Options {
 

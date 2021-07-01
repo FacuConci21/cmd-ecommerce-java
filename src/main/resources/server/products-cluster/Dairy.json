@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "collection": [
     {
       "vitamins": [
@@ -16,4 +17,7 @@
       "category": 3
     }
   ]
+=======
+  "collection": []
+>>>>>>> 2a41d48e83c76d7aaede97e0b3a59c1074f69ef8
 }

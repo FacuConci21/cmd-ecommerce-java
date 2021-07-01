@@ -1,14 +1,1 @@
-{
-  "collection": [
-    {
-      "_id": "",
-      "name": "",
-      "description": "",
-      "price": "",
-      "stock": "",
-      "category": "",
-      "createdAt": "",
-      "updatedAt": ""
-    }
-  ]
-}
+{"collection":[{"price":65.0,"fatPercentage":35,"name":"Queso-AZUL","dateExpiry":"29-10-2021","description":"Queso-Serenisima","_id":1,"stock":25,"category":3},{"price":80.0,"fatPercentage":50,"name":"Salame","dateExpiry":"29-11-2021","description":"Salame","_id":2,"stock":2,"category":3},{"price":60.0,"fatPercentage":80,"name":"Mortadela","dateExpiry":"29-12-2022","description":"mortadela","_id":3,"stock":15,"category":3}]}

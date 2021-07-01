@@ -7,6 +7,6 @@ public class Main {
 
         CmdEcommerce program = new CmdEcommerce();
 
-        program.main_loop_program();
+        program.mainLoopProgram();
     }
 }
