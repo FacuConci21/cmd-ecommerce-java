@@ -78,4 +78,32 @@ public class StiffProductsTest {
             System.out.println(color + index.PUT(id, sProduct));
         }
     }
+
+    public static void DeleteStiffProducts(Index index, String id, String errorColor, String color){
+        JSONArray stiffCollection = index.GET();
+
+        int stiffDelete = index.DELETE(id);
+        if(stiffDelete == 0 ){
+            System.out.println(color + "Eliminado Correctamente");
+            /** Obteniendo colección de nuevo para ver si se eliminó */
+            if (stiffCollection.size() == 0) {
+                System.out.println(stiffCollection);
+            } else {
+                for (int i = 0; i < stiffCollection.size(); i++) {
+                    JSONObject stiff = (JSONObject) stiffCollection.get(i);
+
+                    System.out.println(color + "[");
+                    for (Object key : stiff.keySet()) {
+                        System.out.println(color + "\t" + key + ": " + stiff.get(key));
+                    }
+                    System.out.println(color + "]");
+                }
+            }
+
+        } else {
+            System.out.println(errorColor + "No se pudo eliminar");
+        }
+    }
+
+
 } // StiffProductsTest

@@ -112,7 +112,7 @@ public class BackendTester implements Colors {
                 System.out.println(ANSI_GREEN + "DELETE Operation:");
 
                 /**
-                 StiffProductsTest.DeleteTest(index, "2", ANSI_YELLOW);
+                 StiffProductsTest.DeleteStiffProducts(index, "2", ANSI_YELLOW);
                  productstests.DairyProductsTest.DeleteDairyProducts(index, "1", ANSI_RED, ANSI_DEFAULT);
                  AlcoholBeverageProductsTest.DeleteAlcoholBeverageProducts(index, "1", ANSI_RED ,ANSI_DEFAULT);
                  */
