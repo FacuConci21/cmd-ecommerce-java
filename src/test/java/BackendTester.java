@@ -89,11 +89,11 @@ public class BackendTester implements Colors {
                  AlcoholBeverageProductsTest.GetAlcoholBeverageProducts(index, ANSI_DEFAULT);
                  productstests.DairyProductsTest.GetDairyProducts(index, ANSI_DEFAULT);
                  */
-                //StiffProductsTest.GetTest(index, ANSI_DEFAULT);
+                StiffProductsTest.GetStiffProducts(index, ANSI_DEFAULT);
 
                 /**Prueba de GET by INDEX*/
 
-                //System.out.println(ANSI_GREEN + "GET BY ID Operation:");
+                System.out.println(ANSI_GREEN + "GET BY ID Operation:");
 
                 /**productstests.DairyProductsTest.GetDairyProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
                 /**AlcoholBeverageProductsTest.GetAlcoholBeverageProductsById(index, "2", ANSI_DEFAULT, ANSI_RED);*/
