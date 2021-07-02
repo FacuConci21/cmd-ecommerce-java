@@ -227,7 +227,6 @@ public final class CmdEcommerce implements Options {
             System.out.print(Colors.ANSI_DEFAULT + "Description: ");
             productDescription = scanner.next();
 
-
             switch (this.productsList.elementAt(optionSelection - 1).getCategory()) {
                 case 1: {
 
@@ -239,9 +238,9 @@ public final class CmdEcommerce implements Options {
                     System.out.print(Colors.ANSI_DEFAULT + "Porcentaje de alcohol: ");
                     beveragePercentage = scanner.nextInt();
 
-                    newProductInstance = new AlcoholicBeverage(this.productsList.elementAt(
-                            optionSelection - 1).getId(), optionSelection, productName,
-                            productDescription, productPrice, productStock, beverageLiter, beveragePercentage
+                    newProductInstance = new AlcoholicBeverage(
+                            optionSelection, productName, productDescription, productPrice, productStock,
+                            beverageLiter, beveragePercentage
                     );
 
                     // Updating product
@@ -273,7 +272,6 @@ public final class CmdEcommerce implements Options {
                     } while (!Dairy.controlDate(dairyDateExpiry));
 
                     newProductInstance = new Dairy(
-                            this.productsList.elementAt(optionSelection - 1).getId(),
                             optionSelection, productName, productDescription, productPrice, productStock,
                             dairyFatPercentage, dairyDateExpiry, dairyVitamins
                     );
@@ -299,9 +297,11 @@ public final class CmdEcommerce implements Options {
                         stiffDateExpiry = scanner.next();
                     } while (!Stiff.controlDate(stiffDateExpiry));
 
-                    newProductInstance = new Stiff(this.productsList.elementAt(optionSelection - 1).getId(),
-                            optionSelection, productName, productDescription, productPrice, productStock, "12-12-2022",
-                            stiffFatPercentage);
+                    newProductInstance = new Stiff(
+                            optionSelection, productName, productDescription, productPrice, productStock,
+                            stiffDateExpiry, stiffFatPercentage
+                    );
+
                     // Updating product
                     String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
                     index.PUT(idProd,

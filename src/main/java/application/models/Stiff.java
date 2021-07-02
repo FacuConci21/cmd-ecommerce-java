@@ -84,15 +84,9 @@ public class Stiff extends Product {
                 int year = LocalDate.now().getYear();
                 int maxYear = LocalDate.MAX.getYear();
 
-                if (Integer.parseInt(arrayDate[0]) >= 1 && Integer.parseInt(arrayDate[0]) <= maxDay) {
-                    isDate = true;
-                } else{ return false; }
-                if (Integer.parseInt(arrayDate[1]) >= 1 && Integer.parseInt(arrayDate[1]) <= maxMonth) {
-                    isDate = true;
-                } else{ return false;}
-                if (Integer.parseInt(arrayDate[2]) >= 1 && Integer.parseInt(arrayDate[2]) <= maxYear) {
-                    isDate = true;
-                } else{ return false;}
+                isDate = (Integer.parseInt(arrayDate[0]) >= 1 && Integer.parseInt(arrayDate[0]) <= maxDay) &&
+                        (Integer.parseInt(arrayDate[1]) >= 1 && Integer.parseInt(arrayDate[1]) <= maxMonth) &&
+                        (Integer.parseInt(arrayDate[2]) >= year && Integer.parseInt(arrayDate[2]) <= maxYear);
             }
 
         }
