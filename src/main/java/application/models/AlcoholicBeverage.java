@@ -47,7 +47,7 @@ public class AlcoholicBeverage extends Product{
                     "\"price\":\"" + product.getPrice() + "\"," +
                     "\"stock\":\"" + product.getStock() + "\"," +
                     "\"alcohol_percentage\":\"" + product.getPercentage() + "\"," +
-                    "\"liter\":\"" + product.getLiter() + "\"" +
+                    "\"liters\":\"" + product.getLiter() + "\"" +
                     "}"
             );
             return (JSONObject) jsonAlcoholic;

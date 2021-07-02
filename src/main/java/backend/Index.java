@@ -165,10 +165,7 @@ public final class Index implements Service, RoutesAndPaths {
         if (newRecord instanceof Dairy) {
             this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
             this.dairyController.GET();
-
             this.closeReader();
-
-
 
             this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
             result = this.dairyController.POST(newRecord);
@@ -222,7 +219,6 @@ public final class Index implements Service, RoutesAndPaths {
 
                 return jsonResult;
             }
-
             case "alcoholic": {
                 this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
                 this.alcoholController.GET();
@@ -231,6 +227,7 @@ public final class Index implements Service, RoutesAndPaths {
                 this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
                 jsonResult = this.alcoholController.PUT(id, updatedObject);
                 this.closeWriter();
+
                 return jsonResult;
             }
             case "stiff": {
@@ -250,8 +247,6 @@ public final class Index implements Service, RoutesAndPaths {
         }
     }
 
-
-
     @Override
     public int DELETE(String id) {
 
@@ -268,9 +263,14 @@ public final class Index implements Service, RoutesAndPaths {
                 return result;
             }
             case "alcoholic":{
+                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                this.alcoholController.GET();
+                this.closeReader();
+
                 this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
                 int result = this.alcoholController.DELETE(id);
                 this.closeWriter();
+
                 return result;
             }
             case "stiff": {
@@ -289,5 +289,4 @@ public final class Index implements Service, RoutesAndPaths {
             }
         }
     }
-
 } // Index

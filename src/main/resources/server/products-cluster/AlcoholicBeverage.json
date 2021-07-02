@@ -1,14 +1,1 @@
-{
-  "collection": [
-    {
-      "price": "2.0",
-      "liter": "2.0",
-      "name": "2",
-      "alcohol_percentage": "2",
-      "description": "2",
-      "_id": "1",
-      "category": "1",
-      "stock": "2"
-    }
-  ]
-}
+{"collection":[{"price":1.0,"liters":1.0,"name":"a","alcohol_percentage":1,"description":"1","_id":1,"stock":1,"category":1}]}
