@@ -1,1 +1,3 @@
-{"collection":[{"price":200.12,"fatPercentage":30,"name":"Queso","dateExpiry":"24-6-2021","description":"Queso La Paulina","_id":1,"stock":5,"category":2},{"price":200.12,"fatPercentage":30,"name":"Salame","dateExpiry":"24-6-2021","description":"Salame corte fino","_id":2,"stock":5,"category":2},{"price":200.12,"fatPercentage":30,"name":"Mortadela","dateExpiry":"24-6-2021","description":"3Kg - Mortadela Campofrio","_id":3,"stock":5,"category":2},{"price":200.12,"fatPercentage":30,"name":"Queso","dateExpiry":"24-6-2021","description":"Queso La Paulina","_id":4,"stock":5,"category":2},{"price":200.12,"fatPercentage":30,"name":"otro fiambre coño","dateExpiry":"24-6-2021","description":"Salame corte fino","_id":5,"stock":5,"category":2},{"price":200.12,"fatPercentage":30,"name":"Mortadela","dateExpiry":"24-6-2021","description":"3Kg - Mortadela Campofrio","_id":6,"stock":5,"category":2}]}
+{
+  "collection":[]
+}
