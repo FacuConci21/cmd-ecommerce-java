@@ -79,12 +79,13 @@ public class StiffProductsTest {
         }
     }
 
-    public static void (Index index, String id, String errorColor, String color){
+    public static void StiffProductsTest(Index index, String id, String errorColor, String color){
         JSONArray stiffCollection = index.GET();
 
         int stiffDelete = index.DELETE(id);
         if(stiffDelete == 0 ){
             System.out.println(color + "Eliminado Correctamente");
+
             /** Obteniendo colección de nuevo para ver si se eliminó */
             if (stiffCollection.size() == 0) {
                 System.out.println(stiffCollection);
