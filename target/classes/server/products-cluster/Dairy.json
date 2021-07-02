@@ -14,36 +14,6 @@
       "_id": 2,
       "stock": 12,
       "category": 3
-    },
-    {
-      "vitamins": [
-        "a2",
-        "h",
-        "bc"
-      ],
-      "price": "3333.0",
-      "fatPercentage": "123",
-      "name": "aaaa",
-      "dateExpiry": "10-6-2024",
-      "description": "aaaaaaaaaaaaaaaa",
-      "_id": "3",
-      "category": "3",
-      "stock": "11"
-    },
-    {
-      "vitamins": [
-        "1",
-        "1",
-        "1"
-      ],
-      "price": 1.0,
-      "fatPercentage": 1,
-      "name": "1",
-      "dateExpiry": "10-6-2022",
-      "description": "1",
-      "_id": 4,
-      "stock": 1,
-      "category": 2
     }
   ]
 }

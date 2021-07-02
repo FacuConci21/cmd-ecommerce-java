@@ -1,0 +1,19 @@
+{
+  "collection": [
+    {
+      "vitamins": [
+        "a2",
+        "h",
+        "bc"
+      ],
+      "price": 100.0,
+      "fatPercentage": 30,
+      "name": "Yogurt en Sachet",
+      "dateExpiry": "25-7-2023",
+      "description": "Y nos da la leche!",
+      "_id": 2,
+      "stock": 12,
+      "category": 3
+    }
+  ]
+}

@@ -257,9 +257,14 @@ public final class Index implements Service, RoutesAndPaths {
 
         switch (this.collectionName){
             case "dairy":{
+                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                this.dairyController.GET();
+                this.closeReader();
+
                 this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
                 int result = this.dairyController.DELETE(id);
                 this.closeWriter();
+
                 return result;
             }
             case "alcoholic":{
