@@ -79,7 +79,7 @@ public class StiffProductsTest {
         }
     }
 
-    public static void StiffProductsTest(Index index, String id, String errorColor, String color){
+    public static void DeleteStiffProducts(Index index, String id, String errorColor, String color){
         JSONArray stiffCollection = index.GET();
 
         int stiffDelete = index.DELETE(id);
