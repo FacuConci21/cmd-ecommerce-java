@@ -1,13 +1,15 @@
 package application;
 
-import appinterfaces.ResultsProgram;
-import application.models.*;
 import appinterfaces.Colors;
 import appinterfaces.Options;
+import appinterfaces.ResultsProgram;
+import application.models.AlcoholicBeverage;
+import application.models.Dairy;
+import application.models.Product;
+import application.models.Stiff;
 import backend.Index;
 import org.json.simple.JSONArray;
 
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -163,7 +165,7 @@ public final class CmdEcommerce implements Options {
                 } while (!Dairy.controlDate(dairyDateExpiry));
 
                 newProductInstance = new Dairy(
-                        this.optionSelection,productName, productDescription, productPrice, productStock,
+                        this.optionSelection, productName, productDescription, productPrice, productStock,
                         dairyFatPercentage, dairyDateExpiry, dairyVitamins
                 );
                 break;
@@ -245,10 +247,7 @@ public final class CmdEcommerce implements Options {
 
                     // Updating product
                     String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
-                    index.PUT(idProd,
-                            Objects.requireNonNull(
-                            AlcoholicBeverage.toJson((AlcoholicBeverage) newProductInstance)
-                    ));
+                    index.PUT(idProd, AlcoholicBeverage.toJson((AlcoholicBeverage) newProductInstance));
                     break;
                 }
                 case 2: {
@@ -278,11 +277,7 @@ public final class CmdEcommerce implements Options {
 
                     // Updating product
                     String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
-                    index.PUT(idProd,
-                            Objects.requireNonNull(
-                                    Dairy.toJson((Dairy) newProductInstance)
-                            )
-                    );
+                    index.PUT(idProd,Dairy.toJson((Dairy) newProductInstance));
                     break;
                 }
                 case 3: {
@@ -304,11 +299,7 @@ public final class CmdEcommerce implements Options {
 
                     // Updating product
                     String idProd = "" + this.productsList.elementAt(optionSelection - 1).getId();
-                    index.PUT(idProd,
-                            Objects.requireNonNull(
-                                    Stiff.toJson((Stiff) newProductInstance)
-                            )
-                    );
+                    index.PUT(idProd,Stiff.toJson((Stiff) newProductInstance));
                     break;
                 }
             }
@@ -376,7 +367,7 @@ public final class CmdEcommerce implements Options {
                 "Salir"
         };
 
-        this.optionsMenu(productsCategories, "Elija la categoria del producto que desea modificar: ");
+        this.optionsMenu(productsCategories, "Elija la categoria del producto: ");
         this.productsList.clear();
         switch (this.optionSelection) {
             case 1: {
