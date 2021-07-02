@@ -13,7 +13,7 @@ public interface ResultsProgram {
     int INVALID_VALUE = 9;
 
     String[] outputMessages = {
-            Colors.ANSI_BLUE + "La operacion de llevo a cabo con exito!",
+            Colors.ANSI_BLUE + "La operacion se llevo a cabo con exito!",
             Colors.ANSI_YELLOW + "La operacion fue cancelada.",
             Colors.ANSI_YELLOW + "La lista de productos esta vacia.",
             Colors.ANSI_RED + "Se produjo un error.",

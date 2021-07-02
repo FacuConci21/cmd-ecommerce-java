@@ -48,7 +48,7 @@ public class Dairy extends Product{
                     "\"stock\":\"" + product.getStock() + "\","+
                     "\"fatPercentage\":\"" + product.getFatPercentage() + "\","+
                     "\"dateExpiry\":\"" + product.getDateExpiry() + "\","+
-                    "\"vitamins\":\"" + product.getVitamins() + "\"" +
+                    "\"vitamins\":" + product.getVitaminsAsStringArray() +
                      "}"
              );
              return (JSONObject) jsonDairy;
@@ -71,6 +71,12 @@ public class Dairy extends Product{
         return vitamins;
     }
 
+    public String getVitaminsAsStringArray() {
+        return "[ \"" + this.vitamins.elementAt(0) +
+                "\", \"" + this.vitamins.elementAt(1) +
+                "\", \"" +this.vitamins.elementAt(2) + "\" ]";
+    }
+
     @Override
     public String toString() {
         return super.toString() +
@@ -87,22 +93,14 @@ public class Dairy extends Product{
             String [] arrayDate = date.split("-");
             if(arrayDate.length == 3) {
 
-                int day = LocalDate.now().getDayOfMonth(),
-                    maxDay = LocalDate.MAX.getDayOfMonth(),
-                    month = LocalDate.now().getMonthValue(),
+                int maxDay = LocalDate.MAX.getDayOfMonth(),
                     maxMonth = LocalDate.MAX.getMonthValue(),
                     year = LocalDate.now().getYear(),
                     maxYear = LocalDate.MAX.getYear();
 
-                if (Integer.parseInt(arrayDate[0]) >= day && Integer.parseInt(arrayDate[0]) <= maxDay) {
-                    isDate = true;
-                }else{ isDate = false;}
-                if (Integer.parseInt(arrayDate[1]) >= month && Integer.parseInt(arrayDate[1]) <= maxMonth) {
-                    isDate = true;
-                }else{ isDate = false;}
-                if (Integer.parseInt(arrayDate[2]) >= year && Integer.parseInt(arrayDate[2]) <= maxYear) {
-                    isDate = true;
-                }else{ isDate = false;}
+                isDate = (Integer.parseInt(arrayDate[0]) >= 1 && Integer.parseInt(arrayDate[0]) <= maxDay) &&
+                        (Integer.parseInt(arrayDate[1]) >= 1 && Integer.parseInt(arrayDate[1]) <= maxMonth) &&
+                        (Integer.parseInt(arrayDate[2]) >= year && Integer.parseInt(arrayDate[2]) <= maxYear);
             }
         }
         return isDate;
