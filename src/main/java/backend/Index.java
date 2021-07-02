@@ -200,51 +200,46 @@ public final class Index implements Service, RoutesAndPaths {
     public JSONObject PUT(String id, JSONObject updatedObject) {
         JSONObject jsonResult = new JSONObject();
 
-        if (!updatedObject.get("_id").toString().equals(id)) {
-            /**
-             * No se permite cambiar el valor de los Ids
-             */
-            return null;
-        }
 
-        switch (this.collectionName) {
-            case "dairy": {
-                this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
-                this.dairyController.GET();
-                this.closeReader();
+            switch (this.collectionName) {
+                case "dairy": {
+                    this.dairyController.setDairyCollectionReader(this.connectToRead(DAIRY_URL));
+                    this.dairyController.GET();
+                    this.closeReader();
 
-                this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
-                jsonResult = this.dairyController.PUT(id, updatedObject);
-                this.closeWriter();
+                    this.dairyController.setDairyCollectionWriter(this.connectToWrite(DAIRY_URL));
+                    jsonResult = this.dairyController.PUT(id, updatedObject);
+                    this.closeWriter();
 
-                return jsonResult;
+                    return jsonResult;
+                }
+                case "alcoholic": {
+                    this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
+                    this.alcoholController.GET();
+                    this.closeReader();
+
+                    this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
+                    jsonResult = this.alcoholController.PUT(id, updatedObject);
+                    this.closeWriter();
+
+                    return jsonResult;
+                }
+                case "stiff": {
+                    this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
+                    this.stiffController.GET();
+                    this.closeReader();
+
+                    this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
+                    jsonResult = this.stiffController.PUT(id, updatedObject);
+                    this.closeWriter();
+
+                    return jsonResult;
+                }
+                default: {
+                    return null;
+                }
             }
-            case "alcoholic": {
-                this.alcoholController.setAlcoholCollectionReader(this.connectToRead(ALCOHOLIC_BEVERAGE_URL));
-                this.alcoholController.GET();
-                this.closeReader();
 
-                this.alcoholController.setAlcoholCollectionWriter(this.connectToWrite(ALCOHOLIC_BEVERAGE_URL));
-                jsonResult = this.alcoholController.PUT(id, updatedObject);
-                this.closeWriter();
-
-                return jsonResult;
-            }
-            case "stiff": {
-                this.stiffController.setStiffCollectionReader(this.connectToRead(STIFF_URL));
-                this.stiffController.GET();
-                this.closeReader();
-
-                this.stiffController.setStiffCollectionWriter(this.connectToWrite(STIFF_URL));
-                jsonResult = this.stiffController.PUT(id, updatedObject);
-                this.closeWriter();
-
-                return jsonResult;
-            }
-            default: {
-                return null;
-            }
-        }
     }
 
     @Override

@@ -98,8 +98,8 @@ public class Dairy extends Product{
                     year = LocalDate.now().getYear(),
                     maxYear = LocalDate.MAX.getYear();
 
-                isDate = (Integer.parseInt(arrayDate[0]) >= 1 && Integer.parseInt(arrayDate[0]) <= maxDay) &&
-                        (Integer.parseInt(arrayDate[1]) >= 1 && Integer.parseInt(arrayDate[1]) <= maxMonth) &&
+                isDate = (Integer.parseInt( arrayDate[0])<= maxDay) &&
+                        (Integer.parseInt(arrayDate[1]) <= maxMonth) &&
                         (Integer.parseInt(arrayDate[2]) >= year && Integer.parseInt(arrayDate[2]) <= maxYear);
             }
         }
